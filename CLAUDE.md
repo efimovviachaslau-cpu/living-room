@@ -11,8 +11,9 @@
 - [x] `layout.json` v1 — **оценка без замеров** (315 × 546 по площади 17.2 м²), варианты A и B
 - [x] 2D-набросок с проверкой проходов: `node tools/sketch.mjs` → `renders/sketch/`
 - [ ] Замеры друга → заменить оценки, `src` → `measured`
-- [ ] Каркас Vite, 2D-чертёж, 3D-вид
-- [ ] Варианты мебели, палитры, камеры, экспорт PNG
+- [x] Просмотрщик (20.11.2026): 3D + план, варианты, палитры и свои цвета, 5 камер,
+      экспорт PNG 1536×1024 в режимах цвет / глина / линии / глубина (по одному и zip)
+- [ ] Проверить на реальном телефоне друга
 - [ ] Деплой на Pages, галерея финальных рендеров
 
 ## Главные правила
@@ -78,8 +79,11 @@
 input/photos  input/plan  input/refs   — исходники от Славы (в .gitignore)
 brief.md                               — замеры и пожелания, заполняет Claude
 src/data/layout.json                   — геометрия + варианты + палитры + камеры
-tools/geometry.mjs                     — геометрия и проверки (чистый JS, переедет в просмотрщик)
-tools/sketch.mjs                       — 2D-набросок SVG/PNG + сводка проверок в консоль
+src/lib/geometry.js, plan-svg.js        — геометрия, проверки, SVG-план (чистый JS: и node, и браузер)
+src/lib/schema.js                      — zod-схема layout.json
+src/components/                        — 3D: prims (материалы по ролям), Room3D, Furniture3D, Scene3D
+tools/check.mjs                        — проверка JSON перед сборкой (npm run check)
+tools/sketch.mjs                       — PNG-наброски плана + сводка проверок (npm run sketch)
 renders/sketch/                        — наброски плана по вариантам
 renders/raw/                           — PNG из просмотрщика (в .gitignore)
 renders/final/                         — отобранные фото-рендеры → public/gallery
@@ -89,11 +93,22 @@ renders/prompts.md                     — промпты image-to-image
 
 ## Стек (решено 20.11.2026)
 
-Vite + React + TypeScript, `@react-three/fiber` + `@react-three/drei` для 3D,
+Vite 8 + React 19 + TypeScript, `@react-three/fiber` 9 для 3D (drei не нужен: OrbitControls берём из three),
 **2D-чертёж — SVG** из того же JSON (не ортокамера three.js: точные подписи, чёткость
 на телефоне, лёгкий экспорт), `zod` для проверки `layout.json`, состояние вида —
 в URL-хэше (`#v=B&cam=sofa&pal=warm`), чтобы делиться конкретным видом ссылкой.
 Деплой — GitHub Actions → Pages, `base: '/living-room/'` в `vite.config.ts`.
+
+Запуск: `npm run dev` (порт 5174 в превью Claude), сборка `npm run build` = check + tsc + vite.
+Сборка 20.11: интерфейс 82 КБ gzip, 3D-кусок 252 КБ gzip (грузится лениво).
+
+### Как устроена сцена (чтобы не перечитывать код)
+- Материалы выдаются по ролям (`walls`, `textile`, `wood`…) из `prims.tsx`; режим снимка меняет
+  все материалы разом: глина — один серый, линии — белый + рёбра `EdgesGeometry`, глубина — свой шейдер.
+- «Кукольный дом»: стена прячется, если камера снаружи её внутренней грани (`updateWalls`).
+- Снимок: временно `setSize(1536, 1024)` → `render` → `toDataURL` → вернуть размер.
+  В dev из консоли доступен `window.__capture.current.capture(preset|null, w, h)`.
+- Угол обзора пресета вертикальный; на портретном экране он пересчитывается в горизонтальный.
 
 ## Формат layout.json (черновик, уточнить после брифа)
 

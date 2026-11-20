@@ -73,8 +73,8 @@
         { "id": "coffee", "ref": "coffee100", "x": 150, "y": 120, "rot": 90, "group": "lounge" },
         { "id": "stand", "ref": "tvstand160", "x": 21, "y": 93, "rot": 270, "group": "tv" },
         { "id": "tv", "ref": "tv65", "x": 4, "y": 93, "rot": 270, "group": "tv" },
-        { "id": "armchair", "ref": "armchair", "x": 265, "y": 290, "rot": 90, "group": "lounge" },
-        { "id": "lamp", "ref": "floorlamp", "x": 288, "y": 352, "rot": 0, "group": "lounge" },
+        { "id": "lamp", "ref": "floorlamp", "x": 293, "y": 250, "rot": 0, "group": "lounge" },
+        { "id": "armchair", "ref": "armchair", "x": 265, "y": 310, "rot": 90, "group": "lounge" },
         { "id": "shelf", "ref": "shelf200", "x": 110, "y": 526, "rot": 0, "group": "storage" },
         { "id": "rug", "ref": "rug230", "x": 150, "y": 120, "rot": 90, "group": "lounge" }
       ],
@@ -105,12 +105,12 @@
   ],
 
   "palettes": [
-    { "id": "clay", "name": "Глина (для нейросети)", "walls": "#d9d9d9", "floor": "#bdbdbd", "ceiling": "#e6e6e6", "furniture": "#cfcfcf", "textile": "#c4c4c4", "wood": "#c9c9c9" },
     { "id": "light", "name": "Светлая", "walls": "#ece8e1", "floor": "#c49a6c", "ceiling": "#f6f5f2", "furniture": "#f2efe9", "textile": "#8a9a8b", "wood": "#b48a5a" },
     { "id": "warm", "name": "Тёплая", "walls": "#d8cbb8", "floor": "#8e6a4a", "ceiling": "#f3efe8", "furniture": "#e9e2d6", "textile": "#a8643f", "wood": "#6f4e37" }
   ],
 
   "cameras": [
+    { "id": "overview", "name": "Обзор", "pos": [620, -330, 520], "target": [157, 273, 40], "fov": 50 },
     { "id": "entry", "name": "От входа", "pos": [295, 486, 150], "target": [60, 100, 110], "fov": 60 },
     { "id": "window", "name": "От окна", "pos": [157, 30, 150], "target": [157, 546, 110], "fov": 60 },
     { "id": "top", "name": "Сверху", "type": "top" }
