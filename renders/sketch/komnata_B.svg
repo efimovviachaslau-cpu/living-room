@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="981" height="981" viewBox="0 0 981 981" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+<defs><marker id="a-2e8b57" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e8b57"/></marker><marker id="a-d48a00" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#d48a00"/></marker><marker id="a-d23c2a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#d23c2a"/></marker></defs>
+<rect width="981" height="981" fill="#ffffff"/>
+<polygon points="110.0,483.5 110.0,86.0 57.5,86.0 57.5,483.5" fill="#3d3a36"/>
+<polygon points="57.5,110.0 599.0,110.0 599.0,86.0 57.5,86.0" fill="#3d3a36"/>
+<polygon points="581.0,86.0 581.0,483.5 599.0,483.5 599.0,86.0" fill="#3d3a36"/>
+<polygon points="599.0,468.5 57.5,468.5 57.5,483.5 599.0,483.5" fill="#3d3a36"/>
+<polygon points="110.0,468.5 110.0,110.0 581.0,110.0 581.0,468.5" fill="#fbfaf7"/>
+<polygon points="581.0,329.0 581.0,456.5 599.0,456.5 599.0,329.0" fill="#fbfaf7"/>
+<path d="M581,336.49999999999994 A120,120 0 0 0 461,456.49999999999994" fill="none" stroke="#9aa7b8" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="581" y1="456.4999999999999" x2="461" y2="456.49999999999994" stroke="#2b2b2b" stroke-width="2"/>
+<text x="572" y="396.74999999999994" font-size="10.5" font-style="italic" fill="#6d6a65" text-anchor="end">Из зала</text>
+<polygon points="110.0,408.5 110.0,191.0 57.5,191.0 57.5,408.5" fill="#fbfaf7"/>
+<line x1="94.25" y1="408.5" x2="94.25" y2="191.00000000000006" stroke="#6b8fb3" stroke-width="1"/>
+<line x1="83.75" y1="408.5" x2="83.75" y2="191.00000000000006" stroke="#6b8fb3" stroke-width="2"/>
+<line x1="73.25" y1="408.5" x2="73.25" y2="191.00000000000006" stroke="#6b8fb3" stroke-width="1"/>
+<polygon points="110.0,408.5 110.0,191.0 147.5,191.0 147.5,408.5" fill="none" stroke="#6b8fb3" stroke-width="0.8" stroke-dasharray="3 2"/>
+<polygon points="110.0,353.0 110.0,248.0 125.0,248.0 125.0,353.0" fill="#e9b8a8" stroke="#2b2b2b" stroke-width="0.8"/>
+<text x="117.5" y="286.50000000000006" font-size="10" fill="#6d6a65" text-anchor="middle">батарея</text>
+<circle cx="345.5" cy="288.5" r="6" fill="none" stroke="#8a857d"/><line x1="339.5" y1="282.5" x2="351.5" y2="294.5" stroke="#8a857d"/><line x1="339.5" y1="294.5" x2="351.5" y2="282.5" stroke="#8a857d"/>
+<g><line x1="110" y1="468.5" x2="39.5" y2="468.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="408.5" x2="39.5" y2="408.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="39.5" y1="468.5" x2="39.5" y2="408.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="35.5" y1="472.5" x2="43.5" y2="464.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="35.5" y1="412.5" x2="43.5" y2="404.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="39.5" y="438.5" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 39.5 438.5)">40</text></g>
+<g><line x1="110" y1="408.5" x2="39.5" y2="408.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="191.00000000000006" x2="39.5" y2="191.00000000000006" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="39.5" y1="408.5" x2="39.5" y2="191.00000000000006" stroke="#6d6a65" stroke-width="0.8"/><line x1="35.5" y1="412.5" x2="43.5" y2="404.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="35.5" y1="195.00000000000006" x2="43.5" y2="187.00000000000006" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="39.5" y="299.75" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 39.5 299.75)">145</text></g>
+<g><line x1="110" y1="191.00000000000006" x2="39.5" y2="191.00000000000006" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="110.00000000000004" x2="39.5" y2="110.00000000000004" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="39.5" y1="191.00000000000006" x2="39.5" y2="110.00000000000004" stroke="#6d6a65" stroke-width="0.8"/><line x1="35.5" y1="195.00000000000006" x2="43.5" y2="187.00000000000006" stroke="#6d6a65" stroke-width="1.2"/><line x1="35.5" y1="114.00000000000004" x2="43.5" y2="106.00000000000004" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="39.5" y="150.50000000000006" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 39.5 150.50000000000006)">54</text></g>
+<g><line x1="110" y1="468.5" x2="17.5" y2="468.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="110" x2="17.5" y2="110" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="17.5" y1="468.5" x2="17.5" y2="110" stroke="#2b2b2b" stroke-width="0.8"/><line x1="13.5" y1="472.5" x2="21.5" y2="464.5" stroke="#2b2b2b" stroke-width="1.2"/><line x1="13.5" y1="114" x2="21.5" y2="106" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="17.5" y="289.25" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(-90 17.5 289.25)">С1  ·  239</text></g>
+<g><line x1="110" y1="110" x2="110" y2="68" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="581" y1="110" x2="581" y2="68" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="68" x2="581" y2="68" stroke="#2b2b2b" stroke-width="0.8"/><line x1="106" y1="72" x2="114" y2="64" stroke="#2b2b2b" stroke-width="1.2"/><line x1="577" y1="72" x2="585" y2="64" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="345.5" y="68" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(0 345.5 68)">С2  ·  314</text></g>
+<g><line x1="581" y1="110" x2="617" y2="110" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="581" y1="328.99999999999994" x2="617" y2="328.99999999999994" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="617" y1="110" x2="617" y2="328.99999999999994" stroke="#6d6a65" stroke-width="0.8"/><line x1="613" y1="114" x2="621" y2="106" stroke="#6d6a65" stroke-width="1.2"/><line x1="613" y1="332.99999999999994" x2="621" y2="324.99999999999994" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="617" y="219.49999999999997" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(90 617 219.49999999999997)">146</text></g>
+<g><line x1="581" y1="328.99999999999994" x2="617" y2="328.99999999999994" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="581" y1="456.49999999999994" x2="617" y2="456.49999999999994" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="617" y1="328.99999999999994" x2="617" y2="456.49999999999994" stroke="#6d6a65" stroke-width="0.8"/><line x1="613" y1="332.99999999999994" x2="621" y2="324.99999999999994" stroke="#6d6a65" stroke-width="1.2"/><line x1="613" y1="460.49999999999994" x2="621" y2="452.49999999999994" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="617" y="392.74999999999994" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(90 617 392.74999999999994)">85</text></g>
+<g><line x1="581" y1="456.49999999999994" x2="617" y2="456.49999999999994" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="581" y1="468.49999999999994" x2="617" y2="468.49999999999994" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="617" y1="456.49999999999994" x2="617" y2="468.49999999999994" stroke="#6d6a65" stroke-width="0.8"/><line x1="613" y1="460.49999999999994" x2="621" y2="452.49999999999994" stroke="#6d6a65" stroke-width="1.2"/><line x1="613" y1="472.49999999999994" x2="621" y2="464.49999999999994" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="617" y="462.49999999999994" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(90 617 462.49999999999994)">8</text></g>
+<g><line x1="581" y1="110" x2="639" y2="110" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="581" y1="468.5" x2="639" y2="468.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="639" y1="110" x2="639" y2="468.5" stroke="#2b2b2b" stroke-width="0.8"/><line x1="635" y1="114" x2="643" y2="106" stroke="#2b2b2b" stroke-width="1.2"/><line x1="635" y1="472.5" x2="643" y2="464.5" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="639" y="289.25" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(90 639 289.25)">С3  ·  239</text></g>
+<g><line x1="581" y1="468.5" x2="581" y2="501.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="468.5" x2="110" y2="501.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="581" y1="501.5" x2="110" y2="501.5" stroke="#2b2b2b" stroke-width="0.8"/><line x1="577" y1="505.5" x2="585" y2="497.5" stroke="#2b2b2b" stroke-width="1.2"/><line x1="106" y1="505.5" x2="114" y2="497.5" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="345.5" y="501.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(360 345.5 501.5)">С4  ·  314</text></g>
+<polygon points="266.0,110.0 266.0,335.0 581.0,335.0 581.0,110.0" fill="#dde4ec" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="581.0,110.0 581.0,335.0 569.0,335.0 569.0,110.0" fill="#b9c3cf" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="563.0,213.5 563.0,125.0 506.0,125.0 506.0,213.5" fill="#ffffff" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="563.0,231.5 563.0,320.0 506.0,320.0 506.0,231.5" fill="#ffffff" stroke="#2b2b2b" stroke-width="0.6"/>
+<polyline points="488.0,110.0 488.0,335.0" fill="none" stroke="#2b2b2b" stroke-width="0.6" stroke-dasharray="4 3"/>
+<g><text x="423.5" y="220.5" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Кровать 140×200</text>
+<text x="423.5" y="233.5" font-size="9.5" fill="#6d6a65" text-anchor="middle">150×210</text>
+</g>
+<polygon points="110.0,185.0 260.0,185.0 260.0,110.0 110.0,110.0" fill="#d8cfc2" stroke="#2b2b2b" stroke-width="1.1"/>
+<polyline points="110.0,185.0 260.0,110.0" fill="none" stroke="#2b2b2b" stroke-width="0.6"/>
+<g><text x="185" y="145.5" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Шкаф</text>
+<text x="185" y="158.5" font-size="9.5" fill="#6d6a65" text-anchor="middle">100×50</text>
+</g>
+<polygon points="200.0,401.0 110.0,401.0 110.0,468.5 200.0,468.5" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
+<g><text x="155" y="432.75" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Комод</text>
+<text x="155" y="445.75" font-size="9.5" fill="#6d6a65" text-anchor="middle">60×45</text>
+</g>
+<g><line x1="200" y1="401" x2="266" y2="335" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="218" y="360" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="233" y="372" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">62</text></g>
+<g><line x1="266" y1="335" x2="266" y2="468.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="251" y="393.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="266" y="405.75" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">89</text></g>
+<text x="671" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Комната 7.5, вариант B —</text>
+<text x="671" y="124" font-size="20" font-weight="700" fill="#2b2b2b">Спальня</text>
+<text x="671" y="148" font-size="12" fill="#6d6a65">Кровать 140×200 изголовьем к стене зала и</text>
+<text x="671" y="164" font-size="12" fill="#6d6a65">боком к северной стене — так влезает.</text>
+<text x="671" y="180" font-size="12" fill="#6d6a65">Тумбочкам места нет (с юга открывается дверь),</text>
+<text x="671" y="196" font-size="12" fill="#6d6a65">вместо них полка-изголовье. В углу у окна</text>
+<text x="671" y="212" font-size="12" fill="#6d6a65">шкаф, в другом углу у окна комод. Перед окном</text>
+<text x="671" y="228" font-size="12" fill="#6d6a65">и вдоль кровати свободно.</text>
+<text x="671" y="254" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="687" y="254" font-size="12" fill="#2b2b2b">Подход к окну (открыть створку): 60 см</text>
+<text x="687" y="269" font-size="12" fill="#2b2b2b">(норма ≥ 60)</text>
+<text x="671" y="289" font-size="13" font-weight="700" fill="#8a857d">·</text>
+<text x="687" y="289" font-size="12" fill="#2b2b2b">Кровать придвинута к стене с северной</text>
+<text x="687" y="304" font-size="12" fill="#2b2b2b">стороны (соседи): подход только с другой</text>
+<text x="687" y="319" font-size="12" fill="#2b2b2b">стороны</text>
+<text x="671" y="339" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="687" y="339" font-size="12" fill="#2b2b2b">Подход к кровати с южной стороны (спальня</text>
+<text x="687" y="354" font-size="12" fill="#2b2b2b">9.2): 78 см (норма 70, минимум 60)</text>
+<text x="671" y="374" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="687" y="374" font-size="12" fill="#2b2b2b">В ногах кровати до стены: 104 см (норма 75,</text>
+<text x="687" y="389" font-size="12" fill="#2b2b2b">минимум 60)</text>
+<text x="50" y="963" font-size="11" fill="#8a857d">Комната 7.5: набросок по площади 7.5 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
+</svg>

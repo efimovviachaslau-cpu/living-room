@@ -300,6 +300,7 @@ function analyze(v) {
     let best = null;
     for (const b of floor) {
       if (b === a || (a.group && a.group === b.group)) continue;
+      if (a.spec.kind === 'chair' || b.spec.kind === 'chair') continue; // стул двигают — до него не меряем
       const r = G.polyDistance(a.poly, b.poly);
       if (!best || r.d < best.r.d) best = { b, r };
     }
@@ -361,6 +362,9 @@ function analyze(v) {
       const targets = [];
       // Цель — любая точка полосы вдоль борта (от 15 до 90 см от кровати), кроме зоны тумбочек у изголовья.
       for (let t = -hd + 70; t <= hd - 15; t += 5) for (let o = 15; o <= 90; o += 5) targets.push(G.add(G.add(c, G.mul(side, s * (hw + o))), G.mul(f, t)));
+      // Кровать придвинута боком к стене — это решение, а не узкий проход.
+      const wallGap = wl ? G.polySegDistance(bed.poly, wl.a, wl.b).d : Infinity;
+      if (wallGap < 10) { res.push(['info', `Кровать придвинута к стене ${label.replace(/^с /, 'с ')}: подход только с другой стороны`]); continue; }
       const w = G.bottleneck(grid, grid.doors[entry.id], targets);
       const [lo, ok] = R.bedSide;
       res.push([w >= ok ? 'ok' : w >= lo ? 'warn' : 'bad', `Подход к кровати ${label}: ${w} см (норма ${ok}, минимум ${lo})`]);

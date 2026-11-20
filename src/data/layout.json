@@ -58,7 +58,8 @@
           "height": 205,
           "leaf": 80,
           "swing": { "into": "out", "hinge": "start" },
-          "src": "plan + photo"
+          "src": "plan + photo",
+          "link": "komnata:D1"
         },
         {
           "id": "D3",
@@ -499,6 +500,84 @@
         { "id": "window", "name": "От лоджии", "pos": [25, 190, 150], "target": [314, 120, 100], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
       ]
+    },
+    {
+      "id": "komnata",
+      "name": "Комната 7.5",
+      "area": 7.5,
+      "height": { "value": 250, "src": "typical" },
+      "origin": [-326, 303],
+      "originNote": "Угол у стены к лоджии и перегородки со спальней 9.2. Стены по часовой: С1 запад (лоджия, окно), С2 север (соседи), С3 восток (зал, дверь), С4 юг (спальня 9.2).",
+      "outline": [[0, 0], [0, 239], [314, 239], [314, 0]],
+      "outlineSrc": "area + plan: ширина как у спальни 9.2 (общая стена к лоджии на плане), глубина 239 = 7.5 м² / 314; север выходит на линию северной стены зала",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 35, "to": "лоджия", "src": "typical" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 16, "to": "соседи", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "зал", "src": "typical" },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 10, "to": "спальня 9.2", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "D1",
+          "type": "door",
+          "name": "Из зала",
+          "wall": 3,
+          "offset": 146,
+          "width": 85,
+          "height": 205,
+          "leaf": 80,
+          "swing": { "into": "room", "hinge": "end" },
+          "link": "zal:D2",
+          "src": "та же дверь, что D2 в зале; открывается в комнату, петли у перегородки"
+        },
+        {
+          "id": "O1",
+          "type": "window",
+          "name": "Окно",
+          "wall": 1,
+          "offset": 40,
+          "width": 145,
+          "sill": 85,
+          "height": 145,
+          "sillDepth": 25,
+          "sashes": 2,
+          "src": "plan"
+        }
+      ],
+      "fixtures": [
+        { "id": "R1", "type": "radiator", "name": "Батарея", "wall": 1, "offset": 77, "w": 70, "d": 10, "h": 58, "z": 10, "src": "typical" },
+        { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 157, "y": 120, "drop": 20, "src": "typical" }
+      ],
+      "variants": [
+        {
+          "id": "A",
+          "name": "Кабинет и гостевая",
+          "idea": "Вдоль северной стены рабочий стол (окно слева от сидящего — свет не бьёт в монитор, нет тени от правой руки) и шкаф. Вдоль перегородки 2-местный диван-кровать для гостей. Перед окном и от двери свободно.",
+          "items": [
+            { "id": "rug", "ref": "rug200b", "x": 150, "y": 120, "rot": 0, "group": "lounge" },
+            { "id": "sofa", "ref": "sofabed160", "x": 150, "y": 45, "rot": 180, "group": "lounge" },
+            { "id": "desk", "ref": "desk120", "x": 130, "y": 209, "rot": 0, "group": "work" },
+            { "id": "chair", "ref": "officechair", "x": 130, "y": 179, "rot": 180, "group": "work" },
+            { "id": "wardrobe", "ref": "wardrobe120", "x": 254, "y": 209, "rot": 0, "group": "storage" }
+          ]
+        },
+        {
+          "id": "B",
+          "name": "Спальня",
+          "idea": "Кровать 140×200 изголовьем к стене зала и боком к северной стене — так влезает. Тумбочкам места нет (с юга открывается дверь), вместо них полка-изголовье. В углу у окна шкаф, в другом углу у окна комод. Перед окном и вдоль кровати свободно.",
+          "items": [
+            { "id": "bed", "ref": "bed140", "x": 209, "y": 164, "rot": 90, "group": "bed" },
+            { "id": "wardrobe", "ref": "wardrobe100", "x": 50, "y": 214, "rot": 0, "group": "storage" },
+            { "id": "dresser", "ref": "dresser60", "x": 30, "y": 22.5, "rot": 180, "group": "storage" }
+          ]
+        }
+      ],
+      "cameras": [
+        { "id": "overview", "name": "Обзор", "pos": [-260, -240, 480], "target": [157, 120, 40], "fov": 50 },
+        { "id": "entry", "name": "От входа", "pos": [295, 50, 155], "target": [30, 160, 90], "fov": 60 },
+        { "id": "window", "name": "От окна", "pos": [25, 110, 150], "target": [314, 140, 100], "fov": 60 },
+        { "id": "top", "name": "Сверху", "type": "top" }
+      ]
     }
   ],
   "catalog": {
@@ -581,7 +660,15 @@
     },
     "towelrail": { "name": "Полотенцесушитель", "kind": "bathroom", "part": "towel", "w": 50, "d": 8, "h": 80, "z": 90, "floor": false },
     "mirror60": { "name": "Зеркало", "kind": "mirror", "w": 60, "d": 3, "h": 70, "z": 110, "floor": false },
-    "bathmat": { "name": "Коврик", "kind": "rug", "w": 60, "d": 40, "h": 1, "walkable": true }
+    "bathmat": { "name": "Коврик", "kind": "rug", "w": 60, "d": 40, "h": 1, "walkable": true },
+    "desk120": { "name": "Письменный стол", "kind": "table", "w": 120, "d": 60, "h": 75 },
+    "officechair": { "name": "Кресло", "kind": "chair", "w": 50, "d": 50, "h": 95 },
+    "wardrobe120": { "name": "Шкаф", "kind": "wardrobe", "w": 120, "d": 60, "h": 220 },
+    "wardrobe100": { "name": "Шкаф", "kind": "wardrobe", "w": 100, "d": 50, "h": 220 },
+    "bed140": { "name": "Кровать 140×200", "kind": "bed", "w": 150, "d": 210, "h": 95, "note": "матрас 140×200" },
+    "rug200b": { "name": "Ковёр", "kind": "rug", "w": 200, "d": 140, "h": 1, "walkable": true },
+    "sofabed160": { "name": "Диван-кровать", "kind": "sofa", "w": 160, "d": 90, "h": 85, "note": "2-местный, разложенный ≈ 140 × 200" },
+    "dresser60": { "name": "Комод", "kind": "cabinet", "w": 60, "d": 45, "h": 85 }
   },
   "palettes": [
     {
