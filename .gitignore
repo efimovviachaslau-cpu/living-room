@@ -1,0 +1,26 @@
+# Зависимости и сборка
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Исходники друга: фото квартиры не публикуем (репозиторий для Pages публичный)
+input/**
+!input/**/
+!input/**/.gitkeep
+
+# Сырые скриншоты из просмотрщика — тяжёлые и пересоздаются за минуту
+renders/raw/*
+!renders/raw/.gitkeep
+
+# Финальные рендеры в git только после согласия друга; на сайт они идут
+# сжатыми копиями в public/gallery. Убрать эти две строки, когда разрешит.
+renders/final/*
+!renders/final/.gitkeep
+
+# Система и редакторы
+.DS_Store
+.vscode/
+.idea/
+*.log
+.env*
