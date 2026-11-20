@@ -133,3 +133,15 @@ button:disabled { opacity: 0.5; cursor: default; }
   .panel.open { transform: none; }
   .cams { bottom: calc(10px + env(safe-area-inset-bottom)); }
 }
+
+.rooms { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.rooms li { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 8px; }
+.rooms .link { padding: 0; text-align: left; }
+.electric { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13.5px; line-height: 1.35; }
+.electric li { display: grid; grid-template-columns: 20px 1fr; gap: 6px; }
+.electric li b { font-size: 12px; }
+.electric li i { font-style: normal; color: var(--muted); }
+.electric li.socket b { color: #d27b00; }
+.electric li.switch b { color: #2f6db5; }
+.electric li.data b { color: #7a5ab8; }
+.electric li.panel b { color: #5c5c5c; }

@@ -16,7 +16,7 @@ export const registerCeiling = (g: THREE.Group | null) => { if (g) ceilingItems.
 
 export const toThree = (x: number, y: number, z = 0): [number, number, number] => [x / 100, z / 100, -y / 100];
 
-type Ctx = { mode: Mode; colors: Colors; shadows: boolean };
+type Ctx = { mode: Mode; colors: Colors; shadows: boolean; cut?: number };
 export const SceneCtx = createContext<Ctx>({
   mode: 'color',
   colors: { walls: '#ece8e1', floor: '#c49a6c', ceiling: '#f6f5f2', furniture: '#f2efe9', textile: '#8a9a8b', wood: '#b48a5a' },

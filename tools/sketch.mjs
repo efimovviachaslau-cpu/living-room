@@ -8,7 +8,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderPlan } from '../src/lib/plan-svg.js';
+import { renderPlan, renderOverview } from '../src/lib/plan-svg.js';
 import { roomView } from '../src/lib/rooms.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -37,4 +37,14 @@ for (const [L, name, variantId] of jobs) {
     for (const [lvl, t] of checks) console.log(`  ${{ ok: '✓', warn: '!', bad: '✗', info: '·' }[lvl]} ${t}`);
   }
   console.log(`  → ${file}${png ? ' + png' : ''}`);
+}
+
+// Общий план квартиры: все комнаты, по умолчанию вариант A (или из аргумента vs=zal:B,komnata:B).
+if (!onlyRoom || onlyRoom === 'overview') {
+  const vs = Object.fromEntries((process.argv.find((a) => a.startsWith('vs=')) ?? 'vs=').slice(3).split(',').filter(Boolean).map((x) => x.split(':')));
+  const { svg, width } = renderOverview(layout, vs, { fixed: true, title: true, legend: true, square: true });
+  const file = join(OUT, 'overview.svg');
+  writeFileSync(file, svg);
+  try { execFileSync('qlmanage', ['-t', '-s', String(Math.round(width)), '-o', OUT, file], { stdio: 'ignore' }); } catch {}
+  console.log(`  → ${file} + png`);
 }

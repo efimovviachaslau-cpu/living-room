@@ -68,6 +68,8 @@
 <g><line x1="227" y1="138.5" x2="110" y2="138.5" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
 <rect x="153.5" y="130.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
 <text x="168.5" y="142.5" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">78</text></g>
+<circle cx="318.5" cy="206" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="318.5" cy="206" r="1.4" fill="#d27b00"/>
+<text x="302" y="209.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">1</text>
 <text x="414.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Санузел, вариант A — Ванна +</text>
 <text x="414.5" y="124" font-size="20" font-weight="700" fill="#2b2b2b">унитаз у стояка</text>
 <text x="414.5" y="148" font-size="12" fill="#6d6a65">Ванна вдоль стены кухни на всю ширину. Унитаз</text>
@@ -84,5 +86,9 @@
 <text x="414.5" y="297" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
 <text x="430.5" y="297" font-size="12" fill="#2b2b2b">От оси «Унитаз» до стены или предмета сбоку:</text>
 <text x="430.5" y="312" font-size="12" fill="#2b2b2b">36 см (норма ≥ 35)</text>
+<text x="414.5" y="344" font-size="14" font-weight="700" fill="#2b2b2b">Электрика</text>
+<text x="414.5" y="362" font-size="11.5" font-weight="700" fill="#d27b00">1</text>
+<text x="432.5" y="362" font-size="11.5" fill="#2b2b2b">Розетка ×2, 100 см — Стиральная машина и фен:</text>
+<text x="432.5" y="376" font-size="11.5" fill="#2b2b2b">IP44, через УЗО, дальше 60 см от ванны</text>
 <text x="50" y="706.5" font-size="11" fill="#8a857d">Санузел: набросок по площади 3.1 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
 </svg>

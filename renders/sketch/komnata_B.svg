@@ -81,6 +81,14 @@
 <g><line x1="266" y1="335" x2="266" y2="468.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
 <rect x="251" y="393.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
 <text x="266" y="405.75" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">89</text></g>
+<circle cx="575" cy="313.99999999999994" r="4" fill="#2f6db5"/><line x1="575" y1="313.99999999999994" x2="581" y2="307.99999999999994" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="558.5" y="317.49999999999994" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">1</text>
+<circle cx="545" cy="116" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="545" cy="116" r="1.4" fill="#d27b00"/>
+<text x="545" y="136" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">2</text>
+<circle cx="560" cy="116" r="4" fill="#2f6db5"/><line x1="560" y1="116" x2="566" y2="110" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="560" y="136" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">3</text>
+<circle cx="215" cy="462.5" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="215" cy="462.5" r="1.4" fill="#d27b00"/>
+<text x="215" y="449.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">4</text>
 <text x="671" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Комната 7.5, вариант B —</text>
 <text x="671" y="124" font-size="20" font-weight="700" fill="#2b2b2b">Спальня</text>
 <text x="671" y="148" font-size="12" fill="#6d6a65">Кровать 140×200 изголовьем к стене зала и</text>
@@ -102,5 +110,16 @@
 <text x="671" y="374" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
 <text x="687" y="374" font-size="12" fill="#2b2b2b">В ногах кровати до стены: 104 см (норма 75,</text>
 <text x="687" y="389" font-size="12" fill="#2b2b2b">минимум 60)</text>
+<text x="671" y="421" font-size="14" font-weight="700" fill="#2b2b2b">Электрика</text>
+<text x="671" y="439" font-size="11.5" font-weight="700" fill="#2f6db5">1</text>
+<text x="689" y="439" font-size="11.5" fill="#2b2b2b">Выключатель, 90 см — Люстра</text>
+<text x="671" y="456" font-size="11.5" font-weight="700" fill="#d27b00">2</text>
+<text x="689" y="456" font-size="11.5" fill="#2b2b2b">Розетка ×2, 70 см — У изголовья: зарядка,</text>
+<text x="689" y="470" font-size="11.5" fill="#2b2b2b">ночник</text>
+<text x="671" y="487" font-size="11.5" font-weight="700" fill="#2f6db5">3</text>
+<text x="689" y="487" font-size="11.5" fill="#2b2b2b">Выключатель, 90 см — Люстра у кровати</text>
+<text x="689" y="501" font-size="11.5" fill="#2b2b2b">(проходной)</text>
+<text x="671" y="518" font-size="11.5" font-weight="700" fill="#d27b00">4</text>
+<text x="689" y="518" font-size="11.5" fill="#2b2b2b">Розетка, 30 см — У комода</text>
 <text x="50" y="963" font-size="11" fill="#8a857d">Комната 7.5: набросок по площади 7.5 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
 </svg>

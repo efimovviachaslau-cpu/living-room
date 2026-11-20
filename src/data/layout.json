@@ -97,7 +97,14 @@
             { "id": "shelf", "ref": "shelf200", "x": 110, "y": 526, "rot": 0, "group": "storage" },
             { "id": "rug", "ref": "rug230", "x": 150, "y": 120, "rot": 90, "group": "lounge" }
           ],
-          "cameras": [{"id": "sofa", "name": "С дивана", "pos": [250, 120, 115], "target": [4, 93, 110], "fov": 60}]
+          "cameras": [{"id": "sofa", "name": "С дивана", "pos": [250, 120, 115], "target": [4, 93, 110], "fov": 60}],
+          "electric": [
+            { "id": "TV1", "type": "socket", "wall": 1, "offset": 75, "z": 115, "n": 3, "label": "За ТВ: телевизор, приставка, роутер" },
+            { "id": "TV2", "type": "data", "wall": 1, "offset": 113, "z": 115, "n": 2, "label": "ТВ-антенна и интернет" },
+            { "id": "R2", "type": "socket", "wall": 3, "offset": 306, "z": 30, "n": 2, "label": "У дивана: торшер, зарядка" },
+            { "id": "R3", "type": "socket", "wall": 4, "offset": 10, "z": 30, "n": 1, "label": "У дивана со стороны окна: зарядка" },
+            { "id": "R4", "type": "socket", "wall": 2, "offset": 225, "z": 30, "n": 1, "label": "У стеллажа: подсветка полок" }
+          ]
         },
         {
           "id": "B",
@@ -115,7 +122,14 @@
             { "id": "chair4", "ref": "chair", "x": 219, "y": 135, "rot": 90, "group": "dining" },
             { "id": "rug", "ref": "rug200", "x": 190, "y": 400, "rot": 0, "group": "lounge" }
           ],
-          "cameras": [{"id": "sofa", "name": "С дивана", "pos": [190, 300, 115], "target": [170, 543, 110], "fov": 60}]
+          "cameras": [{"id": "sofa", "name": "С дивана", "pos": [190, 300, 115], "target": [170, 543, 110], "fov": 60}],
+          "electric": [
+            { "id": "TV1", "type": "socket", "wall": 2, "offset": 150, "z": 115, "n": 3, "label": "За ТВ: телевизор, приставка, роутер" },
+            { "id": "TV2", "type": "data", "wall": 2, "offset": 190, "z": 115, "n": 2, "label": "ТВ-антенна и интернет" },
+            { "id": "R2", "type": "socket", "wall": 1, "offset": 110, "z": 85, "n": 2, "label": "У обеденного стола: чайник, зарядка" },
+            { "id": "R3", "type": "socket", "wall": 1, "offset": 290, "z": 30, "n": 1, "label": "У дивана слева: торшер" },
+            { "id": "R4", "type": "socket", "wall": 3, "offset": 256, "z": 30, "n": 1, "label": "У дивана справа: зарядка" }
+          ]
         }
       ],
       "cameras": [
@@ -123,6 +137,10 @@
         { "id": "entry", "name": "От входа", "pos": [295, 446, 150], "target": [60, 100, 110], "fov": 60 },
         { "id": "window", "name": "От окна", "pos": [157, 30, 150], "target": [157, 546, 110], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
+      ],
+      "electric": [
+        { "id": "S1", "type": "switch", "wall": 3, "offset": 155, "z": 90, "n": 2, "label": "Люстра: две группы ламп", "controls": ["L1"] },
+        { "id": "R1", "type": "socket", "wall": 3, "offset": 176, "z": 30, "n": 1, "label": "Пылесос, уборка" }
       ]
     },
     {
@@ -135,7 +153,7 @@
       "outline": [[0, 0], [0, 384], [239, 384], [239, 179], [82, 179], [82, 0]],
       "outlineSrc": "plan: Г — квадрат 239 × 205 у входа + коридор 82 × 179 к кухне = 6.37 м²; масштаб плана ≈ 1 см/пкс, как у зала",
       "walls": [
-        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "зал", "src": "typical" },
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "зал", "src": "typical", "shared": true },
         { "id": 2, "name": "С2", "side": "север", "thickness": 16, "to": "соседи", "src": "typical" },
         { "id": 3, "name": "С3", "side": "восток", "thickness": 16, "to": "лестничная площадка", "src": "typical" },
         { "id": 4, "name": "С4", "side": "юг", "thickness": 8, "to": "санузел", "src": "typical" },
@@ -215,6 +233,24 @@
         { "id": "entry", "name": "От входа", "pos": [225, 230, 160], "target": [20, 320, 100], "fov": 60 },
         { "id": "fromzal", "name": "Из зала", "pos": [15, 178, 155], "target": [239, 300, 110], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
+      ],
+      "electric": [
+        { "id": "S1", "type": "switch", "wall": 3, "offset": 84, "z": 90, "n": 2, "label": "Свет: прихожая и коридор", "controls": ["L1", "L2"] },
+        {
+          "id": "S2",
+          "type": "switch",
+          "wall": 1,
+          "offset": 236,
+          "z": 90,
+          "n": 1,
+          "label": "Свет в прихожей — проходной, у двери в зал",
+          "controls": ["L1"]
+        },
+        { "id": "S3", "type": "switch", "wall": 5, "offset": 95, "z": 90, "n": 2, "label": "Санузел: свет и вентилятор (снаружи у двери)" },
+        { "id": "R1", "type": "socket", "wall": 1, "offset": 60, "z": 30, "n": 1, "label": "Пылесос" },
+        { "id": "R2", "type": "socket", "wall": 4, "offset": 29, "z": 30, "n": 1, "label": "У входа: сушилка для обуви, зарядка" },
+        { "id": "P1", "type": "panel", "wall": 4, "offset": 89, "z": 160, "n": 1, "label": "Электрощит: автоматы и УЗО" },
+        { "id": "D1", "type": "data", "wall": 4, "offset": 125, "z": 165, "n": 1, "label": "Ввод интернета (слаботочный щиток)" }
       ]
     },
     {
@@ -227,8 +263,8 @@
       "outline": [[0, 0], [0, 268], [82, 268], [82, 226], [236, 226], [236, 0]],
       "outlineSrc": "plan: 226 × 218 по плану (≈ 1 см/пкс) растянуто на 4 % до площади: 236 × 226 + «хвост» коридора 82 × 42 = 5.68 м²",
       "walls": [
-        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "зал", "src": "typical" },
-        { "id": 2, "name": "С2", "side": "север", "thickness": 8, "to": "прихожая", "src": "typical" },
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "зал", "src": "typical", "shared": true },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 8, "to": "прихожая", "src": "typical", "shared": true },
         { "id": 3, "name": "С3", "side": "восток", "thickness": 8, "to": "санузел", "src": "typical" },
         { "id": 4, "name": "С4", "side": "север", "thickness": 8, "to": "санузел", "src": "typical" },
         { "id": 5, "name": "С5", "side": "восток", "thickness": 30, "to": "лестница", "src": "typical" },
@@ -318,6 +354,16 @@
         { "id": "entry", "name": "От входа", "pos": [45, 150, 160], "target": [236, 80, 105], "fov": 60 },
         { "id": "window", "name": "От окна", "pos": [110, 18, 150], "target": [190, 226, 120], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
+      ],
+      "electric": [
+        { "id": "S1", "type": "switch", "wall": 1, "offset": 250, "z": 90, "n": 2, "label": "Свет на кухне и подсветка столешницы", "controls": ["L1"] },
+        { "id": "R1", "type": "socket", "wall": 4, "offset": 30, "z": 30, "n": 1, "label": "Холодильник (за ним, внизу)" },
+        { "id": "R2", "type": "socket", "wall": 5, "offset": 36, "z": 30, "n": 1, "label": "Посудомойка — в тумбе под мойкой, не за машиной" },
+        { "id": "R3", "type": "socket", "wall": 5, "offset": 120, "z": 30, "n": 1, "label": "Плита: силовая 32 А (если электрическая)" },
+        { "id": "R4", "type": "socket", "wall": 5, "offset": 86, "z": 110, "n": 2, "label": "Над столешницей: чайник, микроволновка" },
+        { "id": "R5", "type": "socket", "wall": 4, "offset": 83, "z": 110, "n": 2, "label": "Над столешницей: мелкая техника" },
+        { "id": "R6", "type": "socket", "wall": 5, "offset": 165, "z": 215, "n": 1, "label": "Вытяжка (в шкафу над ней)" },
+        { "id": "R7", "type": "socket", "wall": 1, "offset": 60, "z": 85, "n": 2, "label": "У стола: зарядка, лампа" }
       ]
     },
     {
@@ -330,10 +376,10 @@
       "outline": [[0, 0], [0, 206], [143, 206], [143, 0]],
       "outlineSrc": "plan: туалет 1.0 + ванная 2.1, перегородка между ними снесена (со слов Славы); 143 × 206 = 2.95 м² — границы по соседним комнатам",
       "walls": [
-        { "id": 1, "name": "С1", "side": "запад", "thickness": 8, "to": "коридор", "src": "typical" },
-        { "id": 2, "name": "С2", "side": "север", "thickness": 8, "to": "прихожая", "src": "typical" },
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 8, "to": "коридор", "src": "typical", "shared": true },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 8, "to": "прихожая", "src": "typical", "shared": true },
         { "id": 3, "name": "С3", "side": "восток", "thickness": 30, "to": "лестница", "src": "typical" },
-        { "id": 4, "name": "С4", "side": "юг", "thickness": 8, "to": "кухня", "src": "typical" }
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 8, "to": "кухня", "src": "typical", "shared": true }
       ],
       "openings": [
         {
@@ -373,6 +419,17 @@
         { "id": "overview", "name": "Обзор", "pos": [-260, 420, 470], "target": [80, 100, 40], "fov": 50 },
         { "id": "entry", "name": "От двери", "pos": [15, 163, 160], "target": [143, 70, 80], "fov": 70 },
         { "id": "top", "name": "Сверху", "type": "top" }
+      ],
+      "electric": [
+        {
+          "id": "R1",
+          "type": "socket",
+          "wall": 3,
+          "offset": 64,
+          "z": 100,
+          "n": 2,
+          "label": "Стиральная машина и фен: IP44, через УЗО, дальше 60 см от ванны"
+        }
       ]
     },
     {
@@ -387,7 +444,7 @@
       "walls": [
         { "id": 1, "name": "С1", "side": "запад", "thickness": 35, "to": "лоджия", "src": "typical" },
         { "id": 2, "name": "С2", "side": "север", "thickness": 10, "to": "спальня 7.5", "src": "typical" },
-        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "зал", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "зал", "src": "typical", "shared": true },
         { "id": 4, "name": "С4", "side": "юг", "thickness": 35, "to": "улица", "src": "typical" }
       ],
       "openings": [
@@ -428,7 +485,8 @@
           "leaf": 70,
           "swing": { "into": "room", "hinge": "end" },
           "pass": "secondary",
-          "src": "plan; ширина и сторона петель — допущение"
+          "src": "plan; ширина и сторона петель — допущение",
+          "link": "balkon:D1"
         }
       ],
       "fixtures": [
@@ -453,6 +511,14 @@
           "cameras": [
             { "id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 40, 110], "fov": 60 },
             { "id": "frombed", "name": "С кровати", "pos": [157, 45, 115], "target": [157, 293, 85], "fov": 60 }
+          ],
+          "electric": [
+            { "id": "R2", "type": "socket", "wall": 4, "offset": 258, "z": 65, "n": 2, "label": "У кровати слева: зарядка, ночник" },
+            { "id": "S3", "type": "switch", "wall": 4, "offset": 272, "z": 85, "n": 2, "label": "У кровати слева: подвес / люстра" },
+            { "id": "R3", "type": "socket", "wall": 4, "offset": 56, "z": 65, "n": 2, "label": "У кровати справа: зарядка" },
+            { "id": "S4", "type": "switch", "wall": 4, "offset": 40, "z": 85, "n": 2, "label": "У кровати справа: подвес / люстра" },
+            { "id": "TV1", "type": "socket", "wall": 2, "offset": 145, "z": 110, "n": 2, "label": "За ТВ: телевизор, приставка" },
+            { "id": "TV2", "type": "data", "wall": 2, "offset": 170, "z": 110, "n": 2, "label": "ТВ-антенна и интернет" }
           ]
         },
         {
@@ -473,6 +539,14 @@
           "cameras": [
             { "id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 40, 110], "fov": 60 },
             { "id": "frombed", "name": "С кровати", "pos": [157, 45, 115], "target": [157, 293, 85], "fov": 60 }
+          ],
+          "electric": [
+            { "id": "R2", "type": "socket", "wall": 4, "offset": 258, "z": 65, "n": 2, "label": "У кровати слева: зарядка, ночник" },
+            { "id": "S3", "type": "switch", "wall": 4, "offset": 272, "z": 85, "n": 2, "label": "У кровати слева: подвес / люстра" },
+            { "id": "R3", "type": "socket", "wall": 4, "offset": 56, "z": 65, "n": 2, "label": "У кровати справа: зарядка" },
+            { "id": "S4", "type": "switch", "wall": 4, "offset": 40, "z": 85, "n": 2, "label": "У кровати справа: подвес / люстра" },
+            { "id": "TV1", "type": "socket", "wall": 2, "offset": 145, "z": 110, "n": 2, "label": "За ТВ: телевизор, приставка" },
+            { "id": "TV2", "type": "data", "wall": 2, "offset": 170, "z": 110, "n": 2, "label": "ТВ-антенна и интернет" }
           ]
         },
         {
@@ -491,6 +565,12 @@
           "cameras": [
             { "id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 40, 110], "fov": 60 },
             { "id": "frombed", "name": "С кровати", "pos": [157, 45, 115], "target": [157, 293, 85], "fov": 60 }
+          ],
+          "electric": [
+            { "id": "R2", "type": "socket", "wall": 4, "offset": 258, "z": 65, "n": 2, "label": "У кровати слева: зарядка, ночник" },
+            { "id": "S3", "type": "switch", "wall": 4, "offset": 272, "z": 85, "n": 2, "label": "У кровати слева: подвес / люстра" },
+            { "id": "TV1", "type": "socket", "wall": 2, "offset": 145, "z": 110, "n": 2, "label": "За ТВ: телевизор, приставка" },
+            { "id": "TV2", "type": "data", "wall": 2, "offset": 170, "z": 110, "n": 2, "label": "ТВ-антенна и интернет" }
           ]
         }
       ],
@@ -499,6 +579,20 @@
         { "id": "entry", "name": "От входа", "pos": [292, 222, 150], "target": [60, 90, 90], "fov": 60 },
         { "id": "window", "name": "От лоджии", "pos": [25, 190, 150], "target": [314, 120, 100], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
+      ],
+      "electric": [
+        {
+          "id": "S1",
+          "type": "switch",
+          "wall": 3,
+          "offset": 127,
+          "z": 90,
+          "n": 2,
+          "label": "Люстра и подвесы у кровати (проходной)",
+          "controls": ["L1"]
+        },
+        { "id": "S2", "type": "switch", "wall": 2, "offset": 15, "z": 90, "n": 1, "label": "Свет на балконе (у двери на балкон)" },
+        { "id": "R1", "type": "socket", "wall": 3, "offset": 143, "z": 30, "n": 1, "label": "Пылесос" }
       ]
     },
     {
@@ -513,8 +607,8 @@
       "walls": [
         { "id": 1, "name": "С1", "side": "запад", "thickness": 35, "to": "лоджия", "src": "typical" },
         { "id": 2, "name": "С2", "side": "север", "thickness": 16, "to": "соседи", "src": "typical" },
-        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "зал", "src": "typical" },
-        { "id": 4, "name": "С4", "side": "юг", "thickness": 10, "to": "спальня 9.2", "src": "typical" }
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "зал", "src": "typical", "shared": true },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 10, "to": "спальня 9.2", "src": "typical", "shared": true }
       ],
       "openings": [
         {
@@ -559,6 +653,12 @@
             { "id": "desk", "ref": "desk120", "x": 130, "y": 209, "rot": 0, "group": "work" },
             { "id": "chair", "ref": "officechair", "x": 130, "y": 179, "rot": 180, "group": "work" },
             { "id": "wardrobe", "ref": "wardrobe120", "x": 254, "y": 209, "rot": 0, "group": "storage" }
+          ],
+          "electric": [
+            { "id": "R1", "type": "socket", "wall": 2, "offset": 100, "z": 85, "n": 3, "label": "Над столом: компьютер, монитор, лампа" },
+            { "id": "D1", "type": "data", "wall": 2, "offset": 160, "z": 85, "n": 1, "label": "Интернет (LAN) у стола" },
+            { "id": "R2", "type": "socket", "wall": 4, "offset": 254, "z": 30, "n": 2, "label": "У дивана: торшер, зарядка" },
+            { "id": "R3", "type": "socket", "wall": 3, "offset": 119, "z": 30, "n": 1, "label": "Пылесос" }
           ]
         },
         {
@@ -569,6 +669,11 @@
             { "id": "bed", "ref": "bed140", "x": 209, "y": 164, "rot": 90, "group": "bed" },
             { "id": "wardrobe", "ref": "wardrobe100", "x": 50, "y": 214, "rot": 0, "group": "storage" },
             { "id": "dresser", "ref": "dresser60", "x": 30, "y": 22.5, "rot": 180, "group": "storage" }
+          ],
+          "electric": [
+            { "id": "R1", "type": "socket", "wall": 2, "offset": 290, "z": 70, "n": 2, "label": "У изголовья: зарядка, ночник" },
+            { "id": "S2", "type": "switch", "wall": 2, "offset": 300, "z": 90, "n": 1, "label": "Люстра у кровати (проходной)" },
+            { "id": "R2", "type": "socket", "wall": 4, "offset": 244, "z": 30, "n": 1, "label": "У комода" }
           ]
         }
       ],
@@ -577,7 +682,98 @@
         { "id": "entry", "name": "От входа", "pos": [295, 50, 155], "target": [30, 160, 90], "fov": 60 },
         { "id": "window", "name": "От окна", "pos": [25, 110, 150], "target": [314, 140, 100], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
-      ]
+      ],
+      "electric": [{"id": "S1", "type": "switch", "wall": 3, "offset": 136, "z": 90, "n": 1, "label": "Люстра", "controls": ["L1"]}]
+    },
+    {
+      "id": "balkon",
+      "name": "Балкон",
+      "area": 5.4,
+      "height": { "value": 250, "src": "typical" },
+      "origin": [-500, 13],
+      "originNote": "Внутренний угол у южного торца и окна спальни 9.2. Стены: С1 остекление (наискосок), С2 северный торец, С3 стена спален, С4 южный торец.",
+      "outline": [[72, 0], [4, 537], [139, 537], [139, 0]],
+      "outlineSrc": "plan: застеклённая лоджия-трапеция вдоль спален 9.2 и 7.5: длина 537, ширина 135 у севера и 67 у юга (≈ 1 см/пкс) ≈ 5.4 м²",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 10, "to": "улица (остекление)", "src": "plan" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 12, "to": "соседний балкон", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 35, "to": "спальни", "shared": true, "src": "та же стена, что у спален" },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 12, "to": "улица", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "D1",
+          "type": "door",
+          "name": "Из спальни 9.2",
+          "wall": 3,
+          "offset": 320,
+          "width": 85,
+          "height": 205,
+          "leaf": 70,
+          "swing": { "into": "out", "hinge": "start" },
+          "link": "spalnya:D2",
+          "src": "та же дверь, что D2 в спальне"
+        },
+        {
+          "id": "O1",
+          "type": "window",
+          "name": "Остекление",
+          "wall": 1,
+          "offset": 8,
+          "width": 525,
+          "sill": 100,
+          "height": 140,
+          "sillDepth": 12,
+          "sashes": 6,
+          "src": "plan; парапет 100 — допущение"
+        },
+        {
+          "id": "O2",
+          "type": "window",
+          "name": "Окно комнаты 7.5",
+          "wall": 3,
+          "offset": 62,
+          "width": 145,
+          "sill": 85,
+          "height": 145,
+          "sillDepth": 25,
+          "sashes": 2,
+          "src": "то же окно, что у комнаты 7.5"
+        },
+        {
+          "id": "O3",
+          "type": "window",
+          "name": "Окно спальни 9.2",
+          "wall": 3,
+          "offset": 405,
+          "width": 115,
+          "sill": 85,
+          "height": 145,
+          "sillDepth": 25,
+          "sashes": 2,
+          "src": "то же окно, что у спальни"
+        }
+      ],
+      "fixtures": [{"id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 85, "y": 300, "drop": 5, "src": "typical"}],
+      "variants": [
+        {
+          "id": "A",
+          "name": "Уголок на двоих",
+          "idea": "В широкой северной части столик и два стульчика — кофе у окна. В узкой южной части под окном спальни тумба для хранения. Середина свободна: проход от двери спальни.",
+          "items": [
+            { "id": "table", "ref": "btable", "x": 75, "y": 480, "rot": 0, "group": "cafe" },
+            { "id": "chair1", "ref": "stool", "x": 75, "y": 437, "rot": 180, "group": "cafe" },
+            { "id": "chair2", "ref": "stool", "x": 36, "y": 482, "rot": 270, "group": "cafe" },
+            { "id": "cabinet", "ref": "bcabinet", "x": 121.5, "y": 70, "rot": 90, "group": "storage" }
+          ]
+        }
+      ],
+      "cameras": [
+        { "id": "overview", "name": "Обзор", "pos": [-330, -150, 470], "target": [90, 270, 40], "fov": 50 },
+        { "id": "entry", "name": "От двери", "pos": [125, 170, 155], "target": [40, 480, 100], "fov": 65 },
+        { "id": "top", "name": "Сверху", "type": "top" }
+      ],
+      "electric": [{"id": "R1", "type": "socket", "wall": 3, "offset": 72, "z": 30, "n": 1, "label": "На балконе (IP44): гирлянда, обогреватель"}]
     }
   ],
   "catalog": {
@@ -668,7 +864,9 @@
     "bed140": { "name": "Кровать 140×200", "kind": "bed", "w": 150, "d": 210, "h": 95, "note": "матрас 140×200" },
     "rug200b": { "name": "Ковёр", "kind": "rug", "w": 200, "d": 140, "h": 1, "walkable": true },
     "sofabed160": { "name": "Диван-кровать", "kind": "sofa", "w": 160, "d": 90, "h": 85, "note": "2-местный, разложенный ≈ 140 × 200" },
-    "dresser60": { "name": "Комод", "kind": "cabinet", "w": 60, "d": 45, "h": 85 }
+    "dresser60": { "name": "Комод", "kind": "cabinet", "w": 60, "d": 45, "h": 85 },
+    "btable": { "name": "Столик", "kind": "table", "w": 50, "d": 50, "h": 72 },
+    "bcabinet": { "name": "Тумба для хранения", "kind": "cabinet", "w": 100, "d": 35, "h": 80 }
   },
   "palettes": [
     {

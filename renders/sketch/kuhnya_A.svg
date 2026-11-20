@@ -121,6 +121,22 @@
 <g><line x1="233" y1="270.5" x2="110" y2="270.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
 <rect x="156.5" y="262.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
 <text x="171.5" y="274.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">82</text></g>
+<circle cx="116" cy="137" r="4" fill="#2f6db5"/><line x1="116" y1="137" x2="122" y2="131" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="132.5" y="140.5" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">1</text>
+<circle cx="278" cy="179" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="278" cy="179" r="1.4" fill="#d27b00"/>
+<text x="278" y="199" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">2</text>
+<circle cx="458" cy="227" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="458" cy="227" r="1.4" fill="#d27b00"/>
+<text x="441.5" y="230.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">3</text>
+<circle cx="458" cy="353" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="458" cy="353" r="1.4" fill="#d27b00"/>
+<text x="441.5" y="356.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">4</text>
+<circle cx="458" cy="302" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="458" cy="302" r="1.4" fill="#d27b00"/>
+<text x="441.5" y="305.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">5</text>
+<circle cx="357.5" cy="179" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="357.5" cy="179" r="1.4" fill="#d27b00"/>
+<text x="357.5" y="199" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">6</text>
+<circle cx="458" cy="420.5" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="458" cy="420.5" r="1.4" fill="#d27b00"/>
+<text x="441.5" y="424" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">7</text>
+<circle cx="116" cy="422" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="116" cy="422" r="1.4" fill="#d27b00"/>
+<text x="132.5" y="425.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">8</text>
 <text x="554" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Кухня, вариант A — Угловая</text>
 <text x="554" y="124" font-size="20" font-weight="700" fill="#2b2b2b">кухня</text>
 <text x="554" y="148" font-size="12" fill="#6d6a65">Г-образный гарнитур: вдоль восточной стены</text>
@@ -135,5 +151,27 @@
 <text x="554" y="289" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
 <text x="570" y="289" font-size="12" fill="#2b2b2b">Подход к окну (открыть створку): 66 см</text>
 <text x="570" y="304" font-size="12" fill="#2b2b2b">(норма ≥ 60)</text>
+<text x="554" y="336" font-size="14" font-weight="700" fill="#2b2b2b">Электрика</text>
+<text x="554" y="354" font-size="11.5" font-weight="700" fill="#2f6db5">1</text>
+<text x="572" y="354" font-size="11.5" fill="#2b2b2b">Выключатель ×2, 90 см — Свет на кухне и</text>
+<text x="572" y="368" font-size="11.5" fill="#2b2b2b">подсветка столешницы</text>
+<text x="554" y="385" font-size="11.5" font-weight="700" fill="#d27b00">2</text>
+<text x="572" y="385" font-size="11.5" fill="#2b2b2b">Розетка, 30 см — Холодильник (за ним, внизу)</text>
+<text x="554" y="402" font-size="11.5" font-weight="700" fill="#d27b00">3</text>
+<text x="572" y="402" font-size="11.5" fill="#2b2b2b">Розетка, 30 см — Посудомойка — в тумбе под</text>
+<text x="572" y="416" font-size="11.5" fill="#2b2b2b">мойкой, не за машиной</text>
+<text x="554" y="433" font-size="11.5" font-weight="700" fill="#d27b00">4</text>
+<text x="572" y="433" font-size="11.5" fill="#2b2b2b">Розетка, 30 см — Плита: силовая 32 А (если</text>
+<text x="572" y="447" font-size="11.5" fill="#2b2b2b">электрическая)</text>
+<text x="554" y="464" font-size="11.5" font-weight="700" fill="#d27b00">5</text>
+<text x="572" y="464" font-size="11.5" fill="#2b2b2b">Розетка ×2, 110 см — Над столешницей: чайник,</text>
+<text x="572" y="478" font-size="11.5" fill="#2b2b2b">микроволновка</text>
+<text x="554" y="495" font-size="11.5" font-weight="700" fill="#d27b00">6</text>
+<text x="572" y="495" font-size="11.5" fill="#2b2b2b">Розетка ×2, 110 см — Над столешницей: мелкая</text>
+<text x="572" y="509" font-size="11.5" fill="#2b2b2b">техника</text>
+<text x="554" y="526" font-size="11.5" font-weight="700" fill="#d27b00">7</text>
+<text x="572" y="526" font-size="11.5" fill="#2b2b2b">Розетка, 215 см — Вытяжка (в шкафу над ней)</text>
+<text x="554" y="543" font-size="11.5" font-weight="700" fill="#d27b00">8</text>
+<text x="572" y="543" font-size="11.5" fill="#2b2b2b">Розетка ×2, 85 см — У стола: зарядка, лампа</text>
 <text x="50" y="846" font-size="11" fill="#8a857d">Кухня: набросок по площади 5.8 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
 </svg>

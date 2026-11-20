@@ -140,6 +140,8 @@ function Lights({ layout, colors, shadows }: { layout: any; colors: Colors; shad
   const room = layout.room;
   const xs = room.outline.map((p: number[]) => p[0]), ys = room.outline.map((p: number[]) => p[1]);
   const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+  // Тень от солнца должна накрыть всю сцену: для общего вида квартиры область больше.
+  const span = Math.max(5, (Math.max(...xs) - Math.min(...xs) + Math.max(...ys) - Math.min(...ys)) / 200 + 1);
   // Снизу комнату подсвечивает пол, но разбавленный белым: иначе потолок и стены «ржавеют».
   const ground = '#' + new THREE.Color(colors.floor).lerp(new THREE.Color('#ffffff'), 0.65).getHexString();
   const target = useMemo(() => {
@@ -178,10 +180,10 @@ function Lights({ layout, colors, shadows }: { layout: any; colors: Colors; shad
         shadow-mapSize={[1024, 1024]}
         shadow-bias={-0.0004}
         shadow-normalBias={0.02}
-        shadow-camera-left={-5}
-        shadow-camera-right={5}
-        shadow-camera-top={5}
-        shadow-camera-bottom={-5}
+        shadow-camera-left={-span}
+        shadow-camera-right={span}
+        shadow-camera-top={span}
+        shadow-camera-bottom={-span}
         shadow-camera-near={0.5}
         shadow-camera-far={20}
       />
@@ -189,15 +191,21 @@ function Lights({ layout, colors, shadows }: { layout: any; colors: Colors; shad
   );
 }
 
+export type FlatRoom = { L: any; variantId: string; origin: number[]; electric: any[] };
+export const CUT = 120; // высота среза стен в общем виде, см
+
 export function Scene3D(props: {
   layout: any; variantId: string; preset: CamPreset; mode: Mode; colors: Colors; shadows: boolean;
   apiRef: MutableRefObject<CaptureApi | null>; onReady?: () => void;
+  electric?: any[]; flat?: FlatRoom[];
 }) {
-  const { layout, variantId, preset, mode, colors, shadows, apiRef, onReady } = props;
+  // layout — одна комната, либо (при flat) условная «комната» с габаритами всей квартиры для камер и света.
+  const { layout, variantId, preset, mode, colors, shadows, apiRef, onReady, electric, flat } = props;
   const walls = useRef<Walls>(new Map()).current;
   roomHeight = layout.room.height.value;
   const register = (id: number, ref: WallRef | null) => { if (ref) walls.set(id, ref); else walls.delete(id); };
-  const ctx = useMemo(() => ({ mode, colors, shadows }), [mode, colors, shadows]);
+  const noop = () => {};
+  const ctx = useMemo(() => ({ mode, colors, shadows, cut: flat ? CUT : undefined }), [mode, colors, shadows, flat]);
   return (
     <Canvas
       key={shadows ? 'sh' : 'nosh'}
@@ -211,8 +219,19 @@ export function Scene3D(props: {
       <color attach="background" args={[BG[mode]]} />
       <SceneCtx.Provider value={ctx}>
         <Lights layout={layout} colors={colors} shadows={shadows} />
-        <Room3D layout={layout} register={register} registerCeiling={registerCeiling} />
-        <Furniture3D layout={layout} variantId={variantId} registerWallItem={registerWallItem} />
+        {flat ? (
+          flat.map((r) => (
+            <group key={r.L.room.id} position={toThree(r.origin[0], r.origin[1])}>
+              <Room3D layout={r.L} register={noop} registerCeiling={registerCeiling} electric={r.electric} combined />
+              <Furniture3D layout={r.L} variantId={r.variantId} hideAbove={CUT} />
+            </group>
+          ))
+        ) : (
+          <>
+            <Room3D layout={layout} register={register} registerCeiling={registerCeiling} electric={electric} />
+            <Furniture3D layout={layout} variantId={variantId} registerWallItem={registerWallItem} />
+          </>
+        )}
       </SceneCtx.Provider>
       <Rig layout={layout} preset={preset} walls={walls} />
       <Exporter layout={layout} walls={walls} apiRef={apiRef} />

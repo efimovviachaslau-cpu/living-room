@@ -398,7 +398,7 @@ export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
 
 const ON_WALL = new Set(['tv', 'art', 'mirror', 'bathroom']);
 
-export function Furniture3D({ layout, variantId, registerWallItem }: { layout: any; variantId: string; registerWallItem?: RegisterWallItem }) {
+export function Furniture3D({ layout, variantId, registerWallItem, hideAbove }: { layout: any; variantId: string; registerWallItem?: RegisterWallItem; hideAbove?: number }) {
   const v = layout.variants.find((x: any) => x.id === variantId);
   if (!v) return null;
   const ceiling = layout.room.height.value;
@@ -407,6 +407,9 @@ export function Furniture3D({ layout, variantId, registerWallItem }: { layout: a
     <>
       {v.items.map((it: any) => {
         const spec = layout.catalog[it.ref];
+        // В общем виде прячем то, что висит выше среза стен: верхние шкафы, подвесы, ТВ и картины на стене.
+        const z0 = it.z ?? spec.z ?? 0;
+        if (hideAbove !== undefined && (z0 >= hideAbove || (spec.floor === false && z0 + spec.h > hideAbove))) return null;
         const onWall = ON_WALL.has(spec.kind) && (spec.kind !== 'bathroom' || spec.floor === false);
         const w = onWall ? walls.find((W: any) => G.pointSegDistance([it.x, it.y], W.a, W.b) < spec.d / 2 + 10) : undefined;
         return <Item key={it.id} it={it} spec={spec} ceiling={ceiling} wallId={w?.id} registerWallItem={registerWallItem} />;

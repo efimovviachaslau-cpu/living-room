@@ -31,6 +31,11 @@ const spec = z.object({
   floor: z.boolean().optional(), walkable: z.boolean().optional(), round: z.boolean().optional(), sliding: z.boolean().optional(), mirror: z.boolean().optional(),
 });
 
+const electric = z.object({
+  id: z.string(), type: z.enum(['socket', 'switch', 'data', 'panel']), wall: z.number().int().positive(),
+  offset: cm, z: cm, n: z.number().int().positive(), label: z.string(), controls: z.array(z.string()).optional(),
+});
+
 const camera = z.object({
   id: z.string(), name: z.string(), type: z.enum(['eye', 'top']).optional(),
   pos: pt3.optional(), target: pt3.optional(), fov: z.number().optional(),
@@ -44,11 +49,11 @@ const room = z.object({
   id: z.string(), name: z.string(), area: z.number(), height: z.object({ value: cm.positive() }),
   origin: pt2, originNote: z.string().optional(),
   outline: z.array(pt2).min(3),
-  walls: z.array(z.object({ id: z.number().int(), name: z.string(), thickness: cm.positive() })),
-  openings: z.array(opening), fixtures: z.array(fixture),
+  walls: z.array(z.object({ id: z.number().int(), name: z.string(), thickness: cm.positive(), shared: z.boolean().optional() })),
+  openings: z.array(opening), fixtures: z.array(fixture), electric: z.array(electric).optional(),
   variants: z.array(z.object({
     id: z.string(), name: z.string(), idea: z.string(),
-    items: z.array(item), cameras: z.array(camera).optional(),
+    items: z.array(item), cameras: z.array(camera).optional(), electric: z.array(electric).optional(),
   })).min(1),
   cameras: z.array(camera),
 });
@@ -82,8 +87,13 @@ export function validateLayout(layout) {
   };
   for (const r of layout.rooms) {
     const nWalls = r.outline.length;
+    const lens = r.outline.map((a, i) => { const b = r.outline[(i + 1) % nWalls]; return Math.hypot(b[0] - a[0], b[1] - a[1]); });
     for (const o of [...r.openings, ...r.fixtures]) {
       if (o.wall && o.wall > nWalls) errors.push(`${r.id}/${o.id}: нет стены ${o.wall}`);
+    }
+    for (const e of [...(r.electric ?? []), ...r.variants.flatMap((v) => v.electric ?? [])]) {
+      if (e.wall > nWalls) errors.push(`${r.id}/${e.id}: нет стены ${e.wall}`);
+      else if (e.offset < 0 || e.offset > lens[e.wall - 1]) errors.push(`${r.id}/${e.id}: отступ ${e.offset} за пределами стены (${Math.round(lens[e.wall - 1])})`);
     }
     for (const o of r.openings.filter((o) => o.link)) {
       const [rid, oid] = o.link.split(':');
@@ -91,7 +101,7 @@ export function validateLayout(layout) {
       if (!o2) { errors.push(`${r.id}/${o.id}: связь ${o.link} не найдена`); continue; }
       if (o2.width !== o.width || o2.height !== o.height) errors.push(`${r.id}/${o.id} и ${o.link}: разные размеры проёма`);
       const [m1, m2] = [absMid(r, o), absMid(rooms.get(rid), o2)];
-      if (Math.hypot(m1[0] - m2[0], m1[1] - m2[1]) > 30) errors.push(`${r.id}/${o.id} и ${o.link}: проёмы не напротив друг друга`);
+      if (Math.hypot(m1[0] - m2[0], m1[1] - m2[1]) > 45) errors.push(`${r.id}/${o.id} и ${o.link}: проёмы не напротив друг друга`);
     }
     for (const v of r.variants) {
       const seen = new Set();

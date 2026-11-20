@@ -10,7 +10,10 @@ type Wall = { id: number; a: Vec; b: Vec; dir: Vec; inward: Vec; length: number 
 export type WallRef = { group: THREE.Group; a: Vec; inward: Vec };
 
 // Коробка в координатах стены: u — вдоль стены от её начала, v — от внутренней грани в комнату (+) / в стену (−).
-function WallBox({ W, u0, u1, v0, v1, z0, z1, role, cast }: { W: Wall; u0: number; u1: number; v0: number; v1: number; z0: number; z1: number; role: Role; cast?: boolean }) {
+function WallBox({ W, u0, u1, v0, v1, z0, z1: z1in, role, cast }: { W: Wall; u0: number; u1: number; v0: number; v1: number; z0: number; z1: number; role: Role; cast?: boolean }) {
+  // В общем виде квартиры стены срезаны на высоте cut — видно мебель сверху.
+  const { cut } = useScene();
+  const z1 = cut ? Math.min(z1in, cut) : z1in;
   if (u1 - u0 <= 0.01 || z1 - z0 <= 0.01 || v1 - v0 <= 0.01) return null;
   const c = G.add(G.add(W.a, G.mul(W.dir, (u0 + u1) / 2)), G.mul(W.inward, (v0 + v1) / 2));
   const rotY = Math.atan2(W.dir[1], W.dir[0]);
@@ -65,7 +68,28 @@ function Door({ W, t, o }: { W: Wall; t: number; o: any }) {
   );
 }
 
-function WallGroup({ room, W, register }: { room: any; W: Wall; register: (id: number, ref: WallRef | null) => void }) {
+// Розетки, выключатели, щиток: пластины на внутренней грани стены (z — центр).
+function Electric({ W, list }: { W: Wall; list: any[] }) {
+  return (
+    <>
+      {list.map((e) => {
+        if (e.type === 'panel') return <WallBox key={e.id} W={W} u0={e.offset - 15} u1={e.offset + 15} v0={0} v1={4} z0={e.z - 20} z1={e.z + 20} role="frame" cast={false} />;
+        const w = 8 * e.n + 1;
+        return (
+          <group key={e.id}>
+            <WallBox W={W} u0={e.offset - w / 2} u1={e.offset + w / 2} v0={0} v1={1} z0={e.z - 4.5} z1={e.z + 4.5} role="frame" cast={false} />
+            {Array.from({ length: e.n }, (_, k) => (
+              <WallBox key={k} W={W} u0={e.offset - w / 2 + 1 + 8 * k + 2} u1={e.offset - w / 2 + 1 + 8 * k + 6} v0={1} v1={1.4} z0={e.z - 2} z1={e.z + 2}
+                role={e.type === 'switch' ? 'trim' : e.type === 'data' ? 'metal' : 'dark'} cast={false} />
+            ))}
+          </group>
+        );
+      })}
+    </>
+  );
+}
+
+function WallGroup({ room, W, register, electric = [], combined }: { room: any; W: Wall; register: (id: number, ref: WallRef | null) => void; electric?: any[]; combined?: boolean }) {
   const H = room.height.value;
   const n = room.outline.length;
   const th = (id: number) => room.walls.find((w: any) => w.id === id)?.thickness ?? 12;
@@ -94,8 +118,12 @@ function WallGroup({ room, W, register }: { room: any; W: Wall; register: (id: n
   for (const o of ops.filter((o: any) => o.type === 'door')) { base.push([bc, o.offset - 7]); bc = o.offset + o.width + 7; }
   base.push([bc, W.length]);
 
+  const mine = electric.filter((e) => e.wall === W.id);
+  // В общем виде общую стену рисует сосед, от этой стены остаётся только электрика.
+  if (combined && room.walls.find((w: any) => w.id === W.id)?.shared) return <Electric W={W} list={mine} />;
   return (
     <group ref={(g) => register(W.id, g ? { group: g, a: W.a, inward: W.inward } : null)}>
+      <Electric W={W} list={mine} />
       {pieces.map((p, i) => <WallBox key={i} W={W} {...p} v0={-t} v1={0} role="walls" />)}
       {base.map(([u0, u1], i) => <WallBox key={'b' + i} W={W} u0={Math.max(0, u0)} u1={u1} v0={0} v1={1.5} z0={0} z1={7} role="trim" cast={false} />)}
       {ops.map((o: any) => (o.type === 'window' ? <Window key={o.id} W={W} t={t} o={o} /> : <Door key={o.id} W={W} t={t} o={o} />))}
@@ -128,7 +156,10 @@ function Radiator({ room, f }: { room: any; f: any }) {
   );
 }
 
-export function Room3D({ layout, register, registerCeiling }: { layout: any; register: (id: number, ref: WallRef | null) => void; registerCeiling: (g: THREE.Group | null) => void }) {
+export function Room3D({ layout, register, registerCeiling, electric, combined }: {
+  layout: any; register: (id: number, ref: WallRef | null) => void; registerCeiling: (g: THREE.Group | null) => void;
+  electric?: any[]; combined?: boolean;
+}) {
   const room = layout.room;
   const H = room.height.value;
   const walls = G.walls(room) as Wall[];
@@ -136,7 +167,7 @@ export function Room3D({ layout, register, registerCeiling }: { layout: any; reg
     <>
       <Slab outline={room.outline} z={0} role="floor" />
       <Slab outline={room.outline} z={H} role="ceiling" down />
-      {walls.map((W) => <WallGroup key={W.id} room={room} W={W} register={register} />)}
+      {walls.map((W) => <WallGroup key={W.id} room={room} W={W} register={register} electric={electric} combined={combined} />)}
       {room.fixtures.map((f: any) => {
         if (f.type === 'radiator') return <Radiator key={f.id} room={room} f={f} />;
         if (f.type === 'pipe') {

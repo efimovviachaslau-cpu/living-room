@@ -109,6 +109,24 @@
 <rect x="512" y="219" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
 <text x="527" y="231" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">72</text></g>
 <line x1="345.5" y1="459.5" x2="345.5" y2="114.5" stroke="#7a6fb0" stroke-width="1" stroke-dasharray="1 4"/><circle cx="345.5" cy="459.5" r="3" fill="#7a6fb0"/>
+<circle cx="575" cy="300.5" r="4" fill="#2f6db5"/><line x1="575" y1="300.5" x2="581" y2="294.5" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="558.5" y="304" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">1</text>
+<circle cx="132.5" cy="116" r="4" fill="#2f6db5"/><line x1="132.5" y1="116" x2="138.5" y2="110" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="132.5" y="136" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">2</text>
+<circle cx="575" cy="324.5" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="575" cy="324.5" r="1.4" fill="#d27b00"/>
+<text x="558.5" y="328" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">3</text>
+<circle cx="194" cy="543.5" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="194" cy="543.5" r="1.4" fill="#d27b00"/>
+<text x="194" y="530.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">4</text>
+<circle cx="173" cy="543.5" r="4" fill="#2f6db5"/><line x1="173" y1="543.5" x2="179" y2="537.5" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="173" y="530.5" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">5</text>
+<circle cx="497" cy="543.5" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="497" cy="543.5" r="1.4" fill="#d27b00"/>
+<text x="497" y="530.5" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">6</text>
+<circle cx="521" cy="543.5" r="4" fill="#2f6db5"/><line x1="521" y1="543.5" x2="527" y2="537.5" stroke="#2f6db5" stroke-width="1.4"/>
+<text x="521" y="530.5" font-size="9.5" font-weight="700" fill="#2f6db5" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">7</text>
+<circle cx="327.5" cy="116" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><circle cx="327.5" cy="116" r="1.4" fill="#d27b00"/>
+<text x="327.5" y="136" font-size="9.5" font-weight="700" fill="#d27b00" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">8</text>
+<path d="M365,111 L370,120 L360,120 Z" fill="#fff" stroke="#7a5ab8" stroke-width="1.5"/>
+<text x="365" y="136" font-size="9.5" font-weight="700" fill="#7a5ab8" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">9</text>
 <text x="671" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Спальня, вариант B — + шкаф у</text>
 <text x="671" y="124" font-size="20" font-weight="700" fill="#2b2b2b">двери на лоджию (проба)</text>
 <text x="671" y="148" font-size="12" fill="#6d6a65">То же, что A, плюс шкаф 60×60 в углу у двери</text>
@@ -135,5 +153,31 @@
 <text x="687" y="412" font-size="12" fill="#2b2b2b">1–1.5, терпимо до 1.7)</text>
 <text x="671" y="432" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
 <text x="687" y="432" font-size="12" fill="#2b2b2b">ТВ в стороне от оси кровати на 0° (≤ 30°)</text>
+<text x="671" y="464" font-size="14" font-weight="700" fill="#2b2b2b">Электрика</text>
+<text x="671" y="482" font-size="11.5" font-weight="700" fill="#2f6db5">1</text>
+<text x="689" y="482" font-size="11.5" fill="#2b2b2b">Выключатель ×2, 90 см — Люстра и подвесы у</text>
+<text x="689" y="496" font-size="11.5" fill="#2b2b2b">кровати (проходной)</text>
+<text x="671" y="513" font-size="11.5" font-weight="700" fill="#2f6db5">2</text>
+<text x="689" y="513" font-size="11.5" fill="#2b2b2b">Выключатель, 90 см — Свет на балконе (у двери</text>
+<text x="689" y="527" font-size="11.5" fill="#2b2b2b">на балкон)</text>
+<text x="671" y="544" font-size="11.5" font-weight="700" fill="#d27b00">3</text>
+<text x="689" y="544" font-size="11.5" fill="#2b2b2b">Розетка, 30 см — Пылесос</text>
+<text x="671" y="561" font-size="11.5" font-weight="700" fill="#d27b00">4</text>
+<text x="689" y="561" font-size="11.5" fill="#2b2b2b">Розетка ×2, 65 см — У кровати слева: зарядка,</text>
+<text x="689" y="575" font-size="11.5" fill="#2b2b2b">ночник</text>
+<text x="671" y="592" font-size="11.5" font-weight="700" fill="#2f6db5">5</text>
+<text x="689" y="592" font-size="11.5" fill="#2b2b2b">Выключатель ×2, 85 см — У кровати слева:</text>
+<text x="689" y="606" font-size="11.5" fill="#2b2b2b">подвес / люстра</text>
+<text x="671" y="623" font-size="11.5" font-weight="700" fill="#d27b00">6</text>
+<text x="689" y="623" font-size="11.5" fill="#2b2b2b">Розетка ×2, 65 см — У кровати справа: зарядка</text>
+<text x="671" y="640" font-size="11.5" font-weight="700" fill="#2f6db5">7</text>
+<text x="689" y="640" font-size="11.5" fill="#2b2b2b">Выключатель ×2, 85 см — У кровати справа:</text>
+<text x="689" y="654" font-size="11.5" fill="#2b2b2b">подвес / люстра</text>
+<text x="671" y="671" font-size="11.5" font-weight="700" fill="#d27b00">8</text>
+<text x="689" y="671" font-size="11.5" fill="#2b2b2b">Розетка ×2, 110 см — За ТВ: телевизор,</text>
+<text x="689" y="685" font-size="11.5" fill="#2b2b2b">приставка</text>
+<text x="671" y="702" font-size="11.5" font-weight="700" fill="#7a5ab8">9</text>
+<text x="689" y="702" font-size="11.5" fill="#2b2b2b">ТВ / интернет ×2, 110 см — ТВ-антенна и</text>
+<text x="689" y="716" font-size="11.5" fill="#2b2b2b">интернет</text>
 <text x="50" y="963" font-size="11" fill="#8a857d">Спальня: набросок по площади 9.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
 </svg>

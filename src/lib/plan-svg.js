@@ -2,6 +2,7 @@
 // Общий код: им пользуются tools/sketch.mjs (PNG-наброски) и просмотрщик (вкладка 2D).
 
 import * as G from './geometry.js';
+import { electricOf, flatView } from './rooms.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
@@ -22,19 +23,23 @@ function wrapText(s, n) {
  * @param {{ withPanel?: boolean, square?: boolean }} [opts]
  *   withPanel — справа колонка с проверками и подпись внизу (для PNG);
  *   square — квадратный холст (Quick Look режет PNG до квадрата).
- * @returns {{ svg: string, checks: [string, string][], title: string }}
+ * @returns {{ svg: string, checks: [string, string][], title: string, electric: any[] }}
  */
 export function renderPlan(layout, variantId, opts = {}) {
-  const { withPanel = true, square = false } = opts;
+  // frame + origin — режим частей для общего плана: комната рисуется в координатах квартиры.
+  const { square = false, frame = null, origin = [0, 0], parts = false } = opts;
+  const withPanel = parts ? false : opts.withPanel ?? true;
   const room = layout.room;
   const R = layout.rules;
-  const S = 1.5; // px на см
+  const S = frame?.S ?? 1.5; // px на см
   const PAD = withPanel ? { l: 110, r: 400, t: 110, b: 150 } : { l: 100, r: 100, t: 80, b: 100 };
   const xs = room.outline.map((p) => p[0]), ys = room.outline.map((p) => p[1]);
   const RX = Math.max(...xs), RY = Math.max(...ys);
   const W0 = PAD.l + RX * S + PAD.r, H0 = PAD.t + RY * S + PAD.b;
   const W = square ? Math.max(W0, H0) : W0, H = square ? Math.max(W0, H0) : H0;
-  const px = ([x, y]) => [PAD.l + x * S, PAD.t + (RY - y) * S];
+  const px = frame
+    ? ([x, y]) => [frame.l + (x + origin[0] - frame.minX) * S, frame.t + (frame.maxY - (y + origin[1])) * S]
+    : ([x, y]) => [PAD.l + x * S, PAD.t + (RY - y) * S];
   const ptsAttr = (poly) => poly.map((p) => px(p).map((v) => v.toFixed(1)).join(',')).join(' ');
 
 const C = {
@@ -69,20 +74,34 @@ function gapLine(p, q, d, color) {
 <text x="${mx}" y="${my + 4}" font-size="10.5" font-weight="600" fill="${color}" text-anchor="middle">${Math.round(d)}</text></g>`;
 }
 
+const t = Object.fromEntries(room.walls.map((w) => [w.id, w.thickness]));
+const n = room.outline.length;
+
 function drawRoom() {
+  return [drawWalls(false), drawFloor(), drawOpenings(true), drawFixtures(), drawDims()].join('\n');
+}
+
+function drawFloor() {
+  return `<polygon points="${ptsAttr(room.outline)}" fill="${C.paper}"/>`;
+}
+
+// Стены: прямоугольник наружу от каждого ребра, с заходом на толщину соседних.
+// skipShared — в общем плане общую стену рисует сосед.
+function drawWalls(skipShared) {
   const out = [];
-  const t = Object.fromEntries(room.walls.map((w) => [w.id, w.thickness]));
-  // Стены: прямоугольник наружу от каждого ребра, с заходом на толщину соседних.
-  const n = room.outline.length;
   for (let i = 1; i <= n; i++) {
+    if (skipShared && room.walls.find((x) => x.id === i)?.shared) continue;
     const w = G.wall(room, i);
     const prev = t[((i - 2 + n) % n) + 1], next = t[(i % n) + 1];
     const a = G.add(w.a, G.mul(w.dir, -prev)), b = G.add(w.b, G.mul(w.dir, next));
     const o = G.mul(w.inward, -t[i]);
     out.push(`<polygon points="${ptsAttr([a, b, G.add(b, o), G.add(a, o)])}" fill="${C.wall}"/>`);
   }
-  out.push(`<polygon points="${ptsAttr(room.outline)}" fill="${C.paper}"/>`);
-  // Проёмы
+  return out.join('\n');
+}
+
+function drawOpenings(labels) {
+  const out = [];
   for (const o of room.openings) {
     const op = G.opening(room, o);
     const out1 = G.mul(op.W.inward, -t[o.wall]);
@@ -113,13 +132,18 @@ function drawRoom() {
         out.push(`<line x1="${hx}" y1="${hy}" x2="${ex}" y2="${ey}" stroke="${C.mute}" stroke-width="1.5" stroke-dasharray="3 2"/>`);
         }
       }
+      if (!labels) continue;
       const lab = G.add(op.mid, G.mul(op.W.inward, 6));
       const [lx, ly] = px(lab);
       const anchor = op.W.inward[0] > 0.5 ? 'start' : op.W.inward[0] < -0.5 ? 'end' : 'middle';
       out.push(`<text x="${lx}" y="${ly + 4}" font-size="10.5" font-style="italic" fill="${C.dim}" text-anchor="${anchor}">${esc(o.name)}</text>`);
     }
   }
-  // Оборудование
+  return out.join('\n');
+}
+
+function drawFixtures() {
+  const out = [];
   for (const f of G.fixtures(layout)) {
     out.push(`<polygon points="${ptsAttr(f.poly)}" fill="${f.type === 'radiator' ? '#e9b8a8' : '#999'}" stroke="${C.ink}" stroke-width="0.8"/>`);
     if (f.type === 'radiator') {
@@ -131,7 +155,35 @@ function drawRoom() {
     const [cx, cy] = px([f.x, f.y]);
     out.push(`<circle cx="${cx}" cy="${cy}" r="6" fill="none" stroke="${C.mute}"/><line x1="${cx - 6}" y1="${cy - 6}" x2="${cx + 6}" y2="${cy + 6}" stroke="${C.mute}"/><line x1="${cx - 6}" y1="${cy + 6}" x2="${cx + 6}" y2="${cy - 6}" stroke="${C.mute}"/>`);
   }
-  // Размерные цепочки по стенам (снаружи)
+  return out.join('\n');
+}
+
+// Электрика: значки на внутренней грани стены и номера; список — в легенде.
+const EL = { socket: ['Розетка', '#d27b00'], switch: ['Выключатель', '#2f6db5'], data: ['ТВ / интернет', '#7a5ab8'], panel: ['Щиток', '#5c5c5c'] };
+function drawElectric(list, numbers = true) {
+  const out = [];
+  list.forEach((e, i) => {
+    const W = G.wall(room, e.wall);
+    const p = G.add(W.a, G.mul(W.dir, e.offset));
+    const [x, y] = px(G.add(p, G.mul(W.inward, 4)));
+    const col = EL[e.type][1];
+    if (e.type === 'socket') out.push(`<circle cx="${x}" cy="${y}" r="4.5" fill="#fff" stroke="${col}" stroke-width="1.6"/><circle cx="${x}" cy="${y}" r="1.4" fill="${col}"/>`);
+    else if (e.type === 'switch') out.push(`<circle cx="${x}" cy="${y}" r="4" fill="${col}"/><line x1="${x}" y1="${y}" x2="${x + 6}" y2="${y - 6}" stroke="${col}" stroke-width="1.4"/>`);
+    else if (e.type === 'data') out.push(`<path d="M${x},${y - 5} L${x + 5},${y + 4} L${x - 5},${y + 4} Z" fill="#fff" stroke="${col}" stroke-width="1.5"/>`);
+    else {
+      const a = G.add(p, G.mul(W.dir, -15)), b = G.add(p, G.mul(W.dir, 15));
+      out.push(`<polygon points="${ptsAttr([a, b, G.add(b, G.mul(W.inward, 8)), G.add(a, G.mul(W.inward, 8))])}" fill="#fff" stroke="${col}" stroke-width="1.5"/>`);
+    }
+    if (numbers) {
+      const [nx, ny] = px(G.add(p, G.mul(W.inward, 15)));
+      out.push(`<text x="${nx}" y="${ny + 3.5}" font-size="9.5" font-weight="700" fill="${col}" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="2.5">${i + 1}</text>`);
+    }
+  });
+  return out.join('\n');
+}
+
+function drawDims() {
+  const out = [];
   for (let i = 1; i <= n; i++) {
     const w = G.wall(room, i);
     const cuts = [0, w.length];
@@ -145,7 +197,7 @@ function drawRoom() {
     }
     const la = w.a, lb = w.b;
     const wl = room.walls.find((x) => x.id === i);
-    out.push(dimLine(la, lb, `${wl?.name ?? 'С' + i}  ·  ${w.length}`, side * (off + (fixed.length > 2 ? 22 : 0)) * dimSign(w), C.ink));
+    out.push(dimLine(la, lb, `${wl?.name ?? 'С' + i}  ·  ${Math.round(w.length)}`, side * (off + (fixed.length > 2 ? 22 : 0)) * dimSign(w), C.ink));
   }
   return out.join('\n');
 }
@@ -425,7 +477,7 @@ function analyze(v) {
   return { res, ann: ann.join('\n') };
 }
 
-function sidePanel(title, lines, sub) {
+function sidePanel(title, lines, sub, electric = []) {
   const x = PAD.l + RX * S + 90, y0 = PAD.t - 10;
   const out = [];
   let y = y0;
@@ -440,6 +492,18 @@ function sidePanel(title, lines, sub) {
     out.push(`<text x="${x}" y="${y}" font-size="13" font-weight="700" fill="${col}">${ic}</text>`);
     for (const l of ws) { out.push(`<text x="${x + 16}" y="${y}" font-size="12" fill="${C.ink}">${esc(l)}</text>`); y += 15; }
     y += 5;
+  }
+  if (electric.length) {
+    y += 12;
+    out.push(`<text x="${x}" y="${y}" font-size="14" font-weight="700" fill="${C.ink}">Электрика</text>`);
+    y += 18;
+    for (const e of electric) {
+      const col = EL[e.type][1];
+      out.push(`<text x="${x}" y="${y}" font-size="11.5" font-weight="700" fill="${col}">${e.num}</text>`);
+      const head = `${e.kindName}${e.type !== 'panel' && e.count > 1 ? ` ×${e.count}` : ''}, ${e.z} см — ${e.label}`;
+      for (const l of wrap(head, 46)) { out.push(`<text x="${x + 18}" y="${y}" font-size="11.5" fill="${C.ink}">${esc(l)}</text>`); y += 14; }
+      y += 3;
+    }
   }
   return out.join('\n');
 }
@@ -457,14 +521,27 @@ ${withPanel ? `<text x="${PAD.l - 60}" y="${H - 18}" font-size="11" fill="${C.mu
 }
 
 
+  const elist = variantId ? electricOf(layout, variantId) : layout.room.electric ?? [];
+  // num — номер на плане, count — сколько гнёзд/клавиш.
+  const electric = elist.map((e, i) => ({ ...e, num: i + 1, count: e.n, kindName: EL[e.type][0], wallName: room.walls.find((w) => w.id === e.wall)?.name }));
+  if (parts) {
+    const v = variantId ? G.resolveVariant(layout, variantId) : null;
+    const xs2 = room.outline.map((p) => p[0]), ys2 = room.outline.map((p) => p[1]);
+    const [lx, ly] = px([(Math.min(...xs2) + Math.max(...xs2)) / 2, (Math.min(...ys2) + Math.max(...ys2)) / 2]);
+    return {
+      floor: drawFloor(), walls: drawWalls(true), openings: drawOpenings(false), fixtures: drawFixtures(),
+      items: v ? drawItems(v) : '', electric: drawElectric(elist, false),
+      label: `<text x="${lx}" y="${ly}" font-size="15" font-weight="700" fill="${C.ink}" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="4" opacity="0.92">${esc(room.name)}<tspan x="${lx}" dy="17" font-size="12" font-weight="400" fill="${C.dim}">${room.area} м²${v && layout.variants.length > 1 ? ` · вариант ${v.id}` : ''}</tspan></text>`,
+    };
+  }
   let body = drawRoom(), side = '', checks = [], title;
   if (variantId) {
     const v = G.resolveVariant(layout, variantId);
     const { res, ann } = analyze(v);
     title = `${room.name}, вариант ${v.id} — ${v.name}`;
-    body += '\n' + drawItems(v) + '\n' + ann;
+    body += '\n' + drawItems(v) + '\n' + ann + '\n' + drawElectric(elist);
     checks = res;
-    if (withPanel) side = sidePanel(title, res, v.idea);
+    if (withPanel) side = sidePanel(title, res, v.idea, electric);
   } else {
     title = `${room.name} — геометрия`;
     checks = [
@@ -474,5 +551,42 @@ ${withPanel ? `<text x="${PAD.l - 60}" y="${H - 18}" font-size="11" fill="${C.mu
     if (layout.meta.status === 'estimate') checks.push(['warn', 'Все размеры — оценка. Точные цифры дадут замеры.']);
     if (withPanel) side = sidePanel(title, checks, 'Начало координат — ' + (room.originNote ?? 'угол (0, 0) контура.'));
   }
-  return { svg: svg(title, body, side), checks, title };
+  return { svg: svg(title, body, side), checks, title, electric };
+}
+
+// Общий план квартиры: все комнаты с выбранными вариантами в одних координатах.
+export function renderOverview(layout, vmap = {}, opts = {}) {
+  const flat = flatView(layout, vmap);
+  const S = opts.S ?? 1, pad = opts.pad ?? 50;
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  for (const { L, origin } of flat) for (const [x, y] of L.room.outline) {
+    minX = Math.min(minX, x + origin[0]); maxX = Math.max(maxX, x + origin[0]);
+    minY = Math.min(minY, y + origin[1]); maxY = Math.max(maxY, y + origin[1]);
+  }
+  minX -= 40; maxX += 40; minY -= 40; maxY += 40; // толщина наружных стен
+  const frame = { minX, maxY, S, l: pad, t: pad + (opts.title ? 40 : 0) };
+  let W = (maxX - minX) * S + 2 * pad, H = (maxY - minY) * S + 2 * pad + (opts.title ? 40 : 0) + (opts.legend ? 40 : 0);
+  if (opts.square) W = H = Math.max(W, H); // Quick Look режет PNG до квадрата
+  const parts = flat.map(({ L, variantId, origin }) => renderPlan(L, variantId, { parts: true, frame, origin }));
+  const layer = (k) => parts.map((p) => p[k]).join('\n');
+  const area = layout.rooms.filter((r) => r.id !== 'balkon').reduce((s, r) => s + r.area, 0);
+  const legend = opts.legend ? `<g font-size="12" fill="#2b2b2b">
+<circle cx="${pad + 6}" cy="${H - pad / 2 - 20}" r="4.5" fill="#fff" stroke="#d27b00" stroke-width="1.6"/><text x="${pad + 16}" y="${H - pad / 2 - 16}">розетка</text>
+<circle cx="${pad + 96}" cy="${H - pad / 2 - 20}" r="4" fill="#2f6db5"/><text x="${pad + 106}" y="${H - pad / 2 - 16}">выключатель</text>
+<path d="M${pad + 206},${H - pad / 2 - 25} l5,9 l-10,0 Z" fill="#fff" stroke="#7a5ab8" stroke-width="1.5"/><text x="${pad + 216}" y="${H - pad / 2 - 16}">ТВ / интернет</text>
+<rect x="${pad + 316}" y="${H - pad / 2 - 24}" width="16" height="7" fill="#fff" stroke="#5c5c5c" stroke-width="1.5"/><text x="${pad + 338}" y="${H - pad / 2 - 16}">щиток</text></g>` : '';
+  const title = opts.title ? `<text x="${pad}" y="${pad + 4}" font-size="22" font-weight="700" fill="#2b2b2b">Квартира · ${Math.round(area * 10) / 10} м² + балкон</text>` : '';
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" ${opts.fixed ? `width="${W}" height="${H}"` : 'width="100%"'} viewBox="0 0 ${W} ${H}" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+<rect width="${W}" height="${H}" fill="#ffffff"/>
+${title}
+${layer('floor')}
+${layer('walls')}
+${layer('openings')}
+${layer('fixtures')}
+${layer('items')}
+${opts.electric === false ? '' : layer('electric')}
+${layer('label')}
+${legend}
+</svg>`;
+  return { svg, width: W, height: H, flat };
 }
