@@ -36,7 +36,8 @@ function Seg<T extends string>({ value, options, onChange, label }: { value: T; 
   return (
     <div className="seg" role="radiogroup" aria-label={label}>
       {options.map(([v, text]) => (
-        <button key={v} role="radio" aria-checked={v === value} className={v === value ? 'on' : ''} onClick={() => onChange(v)}>{text}</button>
+        <button key={v} role="radio" aria-checked={v === value} className={v === value ? 'on' : ''} onClick={() => onChange(v)}
+          ref={(el) => { if (el && v === value) el.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }}>{text}</button>
       ))}
     </div>
   );

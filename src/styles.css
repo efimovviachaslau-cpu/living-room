@@ -33,7 +33,12 @@ button:disabled { opacity: 0.5; cursor: default; }
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
-.brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+.brand { display: flex; align-items: center; gap: 10px; margin-right: auto; min-width: 0; max-width: 100%; }
+.brand > span { flex: none; }
+/* Комнат много: ряд листается пальцем, а не растягивает страницу */
+.brand .seg { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.brand .seg::-webkit-scrollbar { display: none; }
+.seg button { flex: none; white-space: nowrap; }
 .brand b { font-size: 17px; }
 .brand span { color: var(--muted); font-size: 13px; }
 
