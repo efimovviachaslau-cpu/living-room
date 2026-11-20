@@ -40,7 +40,7 @@ export function renderPlan(layout, variantId, opts = {}) {
 const C = {
   wall: '#3d3a36', ink: '#2b2b2b', mute: '#8a857d', dim: '#6d6a65', paper: '#fbfaf7',
   ok: '#2e8b57', warn: '#d48a00', bad: '#d23c2a', swing: '#9aa7b8',
-  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec' },
+  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec', art: '#c08a5b', wardrobe: '#d8cfc2', pendant: 'none' },
 };
 
 function dimLine(a, b, label, off, color = C.dim) {
@@ -159,9 +159,16 @@ function dimSign(w) {
 
 function drawItems(v) {
   const out = [];
-  const order = (it) => (it.spec.kind === 'rug' ? 0 : it.spec.kind === 'tv' ? 3 : 1);
+  const order = (it) => ({ rug: 0, tv: 3, art: 3, pendant: 4 })[it.spec.kind] ?? 1;
   for (const it of [...v.items].sort((a, b) => order(a) - order(b))) {
     const k = it.spec.kind;
+    if (k === 'pendant') {
+      // Подвес над полом — пунктирный круг с крестом, как точка света.
+      const [cx, cy] = px([it.x, it.y]), r = (it.spec.w / 2) * S;
+      out.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#b08a2e" stroke-width="1.2" stroke-dasharray="3 2"/>`);
+      out.push(`<path d="M${cx - r * 0.6},${cy - r * 0.6}L${cx + r * 0.6},${cy + r * 0.6}M${cx - r * 0.6},${cy + r * 0.6}L${cx + r * 0.6},${cy - r * 0.6}" stroke="#b08a2e" stroke-width="1"/>`);
+      continue;
+    }
     if (it.spec.round) {
       const [cx, cy] = px([it.x, it.y]);
       out.push(`<circle cx="${cx}" cy="${cy}" r="${(it.spec.w / 2) * S}" fill="${C.fill[k]}" stroke="${C.ink}" stroke-width="1"/>`);
@@ -192,7 +199,15 @@ function drawItems(v) {
       }
       out.push(`<polyline points="${ptsAttr([p(-hw, hd - 62), p(hw, hd - 62)])}" fill="none" stroke="${C.ink}" stroke-width="0.6" stroke-dasharray="4 3"/>`);
     }
-    if (k === 'tv') continue;
+    if (k === 'wardrobe') out.push(`<polyline points="${ptsAttr([it.poly[0], it.poly[2]])}" fill="none" stroke="${C.ink}" stroke-width="0.6"/>`);
+    if (k === 'tv' || k === 'art') {
+      // Висит на стене: подпись чуть в комнату от полоски.
+      const lp = G.add([it.x, it.y], G.mul(G.facing(it.rot), it.spec.d / 2 + 9));
+      const [lx, ly] = px(lp);
+      const label = k === 'tv' ? it.spec.name : `${it.spec.name} ${it.spec.w}×${it.spec.h}`;
+      out.push(`<text x="${lx}" y="${ly + 4}" font-size="10" font-style="italic" fill="${C.dim}" text-anchor="middle">${esc(label)}</text>`);
+      continue;
+    }
     const [cx, cy] = px([it.x, it.y]);
     const vertical = Math.abs(Math.sin((it.rot || 0) * Math.PI / 180)) > 0.7;
     const span = (vertical ? it.spec.d : it.spec.w) * S;
@@ -299,17 +314,20 @@ function analyze(v) {
     }
   }
   // ТВ
-  const tv = v.items.find((it) => it.spec.kind === 'tv'), sofa = v.items.find((it) => it.spec.kind === 'sofa');
+  const tv = v.items.find((it) => it.spec.kind === 'tv');
+  const sofa = v.items.find((it) => it.spec.kind === 'sofa') ?? v.items.find((it) => it.spec.kind === 'bed');
   if (tv && sofa) {
     const f = G.facing(sofa.rot);
-    const eye = G.add([sofa.x, sofa.y], G.mul(f, -sofa.spec.d / 2 + 40));
+    // Глаза: на диване ~40 см от переднего края, в кровати — сидя у изголовья, ~60 см от него.
+    const eyeOff = sofa.spec.kind === 'bed' ? -sofa.spec.d / 2 + 60 : -sofa.spec.d / 2 + 40;
+    const eye = G.add([sofa.x, sofa.y], G.mul(f, eyeOff));
     const to = G.sub([tv.x, tv.y], eye);
     const dist = G.len(to);
     const diag = parseInt(tv.spec.name.match(/\d+/)[0], 10) * 2.54;
     const ang = Math.acos(G.dot(G.norm(to), f)) * 180 / Math.PI;
     const k = dist / diag;
     res.push([k >= 1 && k <= 1.7 ? 'ok' : 'warn', `ТВ ${tv.spec.name.split(' ')[1]}: ${Math.round(dist)} см от глаз = ${k.toFixed(1)} диагонали (4K: 1–1.5, терпимо до 1.7)`]);
-    res.push([ang <= 30 ? 'ok' : 'warn', `ТВ в стороне от оси дивана на ${Math.round(ang)}° (≤ 30°)`]);
+    res.push([ang <= 30 ? 'ok' : 'warn', `ТВ в стороне от оси ${sofa.spec.kind === 'bed' ? 'кровати' : 'дивана'} на ${Math.round(ang)}° (≤ 30°)`]);
     const [ex, ey] = px(eye), [tx, ty] = px([tv.x, tv.y]);
     ann.push(`<line x1="${ex}" y1="${ey}" x2="${tx}" y2="${ty}" stroke="#7a6fb0" stroke-width="1" stroke-dasharray="1 4"/><circle cx="${ex}" cy="${ey}" r="3" fill="#7a6fb0"/>`);
   }

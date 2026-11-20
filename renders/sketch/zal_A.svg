@@ -112,6 +112,7 @@
 <text x="275" y="138" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Стеллаж</text>
 <text x="275" y="151" font-size="9.5" fill="#6d6a65" text-anchor="middle">200×40</text>
 <polygon points="120.5,898.3 120.5,680.8 111.5,680.8 111.5,898.3" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="0"/>
+<text x="134" y="793.5" font-size="10" font-style="italic" fill="#6d6a65" text-anchor="middle">ТВ 65″</text>
 <g><line x1="432.5" y1="824" x2="372.5" y2="824" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
 <rect x="387.5" y="816" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
 <text x="402.5" y="828" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">40</text></g>

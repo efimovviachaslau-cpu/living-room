@@ -108,6 +108,7 @@
 <polygon points="401.0,767.8 401.0,835.3 476.0,835.3 476.0,767.8" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
 <polygon points="401.0,692.8 401.0,760.3 476.0,760.3 476.0,692.8" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
 <polygon points="256.3,119.0 473.8,119.0 473.8,110.0 256.3,110.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="0"/>
+<text x="365" y="136.5" font-size="10" font-style="italic" fill="#6d6a65" text-anchor="middle">ТВ 65″</text>
 <g><line x1="327.5" y1="426.5" x2="327.5" y2="366.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
 <rect x="312.5" y="388.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
 <text x="327.5" y="400.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">40</text></g>

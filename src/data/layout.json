@@ -187,24 +187,59 @@
         {
           "id": "A",
           "name": "Изголовье к наружной стене",
-          "idea": "Кровать 160×200 по центру глухой южной стены, тумбочки по бокам. В ногах проход от двери к лоджии, двери открываются свободно.",
+          "idea": "Кровать 160×200 по центру глухой южной стены, тумбочки по бокам, над ними подвесные светильники, над изголовьем картина. Ковёр под нижней частью кровати, ТВ 55″ на стене напротив.",
           "items": [
+            { "id": "rug", "ref": "rug250", "x": 157, "y": 170, "rot": 0, "group": "bed" },
             { "id": "bed", "ref": "bed160", "x": 157, "y": 107.5, "rot": 180, "group": "bed" },
             { "id": "standL", "ref": "nightstand", "x": 47.5, "y": 20, "rot": 180, "group": "bed" },
-            { "id": "standR", "ref": "nightstand", "x": 266.5, "y": 20, "rot": 180, "group": "bed" }
+            { "id": "standR", "ref": "nightstand", "x": 266.5, "y": 20, "rot": 180, "group": "bed" },
+            { "id": "lampL", "ref": "pendant", "x": 47.5, "y": 22, "rot": 0, "group": "bed" },
+            { "id": "lampR", "ref": "pendant", "x": 266.5, "y": 22, "rot": 0, "group": "bed" },
+            { "id": "art", "ref": "art120", "x": 157, "y": 1.5, "rot": 180, "group": "bed" },
+            { "id": "tv", "ref": "tv55", "x": 157, "y": 290, "rot": 0, "z": 90, "group": "tv" }
           ],
-          "cameras": [{"id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 60, 70], "fov": 60}]
+          "cameras": [
+            { "id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 40, 110], "fov": 60 },
+            { "id": "frombed", "name": "С кровати", "pos": [157, 45, 115], "target": [157, 293, 85], "fov": 60 }
+          ]
         },
         {
           "id": "B",
-          "name": "Изголовье к стене спальни 7.5",
-          "idea": "Кровать по центру северной стены. В ногах окно и батарея, но правая тумбочка попадает под дверь из зала.",
+          "name": "+ шкаф у двери на лоджию (проба)",
+          "idea": "То же, что A, плюс шкаф 60×60 в углу у двери на лоджию. Проверка: шкаф перекрывает единственный путь к лоджии — между ним и кроватью ~20 см.",
           "items": [
-            { "id": "bed", "ref": "bed160", "x": 157, "y": 185.5, "rot": 0, "group": "bed" },
-            { "id": "standL", "ref": "nightstand", "x": 47.5, "y": 273, "rot": 0, "group": "bed" },
-            { "id": "standR", "ref": "nightstand", "x": 266.5, "y": 273, "rot": 0, "group": "bed" }
+            { "id": "rug", "ref": "rug250", "x": 157, "y": 170, "rot": 0, "group": "bed" },
+            { "id": "bed", "ref": "bed160", "x": 157, "y": 107.5, "rot": 180, "group": "bed" },
+            { "id": "standL", "ref": "nightstand", "x": 47.5, "y": 20, "rot": 180, "group": "bed" },
+            { "id": "standR", "ref": "nightstand", "x": 266.5, "y": 20, "rot": 180, "group": "bed" },
+            { "id": "lampL", "ref": "pendant", "x": 47.5, "y": 22, "rot": 0, "group": "bed" },
+            { "id": "lampR", "ref": "pendant", "x": 266.5, "y": 22, "rot": 0, "group": "bed" },
+            { "id": "art", "ref": "art120", "x": 157, "y": 1.5, "rot": 180, "group": "bed" },
+            { "id": "tv", "ref": "tv55", "x": 157, "y": 290, "rot": 0, "z": 90, "group": "tv" },
+            { "id": "wardrobe", "ref": "wardrobe60", "x": 30, "y": 263, "rot": 270, "group": "storage" }
           ],
-          "cameras": [{"id": "bed", "name": "На кровать", "pos": [157, 15, 150], "target": [157, 240, 70], "fov": 60}]
+          "cameras": [
+            { "id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 40, 110], "fov": 60 },
+            { "id": "frombed", "name": "С кровати", "pos": [157, 45, 115], "target": [157, 293, 85], "fov": 60 }
+          ]
+        },
+        {
+          "id": "C",
+          "name": "Шкаф вместо правой тумбочки",
+          "idea": "Как A, но у стены к залу вместо тумбочки — шкаф 60×60, дверцы к проходу. Проход к лоджии остаётся, тумбочка и светильник — только слева.",
+          "items": [
+            { "id": "rug", "ref": "rug250", "x": 157, "y": 170, "rot": 0, "group": "bed" },
+            { "id": "bed", "ref": "bed160", "x": 157, "y": 107.5, "rot": 180, "group": "bed" },
+            { "id": "standL", "ref": "nightstand", "x": 47.5, "y": 20, "rot": 180, "group": "bed" },
+            { "id": "lampL", "ref": "pendant", "x": 47.5, "y": 22, "rot": 0, "group": "bed" },
+            { "id": "art", "ref": "art120", "x": 157, "y": 1.5, "rot": 180, "group": "bed" },
+            { "id": "tv", "ref": "tv55", "x": 157, "y": 290, "rot": 0, "z": 90, "group": "tv" },
+            { "id": "wardrobe", "ref": "wardrobe60", "x": 283, "y": 31, "rot": 180, "group": "storage" }
+          ],
+          "cameras": [
+            { "id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 40, 110], "fov": 60 },
+            { "id": "frombed", "name": "С кровати", "pos": [157, 45, 115], "target": [157, 293, 85], "fov": 60 }
+          ]
         }
       ],
       "cameras": [
@@ -231,7 +266,11 @@
     "rug200": { "name": "Ковёр", "kind": "rug", "w": 200, "d": 140, "h": 1, "walkable": true },
     "floorlamp": { "name": "Торшер", "kind": "lamp", "w": 35, "d": 35, "h": 160, "round": true },
     "bed160": { "name": "Кровать 160×200", "kind": "bed", "w": 170, "d": 215, "h": 100, "note": "матрас 160×200, габарит с рамой и изголовьем" },
-    "nightstand": { "name": "Тумбочка", "kind": "cabinet", "w": 45, "d": 40, "h": 50 }
+    "nightstand": { "name": "Тумбочка", "kind": "cabinet", "w": 45, "d": 40, "h": 50 },
+    "rug250": { "name": "Ковёр", "kind": "rug", "w": 250, "d": 200, "h": 1, "walkable": true },
+    "pendant": { "name": "Подвесной светильник", "kind": "pendant", "w": 25, "d": 25, "h": 30, "z": 115, "floor": false, "round": true },
+    "art120": { "name": "Картина", "kind": "art", "w": 120, "d": 3, "h": 80, "z": 120, "floor": false },
+    "wardrobe60": { "name": "Шкаф", "kind": "wardrobe", "w": 60, "d": 60, "h": 210 }
   },
   "palettes": [
     {

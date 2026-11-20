@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Room3D, type WallRef } from './Room3D';
 import { Furniture3D } from './Furniture3D';
-import { SceneCtx, depthMaterial, toThree, type Colors, type Mode } from './prims';
+import { SceneCtx, depthMaterial, toThree, ceilingItems, registerCeiling, type Colors, type Mode } from './prims';
 import { resolvePreset } from '../lib/cameras';
 import type { CamPreset } from '../lib/presets';
 
@@ -14,10 +14,10 @@ export type CaptureApi = { capture: (preset: CamPreset | null, w: number, h: num
 
 type Walls = Map<number, WallRef>;
 
-// Светильники под потолком прячем, когда камера выше потолка: сверху они закрывают мебель.
-const ceilingItems = new Set<THREE.Group>();
 let roomHeight = 250;
-const registerCeiling = (g: THREE.Group | null) => { if (g) ceilingItems.add(g); };
+
+const wallItems = new Map<THREE.Group, number>();
+const registerWallItem = (wallId: number, g: THREE.Group | null) => { if (g) wallItems.set(g, wallId); };
 
 function updateWalls(walls: Walls, pos: THREE.Vector3) {
   for (const g of ceilingItems) {
@@ -28,6 +28,10 @@ function updateWalls(walls: Walls, pos: THREE.Vector3) {
   for (const w of walls.values()) {
     const s = (px - w.a[0]) * w.inward[0] + (py - w.a[1]) * w.inward[1];
     w.group.visible = s > -5;
+  }
+  for (const [g, id] of wallItems) {
+    if (!g.parent) { wallItems.delete(g); continue; }
+    g.visible = walls.get(id)?.group.visible ?? true;
   }
 }
 
@@ -203,7 +207,7 @@ export function Scene3D(props: {
       <SceneCtx.Provider value={ctx}>
         <Lights layout={layout} colors={colors} shadows={shadows} />
         <Room3D layout={layout} register={register} registerCeiling={registerCeiling} />
-        <Furniture3D layout={layout} variantId={variantId} />
+        <Furniture3D layout={layout} variantId={variantId} registerWallItem={registerWallItem} />
       </SceneCtx.Provider>
       <Rig layout={layout} preset={preset} walls={walls} />
       <Exporter layout={layout} walls={walls} apiRef={apiRef} />

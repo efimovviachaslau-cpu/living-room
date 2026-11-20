@@ -10,6 +10,10 @@ export type Role =
   | keyof Colors
   | 'trim' | 'door' | 'frame' | 'glass' | 'radiator' | 'metal' | 'dark' | 'screen' | 'rug' | 'shade';
 
+// Подвесы под потолком: прячутся, когда камера выше потолка (сверху они закрывают мебель).
+export const ceilingItems = new Set<THREE.Group>();
+export const registerCeiling = (g: THREE.Group | null) => { if (g) ceilingItems.add(g); };
+
 export const toThree = (x: number, y: number, z = 0): [number, number, number] => [x / 100, z / 100, -y / 100];
 
 type Ctx = { mode: Mode; colors: Colors; shadows: boolean };

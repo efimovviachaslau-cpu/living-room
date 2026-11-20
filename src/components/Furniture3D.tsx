@@ -1,6 +1,10 @@
 // Мебель: low-poly модели из габаритов каталога (w × d × h).
 // Локальные координаты — план относительно центра предмета, фасад к −y (как rot = 0).
-import { PBox, PCyl, toThree } from './prims';
+import * as THREE from 'three';
+import * as G from '../lib/geometry.js';
+import { PBox, PCyl, toThree, registerCeiling } from './prims';
+
+export type RegisterWallItem = (wallId: number, g: THREE.Group | null) => void;
 
 type Spec = { name: string; kind: string; w: number; d: number; h: number; z?: number };
 
@@ -129,6 +133,51 @@ function Tv({ s }: { s: Spec }) {
   );
 }
 
+// Подвесной светильник: провод от потолка до абажура. z — низ абажура.
+function Pendant({ s, z, ceiling }: { s: Spec; z: number; ceiling: number }) {
+  const r = s.w / 2, cord = Math.max(1, ceiling - z - s.h);
+  return (
+    <group ref={registerCeiling}>
+      <PCyl x={0} y={0} z={s.h} r={0.4} h={cord} role="dark" seg={6} />
+      <PCyl x={0} y={0} z={0} r={r} r2={r * 0.35} h={s.h} role="shade" />
+    </group>
+  );
+}
+
+// Картина на стене: рама, холст и пара цветовых пятен (для рендера важно, что это картина, а не дверь).
+function Art({ s }: { s: Spec }) {
+  const { w, d, h } = s, f = 3;
+  return (
+    <>
+      <PBox x={0} y={0} z={0} w={w} d={d} h={h} role="wood" />
+      <PBox x={0} y={-d / 2 - 0.3} z={f} w={w - 2 * f} d={0.6} h={h - 2 * f} role="shade" cast={false} />
+      <PBox x={-w * 0.15} y={-d / 2 - 0.8} z={h * 0.2} w={w * 0.4} d={0.4} h={h * 0.45} role="textile" cast={false} />
+      <PBox x={w * 0.2} y={-d / 2 - 0.8} z={h * 0.45} w={w * 0.25} d={0.4} h={h * 0.3} role="wood" cast={false} />
+    </>
+  );
+}
+
+// Шкаф: цоколь, корпус, одна-две дверцы с ручками.
+function Wardrobe({ s }: { s: Spec }) {
+  const { w, d, h } = s, plinth = 8, n = w >= 80 ? 2 : 1, dw = w / n;
+  return (
+    <>
+      <PBox x={0} y={1} z={0} w={w - 4} d={d - 4} h={plinth} role="dark" cast={false} />
+      <PBox x={0} y={0} z={plinth} w={w} d={d - 2} h={h - plinth} role="furniture" />
+      {Array.from({ length: n }, (_, k) => {
+        const cx = -w / 2 + dw * (k + 0.5);
+        const hx = n === 1 ? w / 2 - 6 : k === 0 ? dw / 2 - 4 : -dw / 2 + 4;
+        return (
+          <group key={k}>
+            <PBox x={cx} y={-d / 2} z={plinth + 1} w={dw - 0.6} d={2} h={h - plinth - 2} role="furniture" />
+            <PBox x={cx + hx} y={-d / 2 - 1.5} z={100} w={1.5} d={1.5} h={25} role="metal" cast={false} />
+          </group>
+        );
+      })}
+    </>
+  );
+}
+
 function Lamp({ s }: { s: Spec }) {
   const r = s.w / 2;
   return (
@@ -140,8 +189,12 @@ function Lamp({ s }: { s: Spec }) {
   );
 }
 
-export function Item({ it, spec }: { it: { x: number; y: number; rot?: number }; spec: Spec }) {
-  const pos = toThree(it.x, it.y, spec.z ?? 0);
+export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
+  it: { x: number; y: number; z?: number; rot?: number }; spec: Spec; ceiling: number;
+  wallId?: number; registerWallItem?: RegisterWallItem;
+}) {
+  const z = it.z ?? spec.z ?? 0;
+  const pos = toThree(it.x, it.y, z);
   const rot = (-(it.rot ?? 0) * Math.PI) / 180;
   let body = null;
   switch (spec.kind) {
@@ -153,13 +206,30 @@ export function Item({ it, spec }: { it: { x: number; y: number; rot?: number };
     case 'tv': body = <Tv s={spec} />; break;
     case 'lamp': body = <Lamp s={spec} />; break;
     case 'bed': body = <Bed s={spec} />; break;
+    case 'pendant': body = <Pendant s={spec} z={z} ceiling={ceiling} />; break;
+    case 'art': body = <Art s={spec} />; break;
+    case 'wardrobe': body = <Wardrobe s={spec} />; break;
     case 'rug': body = <PBox x={0} y={0} z={0} w={spec.w} d={spec.d} h={1} role="rug" cast={false} />; break;
   }
-  return <group position={pos} rotation={[0, rot, 0]}>{body}</group>;
+  // Висящее на стене прячется вместе со стеной в режиме «кукольного дома».
+  const ref = wallId && registerWallItem ? (g: THREE.Group | null) => registerWallItem(wallId, g) : undefined;
+  return <group ref={ref} position={pos} rotation={[0, rot, 0]}>{body}</group>;
 }
 
-export function Furniture3D({ layout, variantId }: { layout: any; variantId: string }) {
+const ON_WALL = new Set(['tv', 'art']);
+
+export function Furniture3D({ layout, variantId, registerWallItem }: { layout: any; variantId: string; registerWallItem?: RegisterWallItem }) {
   const v = layout.variants.find((x: any) => x.id === variantId);
   if (!v) return null;
-  return <>{v.items.map((it: any) => <Item key={it.id} it={it} spec={layout.catalog[it.ref]} />)}</>;
+  const ceiling = layout.room.height.value;
+  const walls = G.walls(layout.room);
+  return (
+    <>
+      {v.items.map((it: any) => {
+        const spec = layout.catalog[it.ref];
+        const w = ON_WALL.has(spec.kind) ? walls.find((W: any) => G.pointSegDistance([it.x, it.y], W.a, W.b) < spec.d / 2 + 10) : undefined;
+        return <Item key={it.id} it={it} spec={spec} ceiling={ceiling} wallId={w?.id} registerWallItem={registerWallItem} />;
+      })}
+    </>
+  );
 }
