@@ -85,6 +85,13 @@ function Rig({ layout, preset, walls }: { layout: any; preset: CamPreset; walls:
   return null;
 }
 
+// Первый отрисованный кадр: до него на экране держится «Загрузка 3D…» (шейдеры компилируются секунды).
+function FirstFrame({ onReady }: { onReady?: () => void }) {
+  const done = useRef(false);
+  useFrame(() => { if (!done.current) { done.current = true; requestAnimationFrame(() => onReady?.()); } });
+  return null;
+}
+
 function Exporter({ layout, walls, apiRef }: { layout: any; walls: Walls; apiRef: MutableRefObject<CaptureApi | null> }) {
   const { gl, scene, camera, invalidate } = useThree();
   useEffect(() => {
@@ -175,9 +182,9 @@ function Lights({ layout, colors, shadows }: { layout: any; colors: Colors; shad
 
 export function Scene3D(props: {
   layout: any; variantId: string; preset: CamPreset; mode: Mode; colors: Colors; shadows: boolean;
-  apiRef: MutableRefObject<CaptureApi | null>;
+  apiRef: MutableRefObject<CaptureApi | null>; onReady?: () => void;
 }) {
-  const { layout, variantId, preset, mode, colors, shadows, apiRef } = props;
+  const { layout, variantId, preset, mode, colors, shadows, apiRef, onReady } = props;
   const walls = useRef<Walls>(new Map()).current;
   roomHeight = layout.room.height.value;
   const register = (id: number, ref: WallRef | null) => { if (ref) walls.set(id, ref); else walls.delete(id); };
@@ -200,6 +207,7 @@ export function Scene3D(props: {
       </SceneCtx.Provider>
       <Rig layout={layout} preset={preset} walls={walls} />
       <Exporter layout={layout} walls={walls} apiRef={apiRef} />
+      <FirstFrame onReady={onReady} />
     </Canvas>
   );
 }

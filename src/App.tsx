@@ -45,6 +45,7 @@ export default function App() {
   const [st, setSt] = useState<AppState>(() => readHash(layout));
   const [sheet, setSheet] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
+  const [ready3d, setReady3d] = useState(false);
   const apiRef = useRef<CaptureApi | null>(null);
   if (import.meta.env.DEV) (window as any).__capture = apiRef; // для отладки снимков из консоли
   const set = (patch: Partial<AppState>) => setSt((s) => ({ ...s, ...patch }));
@@ -113,8 +114,9 @@ export default function App() {
         {st.view === '3d' ? (
           <>
             <Suspense fallback={<div className="loading">Загрузка 3D…</div>}>
-              <Scene3D layout={layout} variantId={st.v} preset={preset} mode={st.mode} colors={colors} shadows={st.shadows} apiRef={apiRef} />
+              <Scene3D layout={layout} variantId={st.v} preset={preset} mode={st.mode} colors={colors} shadows={st.shadows} apiRef={apiRef} onReady={() => setReady3d(true)} />
             </Suspense>
+            {!ready3d && <div className="loading">Загрузка 3D…</div>}
             <div className="cams" role="radiogroup" aria-label="Камера">
               {presets.map((p) => (
                 <button key={p.id} role="radio" aria-checked={p.id === preset.id} className={p.id === preset.id ? 'on' : ''}
