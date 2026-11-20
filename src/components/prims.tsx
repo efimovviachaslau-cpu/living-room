@@ -120,7 +120,8 @@ export function PBox({ x, y, z, w, d, h, role, rotY = 0, cast = true }: BoxProps
 }
 
 const cylGeoms = new Map<string, THREE.CylinderGeometry>();
-export function PCyl({ x, y, z, r, r2, h, role, seg = 20 }: { x: number; y: number; z: number; r: number; r2?: number; h: number; role: Role; seg?: number }) {
+// rotX = true — цилиндр «лёжа», ось к фасаду (люк стиральной машины, крутилки).
+export function PCyl({ x, y, z, r, r2, h, role, seg = 20, rotX }: { x: number; y: number; z: number; r: number; r2?: number; h: number; role: Role; seg?: number; rotX?: boolean }) {
   const { mode, shadows } = useScene();
   const mat = useMaterial(role);
   const geom = useMemo(() => {
@@ -130,7 +131,7 @@ export function PCyl({ x, y, z, r, r2, h, role, seg = 20 }: { x: number; y: numb
     return g;
   }, [r, r2, h, seg]);
   return (
-    <group position={toThree(x, y, z + h / 2)}>
+    <group position={toThree(x, y, rotX ? z : z + h / 2)} rotation={[rotX ? Math.PI / 2 : 0, 0, 0]}>
       <mesh geometry={geom} material={mat} castShadow={shadows} receiveShadow={shadows} />
       {mode === 'lines' && <lineSegments geometry={edgesOf(geom)} material={edgeMaterial} />}
     </group>

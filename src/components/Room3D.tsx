@@ -38,7 +38,8 @@ function Window({ W, t, o }: { W: Wall; t: number; o: any }) {
       {parts.map((p, i) => <WallBox key={i} W={W} {...p} v0={v0} v1={v1} role="frame" />)}
       <WallBox W={W} u0={u0 + f} u1={u1 - f} v0={vc - 0.3} v1={vc + 0.3} z0={o.sill + f} z1={top - f} role="glass" cast={false} />
       {/* подоконник */}
-      <WallBox W={W} u0={u0 - 5} u1={u1 + 5} v0={v0} v1={Math.max(5, (o.sillDepth ?? 25) + vc)} z0={o.sill - 4} z1={o.sill} role="frame" />
+      {/* вынос в комнату: sillOverhang или до sillDepth от рамы (не меньше 5 см) */}
+      <WallBox W={W} u0={u0 - (o.sillOverhang === 0 ? 0 : 5)} u1={u1 + (o.sillOverhang === 0 ? 0 : 5)} v0={v0} v1={o.sillOverhang ?? Math.max(5, (o.sillDepth ?? 25) + vc)} z0={o.sill - 4} z1={o.sill} role="frame" />
     </>
   );
 }

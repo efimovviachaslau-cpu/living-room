@@ -176,8 +176,9 @@
           "width": 70,
           "height": 205,
           "leaf": 65,
-          "swing": { "into": "out", "hinge": "end" },
-          "src": "plan (дверь туалета); ванная и туалет объединены, одна дверь — допущение"
+          "swing": { "into": "room", "hinge": "start" },
+          "src": "дверь бывшего туалета; ванная и туалет объединены, дверь одна (со слов Славы); открывается в коридор",
+          "link": "sanuzel:D1"
         },
         {
           "id": "P1",
@@ -256,11 +257,23 @@
           "height": 135,
           "sillDepth": 25,
           "sashes": 2,
-          "src": "plan; подоконник 90 — вровень со столешницей"
+          "src": "plan; подоконник 90 — вровень со столешницей, без выноса в комнату: к окну подходит столешница",
+          "sillOverhang": 0
         }
       ],
       "fixtures": [
-        { "id": "R1", "type": "radiator", "name": "Батарея", "wall": 6, "offset": 71, "w": 70, "d": 10, "h": 58, "z": 10, "src": "typical" },
+        {
+          "id": "R1",
+          "type": "radiator",
+          "name": "Батарея",
+          "wall": 6,
+          "offset": 94,
+          "w": 56,
+          "d": 10,
+          "h": 58,
+          "z": 10,
+          "src": "typical; 7 секций — между стульчиками и дверцей тумбы у окна"
+        },
         {
           "id": "V1",
           "type": "vent",
@@ -294,8 +307,8 @@
             { "id": "u3", "ref": "k_up59", "x": 171.5, "y": 208.5, "rot": 0, "group": "kitchen" },
             { "id": "u4", "ref": "k_upfridge", "x": 112, "y": 196, "rot": 0, "group": "kitchen" },
             { "id": "table", "ref": "ktable", "x": 25, "y": 50, "rot": 90, "group": "dining" },
-            { "id": "chair1", "ref": "stool", "x": 65, "y": 30, "rot": 90, "group": "dining" },
-            { "id": "chair2", "ref": "stool", "x": 65, "y": 72, "rot": 90, "group": "dining" }
+            { "id": "chair1", "ref": "stool", "x": 56, "y": 30, "rot": 90, "group": "dining" },
+            { "id": "chair2", "ref": "stool", "x": 56, "y": 72, "rot": 90, "group": "dining" }
           ]
         }
       ],
@@ -303,6 +316,61 @@
         { "id": "overview", "name": "Обзор", "pos": [-270, -260, 480], "target": [130, 130, 50], "fov": 50 },
         { "id": "entry", "name": "От входа", "pos": [45, 150, 160], "target": [236, 80, 105], "fov": 60 },
         { "id": "window", "name": "От окна", "pos": [110, 18, 150], "target": [190, 226, 120], "fov": 60 },
+        { "id": "top", "name": "Сверху", "type": "top" }
+      ]
+    },
+    {
+      "id": "sanuzel",
+      "name": "Санузел",
+      "area": 3.1,
+      "height": { "value": 250, "src": "typical" },
+      "origin": [415, 234],
+      "originNote": "Угол у кухни и коридора. Стены по часовой: С1 запад (коридор, дверь), С2 север (прихожая), С3 восток (лестница), С4 юг (кухня).",
+      "outline": [[0, 0], [0, 206], [143, 206], [143, 0]],
+      "outlineSrc": "plan: туалет 1.0 + ванная 2.1, перегородка между ними снесена (со слов Славы); 143 × 206 = 2.95 м² — границы по соседним комнатам",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 8, "to": "коридор", "src": "typical" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 8, "to": "прихожая", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 30, "to": "лестница", "src": "typical" },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 8, "to": "кухня", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "D1",
+          "type": "door",
+          "name": "Из коридора",
+          "wall": 1,
+          "offset": 128,
+          "width": 70,
+          "height": 205,
+          "leaf": 65,
+          "swing": { "into": "out", "hinge": "end" },
+          "link": "prihozhaya:D3",
+          "src": "дверь бывшего туалета; открывается в коридор (как принято для санузла)"
+        }
+      ],
+      "fixtures": [
+        { "id": "V1", "type": "vent", "name": "Вентканал", "wall": 3, "offset": 60, "w": 20, "d": 3, "h": 20, "z": 222, "src": "plan (значок +)" },
+        { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 72, "y": 120, "drop": 5, "src": "typical" }
+      ],
+      "variants": [
+        {
+          "id": "A",
+          "name": "Ванна + унитаз у стояка",
+          "idea": "Ванна вдоль стены кухни на всю ширину. Унитаз у восточной стены (там стояк туалета), рядом раковина над стиральной машиной, над ней зеркало. У двери полотенцесушитель.",
+          "items": [
+            { "id": "tub", "ref": "bathtub150", "x": 71.5, "y": 35, "rot": 180, "group": "bath" },
+            { "id": "sinkwasher", "ref": "sinkwasher", "x": 113, "y": 102, "rot": 90, "group": "sink" },
+            { "id": "toilet", "ref": "toilet", "x": 110.5, "y": 168, "rot": 90, "group": "wc" },
+            { "id": "mirror", "ref": "mirror60", "x": 141.5, "y": 102, "rot": 90, "group": "sink" },
+            { "id": "towel", "ref": "towelrail", "x": 4, "y": 99, "rot": 270, "group": "bath" },
+            { "id": "mat", "ref": "bathmat", "x": 45, "y": 92, "rot": 0, "group": "bath" }
+          ]
+        }
+      ],
+      "cameras": [
+        { "id": "overview", "name": "Обзор", "pos": [-260, 420, 470], "target": [80, 100, 40], "fov": 50 },
+        { "id": "entry", "name": "От двери", "pos": [15, 163, 160], "target": [143, 70, 80], "fov": 70 },
         { "id": "top", "name": "Сверху", "type": "top" }
       ]
     },
@@ -490,7 +558,30 @@
     },
     "k_hood": { "name": "Вытяжка", "kind": "kitchen", "part": "hood", "w": 60, "d": 50, "h": 12, "z": 157, "floor": false },
     "ktable": { "name": "Стол", "kind": "table", "w": 70, "d": 50, "h": 75 },
-    "stool": { "name": "Стульчик", "kind": "chair", "w": 40, "d": 40, "h": 80 }
+    "stool": { "name": "Стульчик", "kind": "chair", "w": 40, "d": 40, "h": 80 },
+    "bathtub150": {
+      "name": "Ванна",
+      "kind": "bath",
+      "w": 143,
+      "d": 70,
+      "h": 58,
+      "note": "стандарт 150 не влезает: ширина ниши ≈ 143 — ванна 140 или под заказ",
+      "front": 70
+    },
+    "toilet": { "name": "Унитаз", "kind": "bathroom", "part": "toilet", "w": 38, "d": 65, "h": 78, "front": 60, "axis": 35 },
+    "sinkwasher": {
+      "name": "Раковина + стиралка",
+      "kind": "bathroom",
+      "part": "sinkwasher",
+      "w": 60,
+      "d": 60,
+      "h": 100,
+      "front": 70,
+      "note": "плоская раковина-«кувшинка» над стиральной машиной 60×50"
+    },
+    "towelrail": { "name": "Полотенцесушитель", "kind": "bathroom", "part": "towel", "w": 50, "d": 8, "h": 80, "z": 90, "floor": false },
+    "mirror60": { "name": "Зеркало", "kind": "mirror", "w": 60, "d": 3, "h": 70, "z": 110, "floor": false },
+    "bathmat": { "name": "Коврик", "kind": "rug", "w": 60, "d": 40, "h": 1, "walkable": true }
   },
   "palettes": [
     {

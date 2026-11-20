@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="724.5" height="724.5" viewBox="0 0 724.5 724.5" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+<defs><marker id="a-2e8b57" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e8b57"/></marker><marker id="a-d48a00" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#d48a00"/></marker><marker id="a-d23c2a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#d23c2a"/></marker></defs>
+<rect width="724.5" height="724.5" fill="#ffffff"/>
+<polygon points="110.0,431.0 110.0,98.0 98.0,98.0 98.0,431.0" fill="#3d3a36"/>
+<polygon points="98.0,110.0 369.5,110.0 369.5,98.0 98.0,98.0" fill="#3d3a36"/>
+<polygon points="324.5,98.0 324.5,431.0 369.5,431.0 369.5,98.0" fill="#3d3a36"/>
+<polygon points="369.5,419.0 98.0,419.0 98.0,431.0 369.5,431.0" fill="#3d3a36"/>
+<polygon points="110.0,419.0 110.0,110.0 324.5,110.0 324.5,419.0" fill="#fbfaf7"/>
+<polygon points="110.0,227.0 110.0,122.0 98.0,122.0 98.0,227.0" fill="#fbfaf7"/>
+<line x1="98" y1="122.00000000000004" x2="49.250000000000014" y2="122.00000000000004" stroke="#8a857d" stroke-width="1.5" stroke-dasharray="3 2"/>
+<text x="119" y="178.50000000000006" font-size="10.5" font-style="italic" fill="#6d6a65" text-anchor="start">Из коридора</text>
+<polygon points="324.5,200.0 324.5,230.0 320.0,230.0 320.0,200.0" fill="#999" stroke="#2b2b2b" stroke-width="0.8"/>
+<circle cx="218" cy="239" r="6" fill="none" stroke="#8a857d"/><line x1="212" y1="233" x2="224" y2="245" stroke="#8a857d"/><line x1="212" y1="245" x2="224" y2="233" stroke="#8a857d"/>
+<g><line x1="110" y1="419" x2="80" y2="419" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="227.00000000000003" x2="80" y2="227.00000000000003" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="80" y1="419" x2="80" y2="227.00000000000003" stroke="#6d6a65" stroke-width="0.8"/><line x1="76" y1="423" x2="84" y2="415" stroke="#6d6a65" stroke-width="1.2"/><line x1="76" y1="231.00000000000003" x2="84" y2="223.00000000000003" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="80" y="323" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 80 323)">128</text></g>
+<g><line x1="110" y1="227.00000000000003" x2="80" y2="227.00000000000003" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="122.00000000000004" x2="80" y2="122.00000000000004" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="80" y1="227.00000000000003" x2="80" y2="122.00000000000004" stroke="#6d6a65" stroke-width="0.8"/><line x1="76" y1="231.00000000000003" x2="84" y2="223.00000000000003" stroke="#6d6a65" stroke-width="1.2"/><line x1="76" y1="126.00000000000004" x2="84" y2="118.00000000000004" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="80" y="174.50000000000003" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 80 174.50000000000003)">70</text></g>
+<g><line x1="110" y1="122.00000000000004" x2="80" y2="122.00000000000004" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="110.00000000000004" x2="80" y2="110.00000000000004" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="80" y1="122.00000000000004" x2="80" y2="110.00000000000004" stroke="#6d6a65" stroke-width="0.8"/><line x1="76" y1="126.00000000000004" x2="84" y2="118.00000000000004" stroke="#6d6a65" stroke-width="1.2"/><line x1="76" y1="114.00000000000004" x2="84" y2="106.00000000000004" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="80" y="116.00000000000004" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 80 116.00000000000004)">8</text></g>
+<g><line x1="110" y1="419" x2="58" y2="419" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="110" x2="58" y2="110" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="58" y1="419" x2="58" y2="110" stroke="#2b2b2b" stroke-width="0.8"/><line x1="54" y1="423" x2="62" y2="415" stroke="#2b2b2b" stroke-width="1.2"/><line x1="54" y1="114" x2="62" y2="106" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="58" y="264.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(-90 58 264.5)">С1  ·  206</text></g>
+<g><line x1="110" y1="110" x2="110" y2="80" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="324.5" y1="110" x2="324.5" y2="80" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="80" x2="324.5" y2="80" stroke="#2b2b2b" stroke-width="0.8"/><line x1="106" y1="84" x2="114" y2="76" stroke="#2b2b2b" stroke-width="1.2"/><line x1="320.5" y1="84" x2="328.5" y2="76" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="217.25" y="80" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(0 217.25 80)">С2  ·  143</text></g>
+<g><line x1="324.5" y1="110" x2="387.5" y2="110" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="324.5" y1="419" x2="387.5" y2="419" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="387.5" y1="110" x2="387.5" y2="419" stroke="#2b2b2b" stroke-width="0.8"/><line x1="383.5" y1="114" x2="391.5" y2="106" stroke="#2b2b2b" stroke-width="1.2"/><line x1="383.5" y1="423" x2="391.5" y2="415" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="387.5" y="264.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(90 387.5 264.5)">С3  ·  206</text></g>
+<g><line x1="324.5" y1="419" x2="324.5" y2="449" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="419" x2="110" y2="449" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="324.5" y1="449" x2="110" y2="449" stroke="#2b2b2b" stroke-width="0.8"/><line x1="320.5" y1="453" x2="328.5" y2="445" stroke="#2b2b2b" stroke-width="1.2"/><line x1="106" y1="453" x2="114" y2="445" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="217.25" y="449" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(360 217.25 449)">С4  ·  143</text></g>
+<text x="414.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Санузел — геометрия</text>
+<text x="414.5" y="124" font-size="12" fill="#6d6a65">Начало координат — Угол у кухни и коридора.</text>
+<text x="414.5" y="140" font-size="12" fill="#6d6a65">Стены по часовой: С1 запад (коридор, дверь),</text>
+<text x="414.5" y="156" font-size="12" fill="#6d6a65">С2 север (прихожая), С3 восток (лестница), С4</text>
+<text x="414.5" y="172" font-size="12" fill="#6d6a65">юг (кухня).</text>
+<text x="414.5" y="198" font-size="13" font-weight="700" fill="#8a857d">·</text>
+<text x="430.5" y="198" font-size="12" fill="#2b2b2b">143 × 206 см = 2.95 м², потолок 250</text>
+<text x="414.5" y="218" font-size="13" font-weight="700" fill="#8a857d">·</text>
+<text x="430.5" y="218" font-size="12" fill="#2b2b2b">Из коридора: 70 см</text>
+<text x="414.5" y="238" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="430.5" y="238" font-size="12" fill="#2b2b2b">Все размеры — оценка. Точные цифры дадут</text>
+<text x="430.5" y="253" font-size="12" fill="#2b2b2b">замеры.</text>
+<text x="50" y="706.5" font-size="11" fill="#8a857d">Санузел: набросок по площади 3.1 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
+</svg>

@@ -294,6 +294,66 @@ function Kitchen({ s, z, ceiling }: { s: KSpec; z: number; ceiling: number }) {
   );
 }
 
+// Ванна: полая — четыре борта и дно, фронтальный экран; смеситель у стены.
+function Bath({ s }: { s: Spec }) {
+  const { w, d, h } = s, t = 7;
+  return (
+    <>
+      <PBox x={0} y={-d / 2 + t / 2} z={0} w={w} d={t} h={h} role="radiator" />
+      <PBox x={0} y={d / 2 - t / 2} z={0} w={w} d={t} h={h} role="radiator" />
+      <PBox x={-w / 2 + t / 2} y={0} z={0} w={t} d={d - 2 * t} h={h} role="radiator" />
+      <PBox x={w / 2 - t / 2} y={0} z={0} w={t} d={d - 2 * t} h={h} role="radiator" />
+      <PBox x={0} y={0} z={0} w={w - 2 * t} d={d - 2 * t} h={18} role="radiator" />
+      <PBox x={-w / 2 + 25} y={d / 2 + 1} z={h + 12} w={14} d={6} h={4} role="metal" cast={false} />
+      <PBox x={-w / 2 + 25} y={d / 2 - 6} z={h + 8} w={3} d={10} h={3} role="metal" cast={false} />
+    </>
+  );
+}
+
+function Toilet({ s }: { s: Spec }) {
+  const { w, d } = s, tank = 18;
+  const bowlY = -d / 2 + (d - tank) / 2 - tank / 2; // центр чаши — впереди бачка
+  return (
+    <>
+      <PBox x={0} y={bowlY + 6} z={0} w={w * 0.55} d={(d - tank) * 0.6} h={30} role="radiator" />
+      <PCyl x={0} y={bowlY} z={30} r={w / 2 - 1} r2={w / 2} h={12} role="radiator" seg={24} />
+      <PCyl x={0} y={bowlY} z={42} r={w / 2} h={2} role="shade" seg={24} />
+      <PBox x={0} y={d / 2 - tank / 2} z={38} w={w} d={tank} h={s.h - 38} role="radiator" />
+      <PBox x={0} y={d / 2 - tank / 2} z={s.h} w={8} d={4} h={1} role="metal" cast={false} />
+    </>
+  );
+}
+
+// Плоская раковина над стиральной машиной 60 × 50 × 85, смеситель у стены.
+function SinkWasher({ s }: { s: Spec }) {
+  const { w, d, h } = s, wh = 85;
+  return (
+    <>
+      <PBox x={0} y={4} z={0} w={w} d={d - 8} h={wh} role="radiator" />
+      <PCyl x={0} y={-d / 2 + 3.5} z={wh / 2 - 8} r={16} h={1.5} role="dark" seg={32} rotX />
+      <PCyl x={0} y={-d / 2 + 3.2} z={wh / 2 - 8} r={12} h={1} role="screen" seg={32} rotX />
+      <PBox x={-w / 2 + 12} y={-d / 2 + 4.5} z={wh - 10} w={18} d={1} h={6} role="dark" cast={false} />
+      <PBox x={0} y={0} z={wh + 1} w={w} d={d} h={h - wh - 1} role="radiator" />
+      <PBox x={0} y={-3} z={h - 0.5} w={w - 14} d={d - 22} h={0.6} role="shade" cast={false} />
+      <PCyl x={0} y={d / 2 - 6} z={h} r={1.6} h={18} role="metal" seg={12} />
+      <PBox x={0} y={d / 2 - 12} z={h + 15} w={2.5} d={12} h={2.5} role="metal" cast={false} />
+    </>
+  );
+}
+
+// Полотенцесушитель-лесенка: две стойки и перекладины.
+function TowelRail({ s }: { s: Spec }) {
+  const { w, h } = s, n = 6;
+  return (
+    <>
+      {[-1, 1].map((sx) => <PCyl key={sx} x={sx * (w / 2 - 1.5)} y={0} z={0} r={1.5} h={h} role="metal" seg={10} />)}
+      {Array.from({ length: n }, (_, k) => (
+        <PBox key={k} x={0} y={0} z={6 + (k * (h - 12)) / (n - 1)} w={w - 3} d={2} h={2} role="metal" cast={false} />
+      ))}
+    </>
+  );
+}
+
 function Lamp({ s }: { s: Spec }) {
   const r = s.w / 2;
   return (
@@ -327,6 +387,8 @@ export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
     case 'wardrobe': body = <Wardrobe s={spec} />; break;
     case 'mirror': body = <Mirror s={spec} />; break;
     case 'kitchen': body = <Kitchen s={spec} z={z} ceiling={ceiling} />; break;
+    case 'bath': body = <Bath s={spec} />; break;
+    case 'bathroom': body = (spec as any).part === 'toilet' ? <Toilet s={spec} /> : (spec as any).part === 'sinkwasher' ? <SinkWasher s={spec} /> : <TowelRail s={spec} />; break;
     case 'rug': body = <PBox x={0} y={0} z={0} w={spec.w} d={spec.d} h={1} role="rug" cast={false} />; break;
   }
   // Висящее на стене прячется вместе со стеной в режиме «кукольного дома».
@@ -334,7 +396,7 @@ export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
   return <group ref={ref} position={pos} rotation={[0, rot, 0]}>{body}</group>;
 }
 
-const ON_WALL = new Set(['tv', 'art', 'mirror']);
+const ON_WALL = new Set(['tv', 'art', 'mirror', 'bathroom']);
 
 export function Furniture3D({ layout, variantId, registerWallItem }: { layout: any; variantId: string; registerWallItem?: RegisterWallItem }) {
   const v = layout.variants.find((x: any) => x.id === variantId);
@@ -345,7 +407,8 @@ export function Furniture3D({ layout, variantId, registerWallItem }: { layout: a
     <>
       {v.items.map((it: any) => {
         const spec = layout.catalog[it.ref];
-        const w = ON_WALL.has(spec.kind) ? walls.find((W: any) => G.pointSegDistance([it.x, it.y], W.a, W.b) < spec.d / 2 + 10) : undefined;
+        const onWall = ON_WALL.has(spec.kind) && (spec.kind !== 'bathroom' || spec.floor === false);
+        const w = onWall ? walls.find((W: any) => G.pointSegDistance([it.x, it.y], W.a, W.b) < spec.d / 2 + 10) : undefined;
         return <Item key={it.id} it={it} spec={spec} ceiling={ceiling} wallId={w?.id} registerWallItem={registerWallItem} />;
       })}
     </>

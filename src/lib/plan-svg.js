@@ -40,7 +40,7 @@ export function renderPlan(layout, variantId, opts = {}) {
 const C = {
   wall: '#3d3a36', ink: '#2b2b2b', mute: '#8a857d', dim: '#6d6a65', paper: '#fbfaf7',
   ok: '#2e8b57', warn: '#d48a00', bad: '#d23c2a', swing: '#9aa7b8',
-  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec', art: '#c08a5b', wardrobe: '#d8cfc2', pendant: 'none', kitchen: '#e4ded4' },
+  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec', art: '#c08a5b', wardrobe: '#d8cfc2', pendant: 'none', kitchen: '#e4ded4', bath: '#eef4f8', bathroom: '#f7f9fa', mirror: '#cfd9de' },
 };
 
 function dimLine(a, b, label, off, color = C.dim) {
@@ -161,8 +161,8 @@ function dimSign(w) {
 
 function drawItems(v) {
   const out = [];
-  const above = (it) => it.spec.kind === 'kitchen' && it.spec.floor === false;
-  const order = (it) => (above(it) ? 5 : ({ rug: 0, tv: 3, art: 3, pendant: 4 })[it.spec.kind] ?? 1);
+  const above = (it) => (it.spec.kind === 'kitchen' || it.spec.kind === 'bathroom') && it.spec.floor === false;
+  const order = (it) => (above(it) ? 5 : ({ rug: 0, tv: 3, art: 3, mirror: 3, pendant: 4 })[it.spec.kind] ?? 1);
   for (const it of [...v.items].sort((a, b) => order(a) - order(b))) {
     const k = it.spec.kind;
     if (above(it)) {
@@ -207,12 +207,27 @@ function drawItems(v) {
       }
       out.push(`<polyline points="${ptsAttr([p(-hw, hd - 62), p(hw, hd - 62)])}" fill="none" stroke="${C.ink}" stroke-width="0.6" stroke-dasharray="4 3"/>`);
     }
+    if (k === 'bath' || k === 'bathroom') {
+      // Значки сантехники: чаша ванны, бачок и чаша унитаза, люк стиральной машины.
+      const f = G.facing(it.rot), side = G.rotCW([1, 0], it.rot || 0), c = [it.x, it.y], hw = it.spec.w / 2, hd = it.spec.d / 2;
+      const p = (u, w) => G.add(c, G.add(G.mul(side, u), G.mul(f, w)));
+      if (k === 'bath') out.push(`<polygon points="${ptsAttr([p(-hw + 7, -hd + 7), p(hw - 7, -hd + 7), p(hw - 7, hd - 7), p(-hw + 7, hd - 7)])}" fill="#ffffff" stroke="${C.ink}" stroke-width="0.7" stroke-linejoin="round"/>`);
+      if (it.spec.part === 'toilet') {
+        out.push(`<polygon points="${ptsAttr([p(-hw, -hd), p(hw, -hd), p(hw, -hd + 18), p(-hw, -hd + 18)])}" fill="#e9edf0" stroke="${C.ink}" stroke-width="0.7"/>`);
+        const [bx, by] = px(p(0, -hd + 18 + (it.spec.d - 18) / 2));
+        out.push(`<ellipse cx="${bx}" cy="${by}" rx="${(hw - 3) * S}" ry="${((it.spec.d - 18) / 2 - 2) * S}" fill="#ffffff" stroke="${C.ink}" stroke-width="0.7" transform="rotate(${-(it.rot || 0) + 90} ${bx} ${by})"/>`);
+      }
+      if (it.spec.part === 'sinkwasher') {
+        const [wx, wy] = px(c);
+        out.push(`<circle cx="${wx}" cy="${wy}" r="${17 * S}" fill="none" stroke="${C.mute}" stroke-width="0.7" stroke-dasharray="3 2"/>`);
+      }
+    }
     if (k === 'wardrobe') out.push(`<polyline points="${ptsAttr([it.poly[0], it.poly[2]])}" fill="none" stroke="${C.ink}" stroke-width="0.6"/>`);
-    if (k === 'tv' || k === 'art') {
+    if (k === 'tv' || k === 'art' || k === 'mirror') {
       // Висит на стене: подпись чуть в комнату от полоски.
       const lp = G.add([it.x, it.y], G.mul(G.facing(it.rot), it.spec.d / 2 + 9));
       const [lx, ly] = px(lp);
-      const label = k === 'tv' ? it.spec.name : `${it.spec.name} ${it.spec.w}×${it.spec.h}`;
+      const label = k === 'art' ? `${it.spec.name} ${it.spec.w}×${it.spec.h}` : it.spec.name;
       out.push(`<text x="${lx}" y="${ly + 4}" font-size="10" font-style="italic" fill="${C.dim}" text-anchor="middle">${esc(label)}</text>`);
       continue;
     }
@@ -250,6 +265,16 @@ function analyze(v) {
   for (const f of fx.filter((f) => f.type === 'vent')) {
     const hit = v.items.find((it) => zOverlap({ ...it, spec: it.spec, z: it.z }, f) && G.polyDistance(it.poly, f.poly).d < 1);
     if (hit) res.push(['warn', `${hit.spec.name} закрывает вентканал — в шкафу нужна решётка или вырез`]);
+  }
+  // Фасады кухни открываются: зона перед дверцей (ширина дверцы, у ПММ 60, у духовки 50) не должна упираться в батарею.
+  for (const it of floor.filter((i) => i.spec.kind === 'kitchen' && ['base', 'sink', 'stove', 'dishwasher'].includes(i.spec.part))) {
+    const depth = it.spec.part === 'dishwasher' ? 60 : it.spec.part === 'stove' ? 50 : Math.min(it.spec.w, 45);
+    const f = G.facing(it.rot), side = G.rotCW([1, 0], it.rot || 0), hw = it.spec.w / 2, hd = it.spec.d / 2;
+    const c = G.add([it.x, it.y], G.mul(f, hd + 1));
+    const zone = [G.add(c, G.mul(side, -hw)), G.add(c, G.mul(side, hw)), G.add(G.add(c, G.mul(side, hw)), G.mul(f, depth)), G.add(G.add(c, G.mul(side, -hw)), G.mul(f, depth))];
+    for (const r of fx.filter((x) => x.type === 'radiator')) {
+      if (G.polyDistance(zone, r.poly).d === 0) res.push(['bad', `Фасад «${it.spec.name}» упирается в батарею — не открыть`]);
+    }
   }
   for (const it of floor) {
     for (const f of fx) if (f.type !== 'vent' && zOverlap(it, f) && G.polyDistance(it.poly, f.poly).d < (f.type === 'radiator' ? 10 : 0.1)) res.push(['bad', `${it.spec.name} вплотную к объекту «${f.name}»`]);
@@ -346,6 +371,34 @@ function analyze(v) {
       const [lo, ok] = R.bedFoot;
       res.push([r.d >= ok ? 'ok' : r.d >= lo ? 'warn' : 'bad', `В ногах кровати до стены: ${Math.round(r.d)} см (норма ${ok}, минимум ${lo})`]);
     }
+  }
+  // Место перед предметом с нормой spec.front (ванна, раковина, унитаз) и от оси унитаза до соседей (spec.axis).
+  const rect = (a, b, dir, depth) => [a, b, G.add(b, G.mul(dir, depth)), G.add(a, G.mul(dir, depth))];
+  const clearAlong = (it, seg, zone) => {
+    let d = Infinity;
+    for (const o of floor) if (o !== it && G.polyDistance(zone, o.poly).d === 0) d = Math.min(d, G.polyDistance(seg, o.poly).d);
+    for (const w of G.walls(room)) if (G.polySegDistance(zone, w.a, w.b).d === 0) d = Math.min(d, G.polySegDistance(seg, w.a, w.b).d);
+    return d;
+  };
+  for (const it of floor.filter((i) => i.spec.front)) {
+    const f = G.facing(it.rot), side = G.rotCW([1, 0], it.rot || 0), c = [it.x, it.y];
+    const hw = it.spec.w / 2 - 1, hd = it.spec.d / 2;
+    // Подходить достаточно с участка шириной 60 (у ванны — не со всей длины): берём лучший участок.
+    const win = Math.min(2 * hw, 60);
+    let d = 0;
+    for (let u = -hw; u + win <= hw + 0.01; u += 5) {
+      const e0 = G.add(G.add(c, G.mul(f, hd)), G.mul(side, u)), e1 = G.add(e0, G.mul(side, win));
+      d = Math.max(d, clearAlong(it, [e0, e1], rect(e0, e1, f, 300)));
+    }
+    const n = it.spec.front;
+    res.push([d >= n ? 'ok' : d >= n - 10 ? 'warn' : 'bad', `Перед «${it.spec.name}»: ${Math.round(d)} см (норма ${n})`]);
+  }
+  for (const it of floor.filter((i) => i.spec.axis)) {
+    const f = G.facing(it.rot), side = G.rotCW([1, 0], it.rot || 0), c = [it.x, it.y], hd = it.spec.d / 2;
+    const a0 = G.add(c, G.mul(f, -hd + 1)), a1 = G.add(c, G.mul(f, hd));
+    const d = Math.min(...[-1, 1].map((s) => clearAlong(it, [a0, a1], rect(a0, a1, G.mul(side, s), 80))));
+    const n = it.spec.axis;
+    res.push([d >= n ? 'ok' : d >= n - 5 ? 'warn' : 'bad', `От оси «${it.spec.name}» до стены или предмета сбоку: ${Math.round(d)} см (норма ≥ ${n})`]);
   }
   // ТВ
   const tv = v.items.find((it) => it.spec.kind === 'tv');
