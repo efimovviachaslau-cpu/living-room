@@ -1,12 +1,13 @@
 // 3D-вид: Canvas, свет, камера с OrbitControls, «кукольный дом» (стены между камерой и комнатой
 // прячутся) и снимки PNG фиксированного размера для нейросети.
-import { useEffect, useMemo, useRef, type MutableRefObject } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, type MutableRefObject, type ReactNode } from 'react';
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Room3D, type WallRef } from './Room3D';
 import { Furniture3D } from './Furniture3D';
-import { SceneCtx, depthMaterial, toThree, ceilingItems, registerCeiling, type Colors, type Mode } from './prims';
+import { SceneCtx, depthMaterial, toThree, ceilingItems, registerCeiling, useScene, type Colors, type Mode } from './prims';
 import { resolvePreset } from '../lib/cameras';
 import type { CamPreset } from '../lib/presets';
 
@@ -89,6 +90,60 @@ function Rig({ layout, preset, walls }: { layout: any; preset: CamPreset; walls:
   return null;
 }
 
+// Склейка статики: после построения React-дерева все меши (и рёбра) с одним материалом сливаются
+// в один объект — вместо сотен вызовов отрисовки десятки. Исходники прячутся, но остаются в дереве:
+// React продолжает ими управлять, а склейка пересобирается после каждого обновления.
+// exclude — поддеревья, которые прячутся на лету (подвесы, настенное у спрятанной стены).
+function Batched({ children, exclude }: { children: ReactNode; exclude: (o: THREE.Object3D) => boolean }) {
+  const { shadows } = useScene(); // подписка на контекст: смена режима/цветов пересобирает склейку
+  const src = useRef<THREE.Group>(null!);
+  const dst = useRef<THREE.Group>(null!);
+  const hidden = useRef<THREE.Object3D[]>([]);
+  const { invalidate } = useThree();
+  useLayoutEffect(() => {
+    const root = src.current, out = dst.current;
+    for (const o of hidden.current) o.visible = true;
+    hidden.current = [];
+    for (const c of [...out.children]) { out.remove(c); (c as THREE.Mesh).geometry?.dispose(); }
+    root.updateMatrixWorld(true);
+    const inv = new THREE.Matrix4().copy(root.matrixWorld).invert();
+    const buckets = new Map<string, { mat: THREE.Material; line: boolean; geoms: THREE.BufferGeometry[]; objs: THREE.Object3D[] }>();
+    const visit = (o: THREE.Object3D) => {
+      if (o !== root && exclude(o)) return;
+      if (!o.visible) return;
+      const m = o as THREE.Mesh;
+      if ((m.isMesh || (o as THREE.LineSegments).isLineSegments) && !Array.isArray(m.material)) {
+        const line = !!(o as THREE.LineSegments).isLineSegments;
+        const key = (line ? 'l:' : 'm:') + (m.material as THREE.Material).uuid;
+        let b = buckets.get(key);
+        if (!b) { b = { mat: m.material as THREE.Material, line, geoms: [], objs: [] }; buckets.set(key, b); }
+        const g = m.geometry.clone();
+        g.applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, o.matrixWorld));
+        b.geoms.push(g);
+        b.objs.push(o);
+      }
+      for (const c of o.children) visit(c);
+    };
+    visit(root);
+    for (const b of buckets.values()) {
+      const merged = mergeGeometries(b.geoms, false);
+      for (const g of b.geoms) g.dispose();
+      if (!merged) continue; // разные наборы атрибутов — оставляем как есть
+      const obj = b.line ? new THREE.LineSegments(merged, b.mat) : new THREE.Mesh(merged, b.mat);
+      if (!b.line) { obj.castShadow = shadows && !(b.mat as THREE.Material).transparent; obj.receiveShadow = shadows; }
+      out.add(obj);
+      for (const o of b.objs) { o.visible = false; hidden.current.push(o); }
+    }
+    invalidate();
+  });
+  return (
+    <>
+      <group ref={src}>{children}</group>
+      <group ref={dst} />
+    </>
+  );
+}
+
 // Первый отрисованный кадр: до него на экране держится «Загрузка 3D…» (шейдеры компилируются секунды).
 function FirstFrame({ onReady }: { onReady?: () => void }) {
   const done = useRef(false);
@@ -99,6 +154,7 @@ function FirstFrame({ onReady }: { onReady?: () => void }) {
 function Exporter({ layout, walls, apiRef }: { layout: any; walls: Walls; apiRef: MutableRefObject<CaptureApi | null> }) {
   const { gl, scene, camera, invalidate } = useThree();
   useEffect(() => {
+    if (import.meta.env.DEV) (window as any).__three = { gl, scene }; // отладка: число объектов и вызовов отрисовки
     apiRef.current = {
       async capture(preset, w, h) {
         const cam = new THREE.PerspectiveCamera(60, w / h, 0.05, 100);
@@ -220,16 +276,21 @@ export function Scene3D(props: {
       <SceneCtx.Provider value={ctx}>
         <Lights layout={layout} colors={colors} shadows={shadows} />
         {flat ? (
-          flat.map((r) => (
-            <group key={r.L.room.id} position={toThree(r.origin[0], r.origin[1])}>
-              <Room3D layout={r.L} register={noop} registerCeiling={registerCeiling} electric={r.electric} combined />
-              <Furniture3D layout={r.L} variantId={r.variantId} hideAbove={CUT} />
-            </group>
-          ))
+          <Batched exclude={(o) => ceilingItems.has(o as THREE.Group)}>
+            {flat.map((r) => (
+              <group key={r.L.room.id} position={toThree(r.origin[0], r.origin[1])}>
+                <Room3D layout={r.L} register={noop} registerCeiling={registerCeiling} electric={r.electric} combined />
+                <Furniture3D layout={r.L} variantId={r.variantId} hideAbove={CUT} />
+              </group>
+            ))}
+          </Batched>
         ) : (
           <>
+            {/* стены не склеиваем: в «кукольном доме» они прячутся по одной */}
             <Room3D layout={layout} register={register} registerCeiling={registerCeiling} electric={electric} />
-            <Furniture3D layout={layout} variantId={variantId} registerWallItem={registerWallItem} />
+            <Batched exclude={(o) => ceilingItems.has(o as THREE.Group) || wallItems.has(o as THREE.Group)}>
+              <Furniture3D layout={layout} variantId={variantId} registerWallItem={registerWallItem} />
+            </Batched>
           </>
         )}
       </SceneCtx.Provider>
