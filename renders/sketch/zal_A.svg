@@ -85,22 +85,78 @@
 <line x1="110" y1="929" x2="110" y2="1021.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
 <line x1="582.5" y1="1021.5" x2="110" y2="1021.5" stroke="#2b2b2b" stroke-width="0.8"/><line x1="578.5" y1="1025.5" x2="586.5" y2="1017.5" stroke="#2b2b2b" stroke-width="1.2"/><line x1="106" y1="1025.5" x2="114" y2="1017.5" stroke="#2b2b2b" stroke-width="1.2"/>
 <text x="346.25" y="1021.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(360 346.25 1021.5)">С4  ·  315</text></g>
-<text x="672.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Зал — геометрия</text>
-<text x="672.5" y="124" font-size="12" fill="#6d6a65">Начало координат — угол у окна и двери в</text>
-<text x="672.5" y="140" font-size="12" fill="#6d6a65">спальню 9.2. Стены по часовой: С1 запад, С2</text>
-<text x="672.5" y="156" font-size="12" fill="#6d6a65">север, С3 восток, С4 окно.</text>
-<text x="672.5" y="182" font-size="13" font-weight="700" fill="#8a857d">·</text>
-<text x="688.5" y="182" font-size="12" fill="#2b2b2b">315 × 546 см = 17.20 м², потолок 250</text>
-<text x="672.5" y="202" font-size="13" font-weight="700" fill="#8a857d">·</text>
-<text x="688.5" y="202" font-size="12" fill="#2b2b2b">Окно: 180 см, подоконник 85, высота 145</text>
-<text x="672.5" y="222" font-size="13" font-weight="700" fill="#8a857d">·</text>
-<text x="688.5" y="222" font-size="12" fill="#2b2b2b">Вход из прихожей: 90 см</text>
-<text x="672.5" y="242" font-size="13" font-weight="700" fill="#8a857d">·</text>
-<text x="688.5" y="242" font-size="12" fill="#2b2b2b">В спальню 7.5: 85 см</text>
-<text x="672.5" y="262" font-size="13" font-weight="700" fill="#8a857d">·</text>
-<text x="688.5" y="262" font-size="12" fill="#2b2b2b">В спальню 9.2: 85 см</text>
-<text x="672.5" y="282" font-size="13" font-weight="700" fill="#d48a00">!</text>
-<text x="688.5" y="282" font-size="12" fill="#2b2b2b">Все размеры — оценка. Точные цифры дадут</text>
-<text x="688.5" y="297" font-size="12" fill="#2b2b2b">замеры.</text>
-<text x="50" y="1061" font-size="11" fill="#8a857d">Набросок по площади 17.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
+<polygon points="215.0,576.5 215.0,921.5 455.0,921.5 455.0,576.5" fill="#efe7f3" stroke="#a58fb5" stroke-width="1.1" stroke-dasharray="6 4"/>
+<text x="335" y="588.5" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Ковёр</text>
+<text x="335" y="601.5" font-size="9.5" fill="#6d6a65" text-anchor="middle">230×160</text>
+<polygon points="432.5,584.0 432.5,914.0 575.0,914.0 575.0,584.0" fill="#cdd8cc" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="575.0,584.0 575.0,914.0 545.0,914.0 545.0,584.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="545.0,584.0 545.0,606.5 432.5,606.5 432.5,584.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="545.0,914.0 545.0,891.5 432.5,891.5 432.5,914.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<text x="503.75" y="747" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Диван 3-местный</text>
+<text x="503.75" y="760" font-size="9.5" fill="#6d6a65" text-anchor="middle">220×95</text>
+<polygon points="297.5,674.0 297.5,824.0 372.5,824.0 372.5,674.0" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<text x="335" y="747" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Журнальный стол</text>
+<text x="335" y="760" font-size="9.5" fill="#6d6a65" text-anchor="middle">100×50</text>
+<polygon points="171.5,909.5 171.5,669.5 111.5,669.5 111.5,909.5" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
+<text x="141.5" y="787.5" font-size="9" font-weight="600" fill="#2b2b2b" text-anchor="middle">ТВ-тумба</text>
+<text x="141.5" y="800.5" font-size="8" fill="#6d6a65" text-anchor="middle">160×40</text>
+<circle cx="549.5" cy="554" r="26.25" fill="#f3e3a6" stroke="#2b2b2b" stroke-width="1"/>
+<text x="549.5" y="523.75" font-size="10" fill="#2b2b2b" text-anchor="middle">Торшер</text>
+<polygon points="447.5,404.0 447.5,524.0 567.5,524.0 567.5,404.0" fill="#cdd8cc" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="567.5,404.0 567.5,524.0 537.5,524.0 537.5,404.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="537.5,404.0 537.5,426.5 447.5,426.5 447.5,404.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="537.5,524.0 537.5,501.5 447.5,501.5 447.5,524.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<text x="507.5" y="462" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Кресло</text>
+<text x="507.5" y="475" font-size="9.5" fill="#6d6a65" text-anchor="middle">80×80</text>
+<polygon points="125.0,170.0 425.0,170.0 425.0,110.0 125.0,110.0" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
+<text x="275" y="138" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Стеллаж</text>
+<text x="275" y="151" font-size="9.5" fill="#6d6a65" text-anchor="middle">200×40</text>
+<polygon points="120.5,898.3 120.5,680.8 111.5,680.8 111.5,898.3" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="0"/>
+<g><line x1="432.5" y1="824" x2="372.5" y2="824" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="387.5" y="816" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="402.5" y="828" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">40</text></g>
+<g><line x1="447.5" y1="584" x2="447.5" y2="524" stroke="#d23c2a" stroke-width="1.4" marker-start="url(#a-d23c2a)" marker-end="url(#a-d23c2a)"/>
+<rect x="432.5" y="546" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d23c2a" stroke-width="0.8"/>
+<text x="447.5" y="558" font-size="10.5" font-weight="600" fill="#d23c2a" text-anchor="middle">40</text></g>
+<g><line x1="297.5" y1="824" x2="171.5" y2="824" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="219.5" y="816" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="234.5" y="828" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">84</text></g>
+<g><line x1="372.5" y1="674" x2="523.25" y2="580.25" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="432.875" y="619.125" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="447.875" y="631.125" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">118</text></g>
+<g><line x1="372.5" y1="674" x2="447.5" y2="524" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="395" y="591" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="410" y="603" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">112</text></g>
+<g><line x1="297.5" y1="674" x2="110" y2="674" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="188.75" y="666" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="203.75" y="678" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">125</text></g>
+<g><line x1="297.5" y1="824" x2="297.5" y2="929" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="282.5" y="868.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="297.5" y="880.5" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">70</text></g>
+<g><line x1="425" y1="170" x2="582.5" y2="170" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="488.75" y="162" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="503.75" y="174" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">105</text></g>
+<line x1="515" y1="749" x2="116" y2="789.5" stroke="#7a6fb0" stroke-width="1" stroke-dasharray="1 4"/><circle cx="515" cy="749" r="3" fill="#7a6fb0"/>
+<text x="672.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Зал, вариант A — ТВ у окна</text>
+<text x="672.5" y="124" font-size="12" fill="#6d6a65">Диван вдоль глухой восточной стены, ТВ</text>
+<text x="672.5" y="140" font-size="12" fill="#6d6a65">напротив в простенке у окна. Проход от входа к</text>
+<text x="672.5" y="156" font-size="12" fill="#6d6a65">спальням остаётся свободной полосой в северной</text>
+<text x="672.5" y="172" font-size="12" fill="#6d6a65">части.</text>
+<text x="672.5" y="198" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="198" font-size="12" fill="#2b2b2b">Диван ↔ журнальный стол: 40 см (норма 35–50)</text>
+<text x="672.5" y="218" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="218" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 7.5»: 82 см</text>
+<text x="688.5" y="233" font-size="12" fill="#2b2b2b">(не уже двери)</text>
+<text x="672.5" y="253" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="253" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 9.2»: 82 см</text>
+<text x="688.5" y="268" font-size="12" fill="#2b2b2b">(не уже двери)</text>
+<text x="672.5" y="288" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="288" font-size="12" fill="#2b2b2b">Подход к окну (открыть створку): 69 см</text>
+<text x="688.5" y="303" font-size="12" fill="#2b2b2b">(норма ≥ 60)</text>
+<text x="672.5" y="323" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="323" font-size="12" fill="#2b2b2b">ТВ 65″: 267 см от глаз = 1.6 диагонали (4K:</text>
+<text x="688.5" y="338" font-size="12" fill="#2b2b2b">1–1.5, терпимо до 1.7)</text>
+<text x="672.5" y="358" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="358" font-size="12" fill="#2b2b2b">ТВ в стороне от оси дивана на 6° (≤ 30°)</text>
+<text x="50" y="1061" font-size="11" fill="#8a857d">Зал: набросок по площади 17.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
 </svg>

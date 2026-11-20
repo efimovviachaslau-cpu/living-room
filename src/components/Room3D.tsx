@@ -141,8 +141,8 @@ export function Room3D({ layout, register, registerCeiling }: { layout: any; reg
         }
         if (f.type === 'ceilingLight') return (
           <group key={f.id} ref={registerCeiling}>
-            <PCyl x={f.x} y={f.y} z={H - 55} r={0.4} h={55} role="dark" seg={6} />
-            <PCyl x={f.x} y={f.y} z={H - 75} r={18} r2={6} h={20} role="shade" />
+            <PCyl x={f.x} y={f.y} z={H - (f.drop ?? 55)} r={0.4} h={f.drop ?? 55} role="dark" seg={6} />
+            <PCyl x={f.x} y={f.y} z={H - (f.drop ?? 55) - 20} r={18} r2={6} h={20} role="shade" />
           </group>
         );
         return null;

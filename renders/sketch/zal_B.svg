@@ -160,27 +160,28 @@
 <rect x="514.25" y="752.25" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
 <text x="529.25" y="764.25" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">71</text></g>
 <line x1="395" y1="509" x2="365" y2="114.5" stroke="#7a6fb0" stroke-width="1" stroke-dasharray="1 4"/><circle cx="395" cy="509" r="3" fill="#7a6fb0"/>
-<text x="672.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Вариант B — Обеденная зона у окна</text>
-<text x="672.5" y="124" font-size="12" fill="#6d6a65">Кухня 5.8 м² — стол на четверых переезжает к</text>
-<text x="672.5" y="140" font-size="12" fill="#6d6a65">окну. Диван спиной к столу делит комнату на</text>
-<text x="672.5" y="156" font-size="12" fill="#6d6a65">две зоны, ТВ на северной стене.</text>
-<text x="672.5" y="182" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
-<text x="688.5" y="182" font-size="12" fill="#2b2b2b">Диван ↔ журнальный стол: 40 см (норма 35–50)</text>
-<text x="672.5" y="202" font-size="13" font-weight="700" fill="#d48a00">!</text>
-<text x="688.5" y="202" font-size="12" fill="#2b2b2b">За стульями до стены: 70–71 см (норма 75,</text>
-<text x="688.5" y="217" font-size="12" fill="#2b2b2b">минимум 60)</text>
-<text x="672.5" y="237" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
-<text x="688.5" y="237" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 7.5»: 82 см</text>
-<text x="688.5" y="252" font-size="12" fill="#2b2b2b">(не уже двери)</text>
-<text x="672.5" y="272" font-size="13" font-weight="700" fill="#d48a00">!</text>
-<text x="688.5" y="272" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 9.2»: 79 см</text>
-<text x="672.5" y="292" font-size="13" font-weight="700" fill="#d48a00">!</text>
-<text x="688.5" y="292" font-size="12" fill="#2b2b2b">Подход к окну (открыть створку): 59 см</text>
-<text x="688.5" y="307" font-size="12" fill="#2b2b2b">(норма ≥ 60)</text>
-<text x="672.5" y="327" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
-<text x="688.5" y="327" font-size="12" fill="#2b2b2b">ТВ 65″: 264 см от глаз = 1.6 диагонали (4K:</text>
-<text x="688.5" y="342" font-size="12" fill="#2b2b2b">1–1.5, терпимо до 1.7)</text>
-<text x="672.5" y="362" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
-<text x="688.5" y="362" font-size="12" fill="#2b2b2b">ТВ в стороне от оси дивана на 4° (≤ 30°)</text>
-<text x="50" y="1061" font-size="11" fill="#8a857d">Набросок по площади 17.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
+<text x="672.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Зал, вариант B — Обеденная</text>
+<text x="672.5" y="124" font-size="20" font-weight="700" fill="#2b2b2b">зона у окна</text>
+<text x="672.5" y="148" font-size="12" fill="#6d6a65">Кухня 5.8 м² — стол на четверых переезжает к</text>
+<text x="672.5" y="164" font-size="12" fill="#6d6a65">окну. Диван спиной к столу делит комнату на</text>
+<text x="672.5" y="180" font-size="12" fill="#6d6a65">две зоны, ТВ на северной стене.</text>
+<text x="672.5" y="206" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="206" font-size="12" fill="#2b2b2b">Диван ↔ журнальный стол: 40 см (норма 35–50)</text>
+<text x="672.5" y="226" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="688.5" y="226" font-size="12" fill="#2b2b2b">За стульями до стены: 70–71 см (норма 75,</text>
+<text x="688.5" y="241" font-size="12" fill="#2b2b2b">минимум 60)</text>
+<text x="672.5" y="261" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="261" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 7.5»: 82 см</text>
+<text x="688.5" y="276" font-size="12" fill="#2b2b2b">(не уже двери)</text>
+<text x="672.5" y="296" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="688.5" y="296" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 9.2»: 79 см</text>
+<text x="672.5" y="316" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="688.5" y="316" font-size="12" fill="#2b2b2b">Подход к окну (открыть створку): 59 см</text>
+<text x="688.5" y="331" font-size="12" fill="#2b2b2b">(норма ≥ 60)</text>
+<text x="672.5" y="351" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="351" font-size="12" fill="#2b2b2b">ТВ 65″: 264 см от глаз = 1.6 диагонали (4K:</text>
+<text x="688.5" y="366" font-size="12" fill="#2b2b2b">1–1.5, терпимо до 1.7)</text>
+<text x="672.5" y="386" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="386" font-size="12" fill="#2b2b2b">ТВ в стороне от оси дивана на 4° (≤ 30°)</text>
+<text x="50" y="1061" font-size="11" fill="#8a857d">Зал: набросок по площади 17.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
 </svg>

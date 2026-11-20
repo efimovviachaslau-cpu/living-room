@@ -5,6 +5,17 @@ import * as G from './geometry.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
+// Перенос строки по словам, n — примерная длина строки в символах.
+function wrapText(s, n) {
+  const w = [];
+  let line = '';
+  for (const word of s.split(' ')) {
+    if ((line + ' ' + word).trim().length > n) { w.push(line); line = word; } else line = (line + ' ' + word).trim();
+  }
+  if (line) w.push(line);
+  return w;
+}
+
 /**
  * @param {any} layout  содержимое layout.json
  * @param {string|null} variantId  id варианта или null — пустая комната
@@ -29,7 +40,7 @@ export function renderPlan(layout, variantId, opts = {}) {
 const C = {
   wall: '#3d3a36', ink: '#2b2b2b', mute: '#8a857d', dim: '#6d6a65', paper: '#fbfaf7',
   ok: '#2e8b57', warn: '#d48a00', bad: '#d23c2a', swing: '#9aa7b8',
-  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6' },
+  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec' },
 };
 
 function dimLine(a, b, label, off, color = C.dim) {
@@ -168,6 +179,19 @@ function drawItems(v) {
       out.push(`<polygon points="${ptsAttr([p(-hw, hd), p(hw, hd), p(hw, hd - 20), p(-hw, hd - 20)])}" fill="#b5c4b3" stroke="${C.ink}" stroke-width="0.6"/>`);
       for (const s of [-1, 1]) out.push(`<polygon points="${ptsAttr([p(s * hw, hd - 20), p(s * (hw - 15), hd - 20), p(s * (hw - 15), -hd), p(s * hw, -hd)])}" fill="#b5c4b3" stroke="${C.ink}" stroke-width="0.6"/>`);
     }
+    if (k === 'bed') {
+      // Изголовье 8 см у тыльной стороны, две подушки, край одеяла.
+      const f = G.facing(it.rot), back = G.mul(f, -1);
+      const c = [it.x, it.y], hw = it.spec.w / 2, hd = it.spec.d / 2;
+      const side = G.rotCW([1, 0], it.rot || 0);
+      const p = (u, w) => G.add(c, G.add(G.mul(side, u), G.mul(back, w)));
+      out.push(`<polygon points="${ptsAttr([p(-hw, hd), p(hw, hd), p(hw, hd - 8), p(-hw, hd - 8)])}" fill="#b9c3cf" stroke="${C.ink}" stroke-width="0.6"/>`);
+      for (const s of [-1, 1]) {
+        const u0 = s * 6, u1 = s * Math.min(hw - 10, 68);
+        out.push(`<polygon points="${ptsAttr([p(u0, hd - 12), p(u1, hd - 12), p(u1, hd - 50), p(u0, hd - 50)])}" fill="#ffffff" stroke="${C.ink}" stroke-width="0.6"/>`);
+      }
+      out.push(`<polyline points="${ptsAttr([p(-hw, hd - 62), p(hw, hd - 62)])}" fill="none" stroke="${C.ink}" stroke-width="0.6" stroke-dasharray="4 3"/>`);
+    }
     if (k === 'tv') continue;
     const [cx, cy] = px([it.x, it.y]);
     const vertical = Math.abs(Math.sin((it.rot || 0) * Math.PI / 180)) > 0.7;
@@ -216,10 +240,12 @@ function analyze(v) {
   const chairGaps = [];
   for (const it of floor) for (const w of G.walls(room)) {
     const r = G.polySegDistance(it.poly, w.a, w.b);
-    const isChair = it.spec.kind === 'chair';
+    const isChair = it.spec.kind === 'chair', isBed = it.spec.kind === 'bed';
     if (isChair && G.dot(w.inward, G.facing(it.rot)) < 0.7) continue; // для стула важна только стена за спиной
+    if (it.group === 'bed' && !isBed) continue; // тумбочки у кровати — не проход
     if (r.d >= 25 && r.d <= 130) {
-      const ok = isChair ? R.behindChair[1] : R.passMain, warn = isChair ? R.behindChair[0] : R.passSecondary;
+      const foot = isBed && G.dot(w.inward, G.facing(it.rot)) < -0.7;
+      const [warn, ok] = isChair ? R.behindChair : foot ? R.bedFoot : isBed ? R.bedSide : [R.passSecondary, R.passMain];
       ann.push(gapLine(r.p, r.q, r.d, r.d >= ok ? C.ok : r.d >= warn ? C.warn : C.bad));
       if (isChair) chairGaps.push(r.d);
     }
@@ -235,15 +261,42 @@ function analyze(v) {
   const entry = doors[0];
   for (const d of doors.slice(1)) {
     const w = G.bottleneck(grid, grid.doors[entry.id], [grid.doors[d.id]]);
-    const lvl = w >= R.passMain ? 'ok' : w >= R.passMin ? 'warn' : 'bad';
+    // К балкону/лоджии ходят редко — для такой двери хватает нормы второстепенного прохода.
+    const [ok, min] = d.pass === 'secondary' ? [R.passSecondary, R.passSecondary - 10] : [R.passMain, R.passMin];
+    const lvl = w >= ok ? 'ok' : w >= min ? 'warn' : 'bad';
     const cap = w >= Math.min(entry.width, d.width) - 3 ? ' (не уже двери)' : '';
-    res.push([lvl, `Проход от входа к двери «${d.name.replace('В спальню', 'спальня')}»: ${w} см${cap}`]);
+    res.push([lvl, `Проход от входа к двери «${d.name.replace('В спальню', 'спальня')}»: ${w} см${cap}${d.pass === 'secondary' ? ` (норма ≥ ${ok})` : ''}`]);
   }
   const win = room.openings.find((o) => o.type === 'window');
   if (win) {
     const g2 = G.passGrid(layout, [...floor.map((it) => it.poly), ...fx.filter((f) => f.type !== 'radiator').map((f) => f.poly)]);
     const w = G.bottleneck(g2, g2.doors[entry.id], G.windowTargets(room, win));
     res.push([w >= R.passSecondary ? 'ok' : 'warn', `Подход к окну (открыть створку): ${w} см (норма ≥ ${R.passSecondary})`]);
+  }
+  // Кровать: подойти с каждой длинной стороны и место в ногах
+  for (const bed of v.items.filter((it) => it.spec.kind === 'bed')) {
+    const f = G.facing(bed.rot), side = G.rotCW([1, 0], bed.rot || 0);
+    const c = [bed.x, bed.y], hw = bed.spec.w / 2, hd = bed.spec.d / 2;
+    for (const s of [-1, 1]) {
+      // Подпись стороны — по стене, к которой она обращена («со стороны лоджии»).
+      const dir = G.mul(side, s);
+      const wl = G.walls(room).find((w) => G.dot(w.inward, dir) < -0.7);
+      const wd = wl && room.walls.find((x) => x.id === wl.id);
+      const adj = { 'запад': 'западной', 'восток': 'восточной', 'север': 'северной', 'юг': 'южной' }[wd?.side];
+      const label = adj ? `с ${adj} стороны${wd.to ? ` (${wd.to})` : ''}` : (s < 0 ? 'слева' : 'справа');
+      const targets = [];
+      // Цель — любая точка полосы вдоль борта (от 15 до 90 см от кровати), кроме зоны тумбочек у изголовья.
+      for (let t = -hd + 70; t <= hd - 15; t += 5) for (let o = 15; o <= 90; o += 5) targets.push(G.add(G.add(c, G.mul(side, s * (hw + o))), G.mul(f, t)));
+      const w = G.bottleneck(grid, grid.doors[entry.id], targets);
+      const [lo, ok] = R.bedSide;
+      res.push([w >= ok ? 'ok' : w >= lo ? 'warn' : 'bad', `Подход к кровати ${label}: ${w} см (норма ${ok}, минимум ${lo})`]);
+    }
+    for (const w of G.walls(room)) {
+      if (G.dot(w.inward, f) > -0.7) continue; // только стена напротив изножья
+      const r = G.polySegDistance(bed.poly, w.a, w.b);
+      const [lo, ok] = R.bedFoot;
+      res.push([r.d >= ok ? 'ok' : r.d >= lo ? 'warn' : 'bad', `В ногах кровати до стены: ${Math.round(r.d)} см (норма ${ok}, минимум ${lo})`]);
+    }
   }
   // ТВ
   const tv = v.items.find((it) => it.spec.kind === 'tv'), sofa = v.items.find((it) => it.spec.kind === 'sofa');
@@ -265,9 +318,10 @@ function analyze(v) {
 
 function sidePanel(title, lines, sub) {
   const x = PAD.l + RX * S + 90, y0 = PAD.t - 10;
-  const out = [`<text x="${x}" y="${y0}" font-size="20" font-weight="700" fill="${C.ink}">${esc(title)}</text>`];
-  let y = y0 + 24;
-  const wrap = (s, n) => { const w = []; let line = ''; for (const word of s.split(' ')) { if ((line + ' ' + word).trim().length > n) { w.push(line); line = word; } else line = (line + ' ' + word).trim(); } if (line) w.push(line); return w; };
+  const out = [];
+  let y = y0;
+  for (const l of wrapText(title, 30)) { out.push(`<text x="${x}" y="${y}" font-size="20" font-weight="700" fill="${C.ink}">${esc(l)}</text>`); y += 24; }
+  const wrap = wrapText;
   if (sub) for (const l of wrap(sub, 46)) { out.push(`<text x="${x}" y="${y}" font-size="12" fill="${C.dim}">${esc(l)}</text>`); y += 16; }
   y += 10;
   const icon = { ok: ['✓', C.ok], warn: ['!', C.warn], bad: ['✗', C.bad], info: ['·', C.mute] };
@@ -283,7 +337,7 @@ function sidePanel(title, lines, sub) {
 
 function svg(title, body, side) {
   const markers = [C.ok, C.warn, C.bad].map((c) => `<marker id="a-${c.slice(1)}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="${c}"/></marker>`).join('');
-  const foot = `Набросок по площади 17.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. ${layout.meta.updated}`;
+  const foot = `${room.name}: набросок по площади ${room.area} м², плану БТИ и фото. Размеры ориентировочные до замеров. ${layout.meta.updated}`;
   return `<svg xmlns="http://www.w3.org/2000/svg" ${withPanel ? `width="${W}" height="${H}"` : 'width="100%"'} viewBox="0 0 ${W} ${H}" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
 <defs>${markers}</defs>
 <rect width="${W}" height="${H}" fill="#ffffff"/>
@@ -298,18 +352,18 @@ ${withPanel ? `<text x="${PAD.l - 60}" y="${H - 18}" font-size="11" fill="${C.mu
   if (variantId) {
     const v = G.resolveVariant(layout, variantId);
     const { res, ann } = analyze(v);
-    title = `Вариант ${v.id} — ${v.name}`;
+    title = `${room.name}, вариант ${v.id} — ${v.name}`;
     body += '\n' + drawItems(v) + '\n' + ann;
     checks = res;
     if (withPanel) side = sidePanel(title, res, v.idea);
   } else {
-    title = 'Зал — геометрия';
+    title = `${room.name} — геометрия`;
     checks = [
       ['info', `${RX} × ${RY} см = ${(RX * RY / 1e4).toFixed(2)} м², потолок ${room.height.value}`],
       ...room.openings.map((o) => ['info', `${o.name}: ${o.width} см${o.type === 'window' ? `, подоконник ${o.sill}, высота ${o.height}` : ''}`]),
     ];
     if (layout.meta.status === 'estimate') checks.push(['warn', 'Все размеры — оценка. Точные цифры дадут замеры.']);
-    if (withPanel) side = sidePanel(title, checks, 'Начало координат — угол у окна и двери в спальню 9.2. Стены по часовой: С1 запад, С2 север, С3 восток, С4 окно.');
+    if (withPanel) side = sidePanel(title, checks, 'Начало координат — ' + (room.originNote ?? 'угол (0, 0) контура.'));
   }
   return { svg: svg(title, body, side), checks, title };
 }

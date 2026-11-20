@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import layoutJson from './data/layout.json';
 import { renderPlan } from './lib/plan-svg.js';
+import { roomView } from './lib/rooms.js';
 import { presetsFor } from './lib/presets';
 import { readHash, writeHash, COLOR_KEYS, type AppState } from './lib/state';
 import { zip, download } from './lib/zip';
@@ -58,8 +59,9 @@ export default function App() {
     return () => removeEventListener('hashchange', onHash);
   }, []);
 
-  const variant = layout.variants.find((x: any) => x.id === st.v);
-  const presets = useMemo(() => presetsFor(layout, st.v), [st.v]);
+  const L = useMemo(() => roomView(layout, st.room), [st.room]);
+  const variant = L.variants.find((x: any) => x.id === st.v) ?? L.variants[0];
+  const presets = useMemo(() => presetsFor(L, variant.id), [L, variant.id]);
   const preset = presets.find((p) => p.id === st.cam) ?? presets[0];
   const palette = layout.palettes.find((p: any) => p.id === st.pal);
   const colors: Colors = useMemo(() => {
@@ -67,15 +69,20 @@ export default function App() {
     for (const k of COLOR_KEYS) c[k] = st.custom[k] ?? palette[k];
     return c;
   }, [palette, st.custom]);
-  const plan = useMemo(() => renderPlan(layout, st.v, { withPanel: false }), [st.v]);
+  const plan = useMemo(() => renderPlan(L, variant.id, { withPanel: false }), [L, variant.id]);
+  const switchRoom = (room: string) => {
+    if (room === st.room) return;
+    set({ room, v: roomView(layout, room).variants[0].id, cam: 'overview' });
+  };
   const hasCustom = Object.keys(st.custom).length > 0;
   const palTag = st.pal + (hasCustom ? '-custom' : '');
+  const base = `${st.room}_${variant.id}_${palTag}`;
 
   async function shotCurrent() {
     const api = apiRef.current;
     if (!api) return;
     const blob = await api.capture(null, SHOT.w, SHOT.h);
-    download(blob, `${st.v}_${palTag}_${st.cam}-free_${st.mode}.png`);
+    download(blob, `${base}_${st.cam}-free_${st.mode}.png`);
   }
 
   async function shotAll() {
@@ -88,11 +95,11 @@ export default function App() {
       for (const p of presets) {
         setBusy(`${files.length + 1} / ${total}`);
         const blob = await apiRef.current!.capture(p, SHOT.w, SHOT.h);
-        files.push({ name: `${st.v}_${palTag}_${p.id}_${m}.png`, data: new Uint8Array(await blob.arrayBuffer()) });
+        files.push({ name: `${base}_${p.id}_${m}.png`, data: new Uint8Array(await blob.arrayBuffer()) });
       }
     }
     set({ mode: prev });
-    download(zip(files), `renders_${st.v}_${palTag}.zip`);
+    download(zip(files), `renders_${base}.zip`);
     setBusy(null);
   }
 
@@ -100,11 +107,11 @@ export default function App() {
     <div className="app">
       <header className="bar">
         <div className="brand">
-          <b>{layout.room.name}</b>
-          <span>{layout.room.area} м²</span>
+          <Seg label="Комната" value={st.room} options={layout.rooms.map((r: any) => [r.id, r.name])} onChange={switchRoom} />
+          <span>{L.room.area} м²</span>
         </div>
         <Seg label="Вид" value={st.view} options={[['3d', '3D'], ['2d', 'План']]} onChange={(view) => set({ view })} />
-        <Seg label="Вариант" value={st.v} options={layout.variants.map((v: any) => [v.id, v.id])} onChange={(v) => set({ v })} />
+        <Seg label="Вариант" value={st.v} options={L.variants.map((v: any) => [v.id, v.id])} onChange={(v) => set({ v })} />
         <button className="sheet-toggle" aria-expanded={sheet} onClick={() => setSheet((x) => !x)}>{sheet ? 'Скрыть' : 'Настройки'}</button>
       </header>
 
@@ -114,7 +121,7 @@ export default function App() {
         {st.view === '3d' ? (
           <>
             <Suspense fallback={<div className="loading">Загрузка 3D…</div>}>
-              <Scene3D layout={layout} variantId={st.v} preset={preset} mode={st.mode} colors={colors} shadows={st.shadows} apiRef={apiRef} onReady={() => setReady3d(true)} />
+              <Scene3D layout={L} variantId={variant.id} preset={preset} mode={st.mode} colors={colors} shadows={st.shadows} apiRef={apiRef} onReady={() => setReady3d(true)} />
             </Suspense>
             {!ready3d && <div className="loading">Загрузка 3D…</div>}
             <div className="cams" role="radiogroup" aria-label="Камера">
@@ -174,7 +181,7 @@ export default function App() {
             <h2>Снимки для нейросети</h2>
             <Seg label="Режим" value={st.mode} options={MODES.map((m) => [m, MODE_LABEL[m]])} onChange={(mode) => set({ mode })} />
             <p className="muted small">
-              {SHOT.w}×{SHOT.h}. Глина — серый материал, Линии и Глубина — для ControlNet. Имя файла: вариант_палитра_камера_режим.
+              {SHOT.w}×{SHOT.h}. Глина — серый материал, Линии и Глубина — для ControlNet. Имя файла: комната_вариант_палитра_камера_режим.
             </p>
             <div className="row">
               <button onClick={shotCurrent} disabled={!!busy}>PNG этого вида</button>

@@ -4,124 +4,265 @@
     "status": "estimate",
     "units": "cm",
     "updated": "2026-11-20",
-    "note": "Примерная геометрия: площадь 17.2 м² из плана БТИ, пропорции по плану, остальное по фото и типовой хрущёвке. Поле src: area | plan | photo | typical | measured.",
-    "origin": "Юго-западный внутренний угол: окно (С4) × стена с дверями в спальни (С1). X — вдоль окна на восток, Y — от окна вглубь комнаты.",
-    "rotation": "Градусы по часовой на плане, 0 = фасад к окну (−Y), 90 = к С1 (запад), 180 = от окна (+Y), 270 = к С3 (восток)."
+    "note": "Примерная геометрия: площади из плана БТИ, пропорции по плану, остальное по фото и типовой хрущёвке. Поле src: area | plan | photo | typical | measured. Комнаты в своих координатах; origin — сдвиг начала комнаты в координатах зала.",
+    "rotation": "Градусы по часовой на плане, 0 = фасад к −Y (к С4), 90 = к С1 (запад), 180 = к +Y, 270 = к С3 (восток)."
   },
-
-  "room": {
-    "name": "Зал",
-    "area": 17.2,
-    "height": { "value": 250, "src": "typical" },
-    "outline": [[0, 0], [0, 546], [315, 546], [315, 0]],
-    "outlineSrc": "area + plan: 315 × 546 = 17.2 м², отношение сторон 1 : 1.73 как на плане",
-    "walls": [
-      { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "спальни 7.5 и 9.2", "src": "typical" },
-      { "id": 2, "name": "С2", "side": "север", "thickness": 16, "to": "соседняя квартира", "src": "typical" },
-      { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "прихожая, санузел, кухня", "src": "typical" },
-      { "id": 4, "name": "С4", "side": "юг", "thickness": 35, "to": "улица", "src": "typical" }
-    ],
-    "openings": [
-      {
-        "id": "O1", "type": "window", "name": "Окно", "wall": 4, "offset": 60, "width": 180,
-        "sill": 85, "height": 145, "sillDepth": 25, "sashes": 3, "src": "plan + photo"
-      },
-      {
-        "id": "D1", "type": "door", "name": "Вход из прихожей", "wall": 3, "offset": 15, "width": 90,
-        "height": 205, "leaf": 80, "swing": { "into": "room", "hinge": "start" }, "src": "plan; петли и сторона — допущение"
-      },
-      {
-        "id": "D2", "type": "door", "name": "В спальню 7.5", "wall": 1, "offset": 311, "width": 85,
-        "height": 205, "leaf": 80, "swing": { "into": "out", "hinge": "start" }, "src": "plan + photo"
-      },
-      {
-        "id": "D3", "type": "door", "name": "В спальню 9.2", "wall": 1, "offset": 176, "width": 85,
-        "height": 205, "leaf": 80, "swing": { "into": "out", "hinge": "end" }, "src": "plan + photo"
-      }
-    ],
-    "fixtures": [
-      { "id": "R1", "type": "radiator", "name": "Батарея", "wall": 4, "offset": 130, "w": 70, "d": 10, "h": 58, "z": 10, "src": "photo" },
-      { "id": "P1", "type": "pipe", "name": "Стояк", "wall": 4, "offset": 297, "w": 4, "d": 4, "h": 250, "z": 0, "src": "photo" },
-      { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 157, "y": 273, "src": "photo" }
-    ]
-  },
-
-  "catalog": {
-    "sofa3":       { "name": "Диван 3-местный", "kind": "sofa", "w": 220, "d": 95, "h": 85 },
-    "coffee100":   { "name": "Журнальный стол", "kind": "table", "w": 100, "d": 50, "h": 45 },
-    "coffee90":    { "name": "Журнальный стол", "kind": "table", "w": 90, "d": 45, "h": 45 },
-    "tvstand160":  { "name": "ТВ-тумба", "kind": "cabinet", "w": 160, "d": 40, "h": 50 },
-    "console120":  { "name": "Консоль под ТВ", "kind": "cabinet", "w": 120, "d": 35, "h": 50 },
-    "tv55":        { "name": "ТВ 55″", "kind": "tv", "w": 123, "d": 6, "h": 71, "z": 75, "floor": false },
-    "tv65":        { "name": "ТВ 65″", "kind": "tv", "w": 145, "d": 6, "h": 83, "z": 68, "floor": false },
-    "armchair":    { "name": "Кресло", "kind": "armchair", "w": 80, "d": 80, "h": 85 },
-    "shelf200":    { "name": "Стеллаж", "kind": "cabinet", "w": 200, "d": 40, "h": 200 },
-    "dining120":   { "name": "Обеденный стол", "kind": "table", "w": 120, "d": 75, "h": 75 },
-    "chair":       { "name": "Стул", "kind": "chair", "w": 45, "d": 50, "h": 85 },
-    "rug230":      { "name": "Ковёр", "kind": "rug", "w": 230, "d": 160, "h": 1, "walkable": true },
-    "rug200":      { "name": "Ковёр", "kind": "rug", "w": 200, "d": 140, "h": 1, "walkable": true },
-    "floorlamp":   { "name": "Торшер", "kind": "lamp", "w": 35, "d": 35, "h": 160, "round": true }
-  },
-
-  "variants": [
+  "rooms": [
     {
-      "id": "A",
-      "name": "ТВ у окна",
-      "idea": "Диван вдоль глухой восточной стены, ТВ напротив в простенке у окна. Проход от входа к спальням остаётся свободной полосой в северной части.",
-      "items": [
-        { "id": "sofa", "ref": "sofa3", "x": 262.5, "y": 120, "rot": 90, "group": "lounge" },
-        { "id": "coffee", "ref": "coffee100", "x": 150, "y": 120, "rot": 90, "group": "lounge" },
-        { "id": "stand", "ref": "tvstand160", "x": 21, "y": 93, "rot": 270, "group": "tv" },
-        { "id": "tv", "ref": "tv65", "x": 4, "y": 93, "rot": 270, "group": "tv" },
-        { "id": "lamp", "ref": "floorlamp", "x": 293, "y": 250, "rot": 0, "group": "lounge" },
-        { "id": "armchair", "ref": "armchair", "x": 265, "y": 310, "rot": 90, "group": "lounge" },
-        { "id": "shelf", "ref": "shelf200", "x": 110, "y": 526, "rot": 0, "group": "storage" },
-        { "id": "rug", "ref": "rug230", "x": 150, "y": 120, "rot": 90, "group": "lounge" }
+      "id": "zal",
+      "name": "Зал",
+      "area": 17.2,
+      "height": { "value": 250, "src": "typical" },
+      "outline": [[0, 0], [0, 546], [315, 546], [315, 0]],
+      "outlineSrc": "area + plan: 315 × 546 = 17.2 м², отношение сторон 1 : 1.73 как на плане",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "спальни 7.5 и 9.2", "src": "typical" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 16, "to": "соседняя квартира", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "прихожая, санузел, кухня", "src": "typical" },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 35, "to": "улица", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "O1",
+          "type": "window",
+          "name": "Окно",
+          "wall": 4,
+          "offset": 60,
+          "width": 180,
+          "sill": 85,
+          "height": 145,
+          "sillDepth": 25,
+          "sashes": 3,
+          "src": "plan + photo"
+        },
+        {
+          "id": "D1",
+          "type": "door",
+          "name": "Вход из прихожей",
+          "wall": 3,
+          "offset": 15,
+          "width": 90,
+          "height": 205,
+          "leaf": 80,
+          "swing": { "into": "room", "hinge": "start" },
+          "src": "plan; петли и сторона — допущение"
+        },
+        {
+          "id": "D2",
+          "type": "door",
+          "name": "В спальню 7.5",
+          "wall": 1,
+          "offset": 311,
+          "width": 85,
+          "height": 205,
+          "leaf": 80,
+          "swing": { "into": "out", "hinge": "start" },
+          "src": "plan + photo"
+        },
+        {
+          "id": "D3",
+          "type": "door",
+          "name": "В спальню 9.2",
+          "wall": 1,
+          "offset": 176,
+          "width": 85,
+          "height": 205,
+          "leaf": 80,
+          "swing": { "into": "out", "hinge": "end" },
+          "src": "plan + photo",
+          "link": "spalnya:D1"
+        }
+      ],
+      "fixtures": [
+        { "id": "R1", "type": "radiator", "name": "Батарея", "wall": 4, "offset": 130, "w": 70, "d": 10, "h": 58, "z": 10, "src": "photo" },
+        { "id": "P1", "type": "pipe", "name": "Стояк", "wall": 4, "offset": 297, "w": 4, "d": 4, "h": 250, "z": 0, "src": "photo" },
+        { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 157, "y": 273, "src": "photo" }
+      ],
+      "originNote": "Угол у окна и двери в спальню 9.2. Стены по часовой: С1 запад, С2 север, С3 восток, С4 окно.",
+      "origin": [0, 0],
+      "variants": [
+        {
+          "id": "A",
+          "name": "ТВ у окна",
+          "idea": "Диван вдоль глухой восточной стены, ТВ напротив в простенке у окна. Проход от входа к спальням остаётся свободной полосой в северной части.",
+          "items": [
+            { "id": "sofa", "ref": "sofa3", "x": 262.5, "y": 120, "rot": 90, "group": "lounge" },
+            { "id": "coffee", "ref": "coffee100", "x": 150, "y": 120, "rot": 90, "group": "lounge" },
+            { "id": "stand", "ref": "tvstand160", "x": 21, "y": 93, "rot": 270, "group": "tv" },
+            { "id": "tv", "ref": "tv65", "x": 4, "y": 93, "rot": 270, "group": "tv" },
+            { "id": "lamp", "ref": "floorlamp", "x": 293, "y": 250, "rot": 0, "group": "lounge" },
+            { "id": "armchair", "ref": "armchair", "x": 265, "y": 310, "rot": 90, "group": "lounge" },
+            { "id": "shelf", "ref": "shelf200", "x": 110, "y": 526, "rot": 0, "group": "storage" },
+            { "id": "rug", "ref": "rug230", "x": 150, "y": 120, "rot": 90, "group": "lounge" }
+          ],
+          "cameras": [{"id": "sofa", "name": "С дивана", "pos": [250, 120, 115], "target": [4, 93, 110], "fov": 60}]
+        },
+        {
+          "id": "B",
+          "name": "Обеденная зона у окна",
+          "idea": "Кухня 5.8 м² — стол на четверых переезжает к окну. Диван спиной к столу делит комнату на две зоны, ТВ на северной стене.",
+          "items": [
+            { "id": "sofa", "ref": "sofa3", "x": 190, "y": 287.5, "rot": 180, "group": "lounge" },
+            { "id": "coffee", "ref": "coffee90", "x": 190, "y": 397.5, "rot": 0, "group": "lounge" },
+            { "id": "console", "ref": "console120", "x": 170, "y": 528.5, "rot": 0, "group": "tv" },
+            { "id": "tv", "ref": "tv65", "x": 170, "y": 543, "rot": 0, "group": "tv" },
+            { "id": "table", "ref": "dining120", "x": 157, "y": 110, "rot": 90, "group": "dining" },
+            { "id": "chair1", "ref": "chair", "x": 95, "y": 85, "rot": 270, "group": "dining" },
+            { "id": "chair2", "ref": "chair", "x": 95, "y": 135, "rot": 270, "group": "dining" },
+            { "id": "chair3", "ref": "chair", "x": 219, "y": 85, "rot": 90, "group": "dining" },
+            { "id": "chair4", "ref": "chair", "x": 219, "y": 135, "rot": 90, "group": "dining" },
+            { "id": "rug", "ref": "rug200", "x": 190, "y": 400, "rot": 0, "group": "lounge" }
+          ],
+          "cameras": [{"id": "sofa", "name": "С дивана", "pos": [190, 300, 115], "target": [170, 543, 110], "fov": 60}]
+        }
       ],
       "cameras": [
-        { "id": "sofa", "name": "С дивана", "pos": [250, 120, 115], "target": [4, 93, 110], "fov": 60 }
+        { "id": "overview", "name": "Обзор", "pos": [620, -330, 520], "target": [157, 273, 40], "fov": 50 },
+        { "id": "entry", "name": "От входа", "pos": [295, 486, 150], "target": [60, 100, 110], "fov": 60 },
+        { "id": "window", "name": "От окна", "pos": [157, 30, 150], "target": [157, 546, 110], "fov": 60 },
+        { "id": "top", "name": "Сверху", "type": "top" }
       ]
     },
     {
-      "id": "B",
-      "name": "Обеденная зона у окна",
-      "idea": "Кухня 5.8 м² — стол на четверых переезжает к окну. Диван спиной к столу делит комнату на две зоны, ТВ на северной стене.",
-      "items": [
-        { "id": "sofa", "ref": "sofa3", "x": 190, "y": 287.5, "rot": 180, "group": "lounge" },
-        { "id": "coffee", "ref": "coffee90", "x": 190, "y": 397.5, "rot": 0, "group": "lounge" },
-        { "id": "console", "ref": "console120", "x": 170, "y": 528.5, "rot": 0, "group": "tv" },
-        { "id": "tv", "ref": "tv65", "x": 170, "y": 543, "rot": 0, "group": "tv" },
-        { "id": "table", "ref": "dining120", "x": 157, "y": 110, "rot": 90, "group": "dining" },
-        { "id": "chair1", "ref": "chair", "x": 95, "y": 85, "rot": 270, "group": "dining" },
-        { "id": "chair2", "ref": "chair", "x": 95, "y": 135, "rot": 270, "group": "dining" },
-        { "id": "chair3", "ref": "chair", "x": 219, "y": 85, "rot": 90, "group": "dining" },
-        { "id": "chair4", "ref": "chair", "x": 219, "y": 135, "rot": 90, "group": "dining" },
-        { "id": "rug", "ref": "rug200", "x": 190, "y": 400, "rot": 0, "group": "lounge" }
+      "id": "spalnya",
+      "name": "Спальня",
+      "area": 9.2,
+      "height": { "value": 250, "src": "typical" },
+      "origin": [-326, 0],
+      "originNote": "Угол у наружной стены и стены к лоджии. Стены по часовой: С1 запад (лоджия), С2 север (спальня 7.5), С3 восток (зал), С4 юг (улица).",
+      "outline": [[0, 0], [0, 293], [314, 293], [314, 0]],
+      "outlineSrc": "area + plan: 314 × 293 = 9.2 м²; глубина с плана Avito (≈1 см/пкс, как у зала), ширина добрана до площади",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 35, "to": "лоджия", "src": "typical" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 10, "to": "спальня 7.5", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 12, "to": "зал", "src": "typical" },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 35, "to": "улица", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "D1",
+          "type": "door",
+          "name": "Вход из зала",
+          "wall": 3,
+          "offset": 32,
+          "width": 85,
+          "height": 205,
+          "leaf": 80,
+          "swing": { "into": "room", "hinge": "start" },
+          "link": "zal:D3",
+          "src": "та же дверь, что D3 в зале"
+        },
+        {
+          "id": "O1",
+          "type": "window",
+          "name": "Окно",
+          "wall": 1,
+          "offset": 30,
+          "width": 115,
+          "sill": 85,
+          "height": 145,
+          "sillDepth": 25,
+          "sashes": 2,
+          "src": "plan"
+        },
+        {
+          "id": "D2",
+          "type": "door",
+          "name": "На лоджию",
+          "wall": 1,
+          "offset": 145,
+          "width": 85,
+          "height": 205,
+          "leaf": 70,
+          "swing": { "into": "room", "hinge": "end" },
+          "pass": "secondary",
+          "src": "plan; ширина и сторона петель — допущение"
+        }
+      ],
+      "fixtures": [
+        { "id": "R1", "type": "radiator", "name": "Батарея", "wall": 1, "offset": 52, "w": 70, "d": 10, "h": 58, "z": 10, "src": "typical" },
+        { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 157, "y": 146, "drop": 15, "src": "typical" }
+      ],
+      "variants": [
+        {
+          "id": "A",
+          "name": "Изголовье к наружной стене",
+          "idea": "Кровать 160×200 по центру глухой южной стены, тумбочки по бокам. В ногах проход от двери к лоджии, двери открываются свободно.",
+          "items": [
+            { "id": "bed", "ref": "bed160", "x": 157, "y": 107.5, "rot": 180, "group": "bed" },
+            { "id": "standL", "ref": "nightstand", "x": 47.5, "y": 20, "rot": 180, "group": "bed" },
+            { "id": "standR", "ref": "nightstand", "x": 266.5, "y": 20, "rot": 180, "group": "bed" }
+          ],
+          "cameras": [{"id": "bed", "name": "На кровать", "pos": [157, 280, 150], "target": [157, 60, 70], "fov": 60}]
+        },
+        {
+          "id": "B",
+          "name": "Изголовье к стене спальни 7.5",
+          "idea": "Кровать по центру северной стены. В ногах окно и батарея, но правая тумбочка попадает под дверь из зала.",
+          "items": [
+            { "id": "bed", "ref": "bed160", "x": 157, "y": 185.5, "rot": 0, "group": "bed" },
+            { "id": "standL", "ref": "nightstand", "x": 47.5, "y": 273, "rot": 0, "group": "bed" },
+            { "id": "standR", "ref": "nightstand", "x": 266.5, "y": 273, "rot": 0, "group": "bed" }
+          ],
+          "cameras": [{"id": "bed", "name": "На кровать", "pos": [157, 15, 150], "target": [157, 240, 70], "fov": 60}]
+        }
       ],
       "cameras": [
-        { "id": "sofa", "name": "С дивана", "pos": [190, 300, 115], "target": [170, 543, 110], "fov": 60 }
+        { "id": "overview", "name": "Обзор", "pos": [600, 640, 500], "target": [157, 146, 40], "fov": 50 },
+        { "id": "entry", "name": "От входа", "pos": [292, 222, 150], "target": [60, 90, 90], "fov": 60 },
+        { "id": "window", "name": "От лоджии", "pos": [25, 190, 150], "target": [314, 120, 100], "fov": 60 },
+        { "id": "top", "name": "Сверху", "type": "top" }
       ]
     }
   ],
-
+  "catalog": {
+    "sofa3": { "name": "Диван 3-местный", "kind": "sofa", "w": 220, "d": 95, "h": 85 },
+    "coffee100": { "name": "Журнальный стол", "kind": "table", "w": 100, "d": 50, "h": 45 },
+    "coffee90": { "name": "Журнальный стол", "kind": "table", "w": 90, "d": 45, "h": 45 },
+    "tvstand160": { "name": "ТВ-тумба", "kind": "cabinet", "w": 160, "d": 40, "h": 50 },
+    "console120": { "name": "Консоль под ТВ", "kind": "cabinet", "w": 120, "d": 35, "h": 50 },
+    "tv55": { "name": "ТВ 55″", "kind": "tv", "w": 123, "d": 6, "h": 71, "z": 75, "floor": false },
+    "tv65": { "name": "ТВ 65″", "kind": "tv", "w": 145, "d": 6, "h": 83, "z": 68, "floor": false },
+    "armchair": { "name": "Кресло", "kind": "armchair", "w": 80, "d": 80, "h": 85 },
+    "shelf200": { "name": "Стеллаж", "kind": "cabinet", "w": 200, "d": 40, "h": 200 },
+    "dining120": { "name": "Обеденный стол", "kind": "table", "w": 120, "d": 75, "h": 75 },
+    "chair": { "name": "Стул", "kind": "chair", "w": 45, "d": 50, "h": 85 },
+    "rug230": { "name": "Ковёр", "kind": "rug", "w": 230, "d": 160, "h": 1, "walkable": true },
+    "rug200": { "name": "Ковёр", "kind": "rug", "w": 200, "d": 140, "h": 1, "walkable": true },
+    "floorlamp": { "name": "Торшер", "kind": "lamp", "w": 35, "d": 35, "h": 160, "round": true },
+    "bed160": { "name": "Кровать 160×200", "kind": "bed", "w": 170, "d": 215, "h": 100, "note": "матрас 160×200, габарит с рамой и изголовьем" },
+    "nightstand": { "name": "Тумбочка", "kind": "cabinet", "w": 45, "d": 40, "h": 50 }
+  },
   "palettes": [
-    { "id": "light", "name": "Светлая", "walls": "#ece8e1", "floor": "#c49a6c", "ceiling": "#f6f5f2", "furniture": "#f2efe9", "textile": "#8a9a8b", "wood": "#b48a5a" },
-    { "id": "warm", "name": "Тёплая", "walls": "#d8cbb8", "floor": "#8e6a4a", "ceiling": "#f3efe8", "furniture": "#e9e2d6", "textile": "#a8643f", "wood": "#6f4e37" }
+    {
+      "id": "light",
+      "name": "Светлая",
+      "walls": "#ece8e1",
+      "floor": "#c49a6c",
+      "ceiling": "#f6f5f2",
+      "furniture": "#f2efe9",
+      "textile": "#8a9a8b",
+      "wood": "#b48a5a"
+    },
+    {
+      "id": "warm",
+      "name": "Тёплая",
+      "walls": "#d8cbb8",
+      "floor": "#8e6a4a",
+      "ceiling": "#f3efe8",
+      "furniture": "#e9e2d6",
+      "textile": "#a8643f",
+      "wood": "#6f4e37"
+    }
   ],
-
-  "cameras": [
-    { "id": "overview", "name": "Обзор", "pos": [620, -330, 520], "target": [157, 273, 40], "fov": 50 },
-    { "id": "entry", "name": "От входа", "pos": [295, 486, 150], "target": [60, 100, 110], "fov": 60 },
-    { "id": "window", "name": "От окна", "pos": [157, 30, 150], "target": [157, 546, 110], "fov": 60 },
-    { "id": "top", "name": "Сверху", "type": "top" }
-  ],
-
   "rules": {
     "passMain": 80,
     "passMin": 75,
     "passSecondary": 60,
     "sofaTable": [35, 50],
     "behindChair": [60, 75],
-    "doorApproach": 80
+    "doorApproach": 80,
+    "bedSide": [60, 70],
+    "bedFoot": [60, 75]
   }
 }

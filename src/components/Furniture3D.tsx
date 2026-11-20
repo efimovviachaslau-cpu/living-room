@@ -81,7 +81,7 @@ function Cabinet({ s }: { s: Spec }) {
     );
   }
   // Тумба на ножках, фасад из двух-трёх дверец.
-  const legH = 10, n = w >= 150 ? 3 : 2;
+  const legH = 10, n = w >= 150 ? 3 : w >= 80 ? 2 : 1;
   return (
     <>
       {[[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([sx, sy], i) => (
@@ -90,6 +90,30 @@ function Cabinet({ s }: { s: Spec }) {
       <PBox x={0} y={0} z={legH} w={w} d={d} h={h - legH} role="furniture" />
       {Array.from({ length: n }, (_, k) => (
         <PBox key={k} x={-w / 2 + (w / n) * (k + 0.5)} y={-d / 2 - 0.5} z={legH + 2} w={w / n - 1} d={1} h={h - legH - 4} role="furniture" />
+      ))}
+    </>
+  );
+}
+
+// Кровать: габарит каталога — с рамой и изголовьем; матрас 160×200 (или w−10 × d−15).
+function Bed({ s }: { s: Spec }) {
+  const { w, d, h } = s;
+  const head = 8, mw = Math.min(160, w - 10), md = Math.min(200, d - head - 7);
+  const backY = d / 2 - head;
+  const mY = backY - 2 - md / 2;
+  const frameTop = 32, mTop = frameTop + 22;
+  return (
+    <>
+      {[[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([sx, sy], i) => (
+        <PBox key={i} x={sx * (w / 2 - 6)} y={sy * (d / 2 - 8)} z={0} w={5} d={5} h={10} role="wood" cast={false} />
+      ))}
+      <PBox x={0} y={-head / 2} z={10} w={w} d={d - head} h={frameTop - 10} role="textile" />
+      <PBox x={0} y={backY + head / 2} z={0} w={w} d={head} h={h} role="textile" />
+      <PBox x={0} y={mY} z={frameTop} w={mw} d={md} h={mTop - frameTop} role="shade" />
+      {/* одеяло на две трети от изножья */}
+      <PBox x={0} y={mY - md / 2 + 70} z={mTop} w={mw + 6} d={140} h={4} role="textile" />
+      {[-1, 1].map((sx) => (
+        <PBox key={sx} x={sx * (mw / 4 + 2)} y={backY - 28} z={mTop} w={mw / 2 - 12} d={42} h={12} role="shade" />
       ))}
     </>
   );
@@ -128,6 +152,7 @@ export function Item({ it, spec }: { it: { x: number; y: number; rot?: number };
     case 'cabinet': body = <Cabinet s={spec} />; break;
     case 'tv': body = <Tv s={spec} />; break;
     case 'lamp': body = <Lamp s={spec} />; break;
+    case 'bed': body = <Bed s={spec} />; break;
     case 'rug': body = <PBox x={0} y={0} z={0} w={spec.w} d={spec.d} h={1} role="rug" cast={false} />; break;
   }
   return <group position={pos} rotation={[0, rot, 0]}>{body}</group>;

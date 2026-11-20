@@ -3,7 +3,7 @@
 
 export type CamPreset = { id: string; name: string; type?: 'eye' | 'top'; pos?: number[]; target?: number[]; fov?: number };
 
-const ORDER = ['overview', 'entry', 'window', 'sofa', 'top'];
+const ORDER = ['overview', 'entry', 'window', 'sofa', 'bed', 'top'];
 
 export function presetsFor(layout: any, variantId: string): CamPreset[] {
   const map = new Map<string, CamPreset>();
