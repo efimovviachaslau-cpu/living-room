@@ -40,12 +40,13 @@
           "type": "door",
           "name": "Вход из прихожей",
           "wall": 3,
-          "offset": 15,
+          "offset": 55,
           "width": 90,
           "height": 205,
           "leaf": 80,
           "swing": { "into": "room", "hinge": "start" },
-          "src": "plan; петли и сторона — допущение"
+          "src": "plan; сдвинута на 40 см к окну по просьбе Славы (20.11.2026); петли и сторона — допущение",
+          "link": "prihozhaya:D2"
         },
         {
           "id": "D2",
@@ -118,8 +119,98 @@
       ],
       "cameras": [
         { "id": "overview", "name": "Обзор", "pos": [620, -330, 520], "target": [157, 273, 40], "fov": 50 },
-        { "id": "entry", "name": "От входа", "pos": [295, 486, 150], "target": [60, 100, 110], "fov": 60 },
+        { "id": "entry", "name": "От входа", "pos": [295, 446, 150], "target": [60, 100, 110], "fov": 60 },
         { "id": "window", "name": "От окна", "pos": [157, 30, 150], "target": [157, 546, 110], "fov": 60 },
+        { "id": "top", "name": "Сверху", "type": "top" }
+      ]
+    },
+    {
+      "id": "prihozhaya",
+      "name": "Прихожая",
+      "area": 6.3,
+      "height": { "value": 250, "src": "typical" },
+      "origin": [322, 268],
+      "originNote": "Юго-западный угол коридора у прохода в кухню. Стены по часовой: С1 запад (зал), С2 север, С3 восток (вход), С4 и С5 санузел, С6 кухня.",
+      "outline": [[0, 0], [0, 384], [239, 384], [239, 179], [82, 179], [82, 0]],
+      "outlineSrc": "plan: Г — квадрат 239 × 205 у входа + коридор 82 × 179 к кухне = 6.37 м²; масштаб плана ≈ 1 см/пкс, как у зала",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "зал", "src": "typical" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 16, "to": "соседи", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 16, "to": "лестничная площадка", "src": "typical" },
+        { "id": 4, "name": "С4", "side": "юг", "thickness": 8, "to": "санузел", "src": "typical" },
+        { "id": 5, "name": "С5", "side": "восток", "thickness": 8, "to": "санузел", "src": "typical" },
+        { "id": 6, "name": "С6", "side": "юг", "thickness": 8, "to": "кухня", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "D1",
+          "type": "door",
+          "name": "Вход в квартиру",
+          "wall": 3,
+          "offset": 109,
+          "width": 90,
+          "height": 205,
+          "leaf": 85,
+          "swing": { "into": "out", "hinge": "start" },
+          "src": "plan; открывается на площадку — допущение"
+        },
+        {
+          "id": "D2",
+          "type": "door",
+          "name": "В зал",
+          "wall": 1,
+          "offset": 133,
+          "width": 90,
+          "height": 205,
+          "leaf": 80,
+          "swing": { "into": "out", "hinge": "end" },
+          "link": "zal:D1",
+          "src": "та же дверь, что D1 в зале"
+        },
+        {
+          "id": "D3",
+          "type": "door",
+          "name": "В санузел",
+          "wall": 5,
+          "offset": 15,
+          "width": 70,
+          "height": 205,
+          "leaf": 65,
+          "swing": { "into": "out", "hinge": "end" },
+          "src": "plan (дверь туалета); ванная и туалет объединены, одна дверь — допущение"
+        },
+        {
+          "id": "P1",
+          "type": "door",
+          "name": "В кухню",
+          "wall": 6,
+          "offset": 4,
+          "width": 74,
+          "height": 205,
+          "leaf": 0,
+          "src": "plan: двери на плане нет, проём"
+        }
+      ],
+      "fixtures": [
+        { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 120, "y": 262, "drop": 10, "src": "typical" },
+        { "id": "L2", "type": "ceilingLight", "name": "Точка света", "x": 41, "y": 90, "drop": 10, "src": "typical" }
+      ],
+      "variants": [
+        {
+          "id": "A",
+          "name": "Шкаф-купе в нише",
+          "idea": "Ниша справа от входа целиком под встроенный шкаф-купе до потолка, средняя створка — зеркало в рост. Напротив входа, у стены к залу, — обувница-скамья, у двери коврик. Проход к залу, санузлу и кухне не уже дверей.",
+          "items": [
+            { "id": "mat", "ref": "mat", "x": 205, "y": 230, "rot": 90, "group": "entry" },
+            { "id": "wardrobe", "ref": "builtin239", "x": 119.5, "y": 354, "rot": 0, "group": "storage" },
+            { "id": "bench", "ref": "shoebench", "x": 17.5, "y": 287, "rot": 270, "group": "entry" }
+          ]
+        }
+      ],
+      "cameras": [
+        { "id": "overview", "name": "Обзор", "pos": [540, -230, 500], "target": [110, 250, 40], "fov": 50 },
+        { "id": "entry", "name": "От входа", "pos": [225, 230, 160], "target": [20, 320, 100], "fov": 60 },
+        { "id": "fromzal", "name": "Из зала", "pos": [15, 178, 155], "target": [239, 300, 110], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
       ]
     },
@@ -270,7 +361,20 @@
     "rug250": { "name": "Ковёр", "kind": "rug", "w": 250, "d": 200, "h": 1, "walkable": true },
     "pendant": { "name": "Подвесной светильник", "kind": "pendant", "w": 25, "d": 25, "h": 30, "z": 115, "floor": false, "round": true },
     "art120": { "name": "Картина", "kind": "art", "w": 120, "d": 3, "h": 80, "z": 120, "floor": false },
-    "wardrobe60": { "name": "Шкаф", "kind": "wardrobe", "w": 60, "d": 60, "h": 210 }
+    "wardrobe60": { "name": "Шкаф", "kind": "wardrobe", "w": 60, "d": 60, "h": 210 },
+    "builtin239": {
+      "name": "Встроенный шкаф-купе",
+      "kind": "wardrobe",
+      "w": 239,
+      "d": 60,
+      "h": 250,
+      "sliding": true,
+      "note": "ниша справа от входа, от стены до стены и до потолка; средняя створка — зеркало",
+      "mirror": true
+    },
+    "shoebench": { "name": "Обувница-скамья", "kind": "cabinet", "w": 70, "d": 35, "h": 45 },
+    "mirror170": { "name": "Зеркало", "kind": "mirror", "w": 60, "d": 3, "h": 170, "z": 30, "floor": false },
+    "mat": { "name": "Коврик", "kind": "rug", "w": 80, "d": 50, "h": 1, "walkable": true }
   },
   "palettes": [
     {

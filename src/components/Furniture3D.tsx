@@ -157,8 +157,43 @@ function Art({ s }: { s: Spec }) {
   );
 }
 
+// Шкаф-купе: створки ~80 см на двух направляющих (через одну чуть впереди), без ручек,
+// с вертикальными профилями; при mirror — средняя створка зеркальная.
+function SlidingWardrobe({ s }: { s: Spec & { mirror?: boolean } }) {
+  const { w, d, h } = s, plinth = 8, n = Math.max(2, Math.round(w / 80)), dw = w / n;
+  return (
+    <>
+      <PBox x={0} y={2} z={0} w={w} d={d - 4} h={plinth} role="dark" cast={false} />
+      <PBox x={0} y={2} z={plinth} w={w} d={d - 6} h={h - plinth} role="furniture" />
+      {Array.from({ length: n }, (_, k) => {
+        const cx = -w / 2 + dw * (k + 0.5), front = k % 2 === 0;
+        const y = -d / 2 + (front ? 0 : 2.5);
+        const mirror = s.mirror && k === Math.floor(n / 2);
+        return (
+          <group key={k}>
+            <PBox x={cx} y={y} z={plinth} w={dw + (front ? 2 : 0)} d={2} h={h - plinth - 4} role="furniture" />
+            {mirror && <PBox x={cx} y={y - 1.2} z={plinth + 6} w={dw - 10} d={0.4} h={h - plinth - 16} role="mirror" cast={false} />}
+            {[-1, 1].map((sx) => <PBox key={sx} x={cx + sx * (dw / 2 - 1)} y={y - 1.2} z={plinth} w={2} d={0.6} h={h - plinth - 4} role="metal" cast={false} />)}
+          </group>
+        );
+      })}
+    </>
+  );
+}
+
+// Зеркало на стене: тонкая рама и зеркальное полотно.
+function Mirror({ s }: { s: Spec }) {
+  return (
+    <>
+      <PBox x={0} y={0} z={0} w={s.w} d={s.d} h={s.h} role="wood" />
+      <PBox x={0} y={-s.d / 2 - 0.3} z={2} w={s.w - 4} d={0.6} h={s.h - 4} role="mirror" cast={false} />
+    </>
+  );
+}
+
 // Шкаф: цоколь, корпус, одна-две дверцы с ручками.
-function Wardrobe({ s }: { s: Spec }) {
+function Wardrobe({ s }: { s: Spec & { sliding?: boolean } }) {
+  if (s.sliding) return <SlidingWardrobe s={s} />;
   const { w, d, h } = s, plinth = 8, n = w >= 80 ? 2 : 1, dw = w / n;
   return (
     <>
@@ -209,6 +244,7 @@ export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
     case 'pendant': body = <Pendant s={spec} z={z} ceiling={ceiling} />; break;
     case 'art': body = <Art s={spec} />; break;
     case 'wardrobe': body = <Wardrobe s={spec} />; break;
+    case 'mirror': body = <Mirror s={spec} />; break;
     case 'rug': body = <PBox x={0} y={0} z={0} w={spec.w} d={spec.d} h={1} role="rug" cast={false} />; break;
   }
   // Висящее на стене прячется вместе со стеной в режиме «кукольного дома».
@@ -216,7 +252,7 @@ export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
   return <group ref={ref} position={pos} rotation={[0, rot, 0]}>{body}</group>;
 }
 
-const ON_WALL = new Set(['tv', 'art']);
+const ON_WALL = new Set(['tv', 'art', 'mirror']);
 
 export function Furniture3D({ layout, variantId, registerWallItem }: { layout: any; variantId: string; registerWallItem?: RegisterWallItem }) {
   const v = layout.variants.find((x: any) => x.id === variantId);

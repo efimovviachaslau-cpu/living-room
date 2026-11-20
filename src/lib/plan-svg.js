@@ -105,11 +105,13 @@ function drawRoom() {
         out.push(`<path d="M${sx},${sy} A${r},${r} 0 0 ${cross > 0 ? 1 : 0} ${ex},${ey}" fill="none" stroke="${C.swing}" stroke-width="1" stroke-dasharray="4 3"/>`);
         out.push(`<line x1="${hx}" y1="${hy}" x2="${ex}" y2="${ey}" stroke="${C.ink}" stroke-width="2"/>`);
       } else {
+        if (o.leaf === 0) { /* проём без двери */ } else {
         // Дверь открывается из комнаты: показываем только полотно снаружи пунктиром.
         const hinge = o.swing?.hinge === 'end' ? op.p1 : op.p0;
         const e = G.add(G.add(hinge, G.mul(op.W.inward, -t[o.wall])), G.mul(op.W.inward, -(o.leaf ?? o.width) * 0.5));
         const [hx, hy] = px(G.add(hinge, G.mul(op.W.inward, -t[o.wall]))), [ex, ey] = px(e);
         out.push(`<line x1="${hx}" y1="${hy}" x2="${ex}" y2="${ey}" stroke="${C.mute}" stroke-width="1.5" stroke-dasharray="3 2"/>`);
+        }
       }
       const lab = G.add(op.mid, G.mul(op.W.inward, 6));
       const [lx, ly] = px(lab);
@@ -214,8 +216,10 @@ function drawItems(v) {
     if (k === 'chair') continue;
     const size = span < 70 ? 9 : 10.5;
     const labY = k === 'rug' ? Math.min(...it.poly.map((p) => px(p)[1])) + 14 : cy;
-    out.push(`<text x="${cx}" y="${labY - 2}" font-size="${size}" font-weight="600" fill="${C.ink}" text-anchor="middle">${esc(it.spec.name)}</text>`);
-    out.push(`<text x="${cx}" y="${labY + 11}" font-size="${size - 1}" fill="${C.dim}" text-anchor="middle">${it.spec.w}×${it.spec.d}</text>`);
+    // Узкий предмет вдоль стены — подпись поворачиваем вдоль него.
+    const turn = (vertical ? it.spec.d : it.spec.w) * S < 60 && (vertical ? it.spec.w : it.spec.d) * S >= 60 ? ` transform="rotate(-90 ${cx} ${labY})"` : '';
+    out.push(`<g${turn}><text x="${cx}" y="${labY - 2}" font-size="${size}" font-weight="600" fill="${C.ink}" text-anchor="middle">${esc(it.spec.name)}</text>`);
+    out.push(`<text x="${cx}" y="${labY + 11}" font-size="${size - 1}" fill="${C.dim}" text-anchor="middle">${it.spec.w}×${it.spec.d}</text></g>`);
   }
   return out.join('\n');
 }
@@ -248,7 +252,7 @@ function analyze(v) {
       res.push([r.d >= lo && r.d <= hi ? 'ok' : 'warn', `Диван ↔ журнальный стол: ${Math.round(r.d)} см (норма ${lo}–${hi})`]);
       continue;
     }
-    if (a.group === b.group && a.group === 'dining') continue;
+    if (a.group && a.group === b.group) continue; // внутри одной группы (диван+кресло, стол+стулья) зазор задуман, это не проход
     if (r.d >= 25 && r.d <= 130) ann.push(gapLine(r.p, r.q, r.d, r.d >= R.passMain ? C.ok : r.d >= R.passSecondary ? C.warn : C.bad));
   }
   // Зазоры до стен (только где реально ходят: 25–130 см)
@@ -258,7 +262,9 @@ function analyze(v) {
     const isChair = it.spec.kind === 'chair', isBed = it.spec.kind === 'bed';
     if (isChair && G.dot(w.inward, G.facing(it.rot)) < 0.7) continue; // для стула важна только стена за спиной
     if (it.group === 'bed' && !isBed) continue; // тумбочки у кровати — не проход
-    if (r.d >= 25 && r.d <= 130) {
+    // Размер до стены не рисуем, если между предметом и стеной стоит другой предмет.
+    const blocked = r.p && floor.some((o) => o !== it && G.pointInPoly(G.mul(G.add(r.p, r.q), 0.5), o.poly));
+    if (!blocked && r.d >= 25 && r.d <= 130) {
       const foot = isBed && G.dot(w.inward, G.facing(it.rot)) < -0.7;
       const [warn, ok] = isChair ? R.behindChair : foot ? R.bedFoot : isBed ? R.bedSide : [R.passSecondary, R.passMain];
       ann.push(gapLine(r.p, r.q, r.d, r.d >= ok ? C.ok : r.d >= warn ? C.warn : C.bad));
@@ -278,8 +284,8 @@ function analyze(v) {
     const w = G.bottleneck(grid, grid.doors[entry.id], [grid.doors[d.id]]);
     // К балкону/лоджии ходят редко — для такой двери хватает нормы второстепенного прохода.
     const [ok, min] = d.pass === 'secondary' ? [R.passSecondary, R.passSecondary - 10] : [R.passMain, R.passMin];
-    const lvl = w >= ok ? 'ok' : w >= min ? 'warn' : 'bad';
     const cap = w >= Math.min(entry.width, d.width) - 3 ? ' (не уже двери)' : '';
+    const lvl = w >= ok || cap ? 'ok' : w >= min ? 'warn' : 'bad';
     res.push([lvl, `Проход от входа к двери «${d.name.replace('В спальню', 'спальня')}»: ${w} см${cap}${d.pass === 'secondary' ? ` (норма ≥ ${ok})` : ''}`]);
   }
   const win = room.openings.find((o) => o.type === 'window');

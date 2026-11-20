@@ -52,14 +52,14 @@ function Door({ W, t, o }: { W: Wall; t: number; o: any }) {
       <WallBox W={W} u0={u0} u1={u0 + 3} v0={-t} v1={0} z0={0} z1={h} role="door" />
       <WallBox W={W} u0={u1 - 3} u1={u1} v0={-t} v1={0} z0={0} z1={h} role="door" />
       <WallBox W={W} u0={u0} u1={u1} v0={-t} v1={0} z0={h - 3} z1={h} role="door" />
-      {/* полотно (закрыто) */}
-      <WallBox W={W} u0={u0 + 3} u1={u1 - 3} v0={-t / 2 - 2} v1={-t / 2 + 2} z0={1} z1={h - 3} role="door" />
+      {/* полотно (закрыто); leaf: 0 — проём без двери */}
+      {o.leaf !== 0 && <WallBox W={W} u0={u0 + 3} u1={u1 - 3} v0={-t / 2 - 2} v1={-t / 2 + 2} z0={1} z1={h - 3} role="door" />}
       {/* наличники со стороны зала */}
       <WallBox W={W} u0={u0 - c} u1={u0} v0={0} v1={1.5} z0={0} z1={h + c} role="trim" />
       <WallBox W={W} u0={u1} u1={u1 + c} v0={0} v1={1.5} z0={0} z1={h + c} role="trim" />
       <WallBox W={W} u0={u0} u1={u1} v0={0} v1={1.5} z0={h} z1={h + c} role="trim" />
       {/* ручка */}
-      <WallBox W={W} u0={handleU - 6} u1={handleU + 6} v0={-t / 2 + 2} v1={-t / 2 + 5} z0={98} z1={101} role="metal" cast={false} />
+      {o.leaf !== 0 && <WallBox W={W} u0={handleU - 6} u1={handleU + 6} v0={-t / 2 + 2} v1={-t / 2 + 5} z0={98} z1={101} role="metal" cast={false} />}
     </>
   );
 }
@@ -68,7 +68,11 @@ function WallGroup({ room, W, register }: { room: any; W: Wall; register: (id: n
   const H = room.height.value;
   const n = room.outline.length;
   const th = (id: number) => room.walls.find((w: any) => w.id === id)?.thickness ?? 12;
-  const t = th(W.id), tNext = th((W.id % n) + 1);
+  // Угол закрываем продлением стены на толщину следующей, но только выпуклый:
+  // во вогнутом углу (Г-образная прихожая) продление вылезло бы внутрь комнаты.
+  const Wn = G.wall(room, (W.id % n) + 1) as Wall;
+  const convex = W.dir[0] * Wn.dir[1] - W.dir[1] * Wn.dir[0] < 0;
+  const t = th(W.id), tNext = convex ? th((W.id % n) + 1) : 0;
   const ops = room.openings.filter((o: any) => o.wall === W.id).sort((a: any, b: any) => a.offset - b.offset);
 
   // Куски стены: сплошные между проёмами, над проёмами и под окнами.

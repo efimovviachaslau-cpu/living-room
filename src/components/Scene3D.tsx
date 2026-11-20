@@ -159,8 +159,13 @@ function Lights({ layout, colors, shadows }: { layout: any; colors: Colors; shad
     const mx = a[0] + dir[0] * (win.offset + win.width / 2), my = a[1] + dir[1] * (win.offset + win.width / 2);
     sun = toThree(mx - inward[0] * 600, my - inward[1] * 600, 360);
   }
+  // Комната без окна (прихожая): светят свои потолочные точки.
+  const lamps = win ? [] : room.fixtures.filter((f: any) => f.type === 'ceilingLight');
   return (
     <>
+      {lamps.map((f: any) => (
+        <pointLight key={f.id} position={toThree(f.x, f.y, room.height.value - (f.drop ?? 55) - 25)} intensity={5} decay={2} color="#fff3e2" />
+      ))}
       <primitive object={target} />
       <hemisphereLight args={['#f5f8fb', ground, 1.5]} />
       <ambientLight intensity={0.45} />

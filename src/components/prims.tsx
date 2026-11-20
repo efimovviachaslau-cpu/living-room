@@ -8,7 +8,7 @@ export type Mode = 'color' | 'clay' | 'lines' | 'depth';
 export type Colors = { walls: string; floor: string; ceiling: string; furniture: string; textile: string; wood: string };
 export type Role =
   | keyof Colors
-  | 'trim' | 'door' | 'frame' | 'glass' | 'radiator' | 'metal' | 'dark' | 'screen' | 'rug' | 'shade';
+  | 'trim' | 'door' | 'frame' | 'glass' | 'radiator' | 'metal' | 'dark' | 'screen' | 'rug' | 'shade' | 'mirror';
 
 // Подвесы под потолком: прячутся, когда камера выше потолка (сверху они закрывают мебель).
 export const ceilingItems = new Set<THREE.Group>();
@@ -38,6 +38,7 @@ function roleColor(role: Role, c: Colors): string {
     case 'screen': return '#0f1012';
     case 'rug': return mix(c.textile, '#ffffff', 0.55);
     case 'shade': return '#f3eee4';
+    case 'mirror': return '#c9d3d8';
     default: return c[role];
   }
 }
@@ -65,6 +66,7 @@ export function materialFor(role: Role, mode: Mode, colors: Colors, side: THREE.
   if (!m) {
     if (role === 'glass') m = new THREE.MeshStandardMaterial({ color, transparent: true, opacity: 0.18, roughness: 0.05, depthWrite: false });
     else if (role === 'screen') m = new THREE.MeshStandardMaterial({ color, roughness: 0.25, metalness: 0.2, side });
+    else if (role === 'mirror') m = new THREE.MeshStandardMaterial({ color, roughness: 0.08, metalness: 0.15, side });
     else if (role === 'metal') m = new THREE.MeshStandardMaterial({ color, roughness: 0.4, metalness: 0.6, side });
     else if (role === 'ceiling') m = new THREE.MeshStandardMaterial({ color, roughness: 0.9, side, emissive: color, emissiveIntensity: 0.45 });
     else m = new THREE.MeshStandardMaterial({ color, roughness: role === 'frame' || role === 'radiator' ? 0.5 : 0.85, side });

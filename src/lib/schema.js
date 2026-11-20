@@ -24,9 +24,9 @@ const fixture = z.object({
 
 const spec = z.object({
   name: z.string(),
-  kind: z.enum(['sofa', 'armchair', 'table', 'chair', 'cabinet', 'tv', 'rug', 'lamp', 'bed', 'pendant', 'art', 'wardrobe']),
+  kind: z.enum(['sofa', 'armchair', 'table', 'chair', 'cabinet', 'tv', 'rug', 'lamp', 'bed', 'pendant', 'art', 'wardrobe', 'mirror']),
   w: cm.positive(), d: cm.positive(), h: cm.positive(), z: cm.optional(),
-  floor: z.boolean().optional(), walkable: z.boolean().optional(), round: z.boolean().optional(),
+  floor: z.boolean().optional(), walkable: z.boolean().optional(), round: z.boolean().optional(), sliding: z.boolean().optional(), mirror: z.boolean().optional(),
 });
 
 const camera = z.object({
