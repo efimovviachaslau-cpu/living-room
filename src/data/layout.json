@@ -188,7 +188,8 @@
           "width": 74,
           "height": 205,
           "leaf": 0,
-          "src": "plan: двери на плане нет, проём"
+          "src": "plan: двери на плане нет, проём",
+          "link": "kuhnya:P1"
         }
       ],
       "fixtures": [
@@ -211,6 +212,97 @@
         { "id": "overview", "name": "Обзор", "pos": [540, -230, 500], "target": [110, 250, 40], "fov": 50 },
         { "id": "entry", "name": "От входа", "pos": [225, 230, 160], "target": [20, 320, 100], "fov": 60 },
         { "id": "fromzal", "name": "Из зала", "pos": [15, 178, 155], "target": [239, 300, 110], "fov": 60 },
+        { "id": "top", "name": "Сверху", "type": "top" }
+      ]
+    },
+    {
+      "id": "kuhnya",
+      "name": "Кухня",
+      "area": 5.8,
+      "height": { "value": 250, "src": "typical" },
+      "origin": [322, 0],
+      "originNote": "Угол у окна и стены к залу. Стены по часовой: С1 запад (зал), С2 проход из прихожей, С3 и С4 санузел, С5 восток, С6 окно.",
+      "outline": [[0, 0], [0, 268], [82, 268], [82, 226], [236, 226], [236, 0]],
+      "outlineSrc": "plan: 226 × 218 по плану (≈ 1 см/пкс) растянуто на 4 % до площади: 236 × 226 + «хвост» коридора 82 × 42 = 5.68 м²",
+      "walls": [
+        { "id": 1, "name": "С1", "side": "запад", "thickness": 12, "to": "зал", "src": "typical" },
+        { "id": 2, "name": "С2", "side": "север", "thickness": 8, "to": "прихожая", "src": "typical" },
+        { "id": 3, "name": "С3", "side": "восток", "thickness": 8, "to": "санузел", "src": "typical" },
+        { "id": 4, "name": "С4", "side": "север", "thickness": 8, "to": "санузел", "src": "typical" },
+        { "id": 5, "name": "С5", "side": "восток", "thickness": 30, "to": "лестница", "src": "typical" },
+        { "id": 6, "name": "С6", "side": "юг", "thickness": 35, "to": "улица", "src": "typical" }
+      ],
+      "openings": [
+        {
+          "id": "P1",
+          "type": "door",
+          "name": "Из прихожей",
+          "wall": 2,
+          "offset": 4,
+          "width": 74,
+          "height": 205,
+          "leaf": 0,
+          "link": "prihozhaya:P1",
+          "src": "тот же проём, что P1 в прихожей"
+        },
+        {
+          "id": "O1",
+          "type": "window",
+          "name": "Окно",
+          "wall": 6,
+          "offset": 21,
+          "width": 150,
+          "sill": 90,
+          "height": 135,
+          "sillDepth": 25,
+          "sashes": 2,
+          "src": "plan; подоконник 90 — вровень со столешницей"
+        }
+      ],
+      "fixtures": [
+        { "id": "R1", "type": "radiator", "name": "Батарея", "wall": 6, "offset": 71, "w": 70, "d": 10, "h": 58, "z": 10, "src": "typical" },
+        {
+          "id": "V1",
+          "type": "vent",
+          "name": "Вентканал",
+          "wall": 5,
+          "offset": 57,
+          "w": 20,
+          "d": 3,
+          "h": 20,
+          "z": 222,
+          "src": "plan (значок +); высота — допущение"
+        },
+        { "id": "L1", "type": "ceilingLight", "name": "Точка света", "x": 118, "y": 113, "drop": 10, "src": "typical" }
+      ],
+      "variants": [
+        {
+          "id": "A",
+          "name": "Угловая кухня",
+          "idea": "Г-образный гарнитур: вдоль восточной стены плита, посудомойка рядом с мойкой, мойка в углу у санузла (ближе к стоякам); у стены санузла холодильник у входа. Верхние шкафы до потолка, над плитой вытяжка. Маленький стол 70×50 на двоих у стены к залу, у окна.",
+          "items": [
+            { "id": "b1", "ref": "k_base31", "x": 206, "y": 15.5, "rot": 90, "group": "kitchen" },
+            { "id": "stove", "ref": "k_stove", "x": 206, "y": 61, "rot": 90, "group": "kitchen" },
+            { "id": "b2", "ref": "k_base30", "x": 206, "y": 106, "rot": 90, "group": "kitchen" },
+            { "id": "dw", "ref": "k_dw45", "x": 206, "y": 143.5, "rot": 90, "group": "kitchen" },
+            { "id": "sink", "ref": "k_sink60", "x": 206, "y": 196, "rot": 90, "group": "kitchen" },
+            { "id": "fridge", "ref": "k_fridge", "x": 112, "y": 193.5, "rot": 0, "group": "kitchen" },
+            { "id": "b3", "ref": "k_base34", "x": 159, "y": 196, "rot": 0, "group": "kitchen" },
+            { "id": "hood", "ref": "k_hood", "x": 211, "y": 61, "rot": 90, "group": "kitchen" },
+            { "id": "u1", "ref": "k_up60s", "x": 218.5, "y": 61, "rot": 90, "group": "kitchen" },
+            { "id": "u2", "ref": "k_up135", "x": 218.5, "y": 158.5, "rot": 90, "group": "kitchen" },
+            { "id": "u3", "ref": "k_up59", "x": 171.5, "y": 208.5, "rot": 0, "group": "kitchen" },
+            { "id": "u4", "ref": "k_upfridge", "x": 112, "y": 196, "rot": 0, "group": "kitchen" },
+            { "id": "table", "ref": "ktable", "x": 25, "y": 50, "rot": 90, "group": "dining" },
+            { "id": "chair1", "ref": "stool", "x": 65, "y": 30, "rot": 90, "group": "dining" },
+            { "id": "chair2", "ref": "stool", "x": 65, "y": 72, "rot": 90, "group": "dining" }
+          ]
+        }
+      ],
+      "cameras": [
+        { "id": "overview", "name": "Обзор", "pos": [-270, -260, 480], "target": [130, 130, 50], "fov": 50 },
+        { "id": "entry", "name": "От входа", "pos": [45, 150, 160], "target": [236, 80, 105], "fov": 60 },
+        { "id": "window", "name": "От окна", "pos": [110, 18, 150], "target": [190, 226, 120], "fov": 60 },
         { "id": "top", "name": "Сверху", "type": "top" }
       ]
     },
@@ -374,7 +466,31 @@
     },
     "shoebench": { "name": "Обувница-скамья", "kind": "cabinet", "w": 70, "d": 35, "h": 45 },
     "mirror170": { "name": "Зеркало", "kind": "mirror", "w": 60, "d": 3, "h": 170, "z": 30, "floor": false },
-    "mat": { "name": "Коврик", "kind": "rug", "w": 80, "d": 50, "h": 1, "walkable": true }
+    "mat": { "name": "Коврик", "kind": "rug", "w": 80, "d": 50, "h": 1, "walkable": true },
+    "k_base30": { "name": "Тумба", "kind": "kitchen", "part": "base", "w": 30, "d": 60, "h": 90 },
+    "k_base31": { "name": "Тумба", "kind": "kitchen", "part": "base", "w": 31, "d": 60, "h": 90 },
+    "k_base34": { "name": "Тумба", "kind": "kitchen", "part": "base", "w": 34, "d": 60, "h": 90 },
+    "k_stove": { "name": "Плита", "kind": "kitchen", "part": "stove", "w": 60, "d": 60, "h": 90, "note": "варочная + духовка под столешницей" },
+    "k_dw45": { "name": "Посудомойка", "kind": "kitchen", "part": "dishwasher", "w": 45, "d": 60, "h": 90, "note": "встроенная 45 см" },
+    "k_sink60": { "name": "Мойка", "kind": "kitchen", "part": "sink", "w": 60, "d": 60, "h": 90 },
+    "k_fridge": { "name": "Холодильник", "kind": "kitchen", "part": "fridge", "w": 60, "d": 65, "h": 200 },
+    "k_up59": { "name": "Верхний шкаф", "kind": "kitchen", "part": "upper", "w": 59, "d": 35, "h": 105, "z": 145, "floor": false, "toCeiling": true },
+    "k_up135": { "name": "Верхний шкаф", "kind": "kitchen", "part": "upper", "w": 135, "d": 35, "h": 105, "z": 145, "floor": false, "toCeiling": true },
+    "k_up60s": { "name": "Верхний шкаф", "kind": "kitchen", "part": "upper", "w": 60, "d": 35, "h": 81, "z": 169, "floor": false, "toCeiling": true },
+    "k_upfridge": {
+      "name": "Антресоль над холодильником",
+      "kind": "kitchen",
+      "part": "upper",
+      "w": 60,
+      "d": 60,
+      "h": 45,
+      "z": 205,
+      "floor": false,
+      "toCeiling": true
+    },
+    "k_hood": { "name": "Вытяжка", "kind": "kitchen", "part": "hood", "w": 60, "d": 50, "h": 12, "z": 157, "floor": false },
+    "ktable": { "name": "Стол", "kind": "table", "w": 70, "d": 50, "h": 75 },
+    "stool": { "name": "Стульчик", "kind": "chair", "w": 40, "d": 40, "h": 80 }
   },
   "palettes": [
     {

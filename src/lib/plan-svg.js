@@ -40,7 +40,7 @@ export function renderPlan(layout, variantId, opts = {}) {
 const C = {
   wall: '#3d3a36', ink: '#2b2b2b', mute: '#8a857d', dim: '#6d6a65', paper: '#fbfaf7',
   ok: '#2e8b57', warn: '#d48a00', bad: '#d23c2a', swing: '#9aa7b8',
-  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec', art: '#c08a5b', wardrobe: '#d8cfc2', pendant: 'none' },
+  fill: { sofa: '#cdd8cc', armchair: '#cdd8cc', table: '#e8d9c2', chair: '#e8d9c2', cabinet: '#ddd6cb', tv: '#2b2b2b', rug: '#efe7f3', lamp: '#f3e3a6', bed: '#dde4ec', art: '#c08a5b', wardrobe: '#d8cfc2', pendant: 'none', kitchen: '#e4ded4' },
 };
 
 function dimLine(a, b, label, off, color = C.dim) {
@@ -161,9 +161,15 @@ function dimSign(w) {
 
 function drawItems(v) {
   const out = [];
-  const order = (it) => ({ rug: 0, tv: 3, art: 3, pendant: 4 })[it.spec.kind] ?? 1;
+  const above = (it) => it.spec.kind === 'kitchen' && it.spec.floor === false;
+  const order = (it) => (above(it) ? 5 : ({ rug: 0, tv: 3, art: 3, pendant: 4 })[it.spec.kind] ?? 1);
   for (const it of [...v.items].sort((a, b) => order(a) - order(b))) {
     const k = it.spec.kind;
+    if (above(it)) {
+      // Верхние шкафы и вытяжка висят над нижними — только пунктирный контур.
+      out.push(`<polygon points="${ptsAttr(it.poly)}" fill="none" stroke="#6d7f93" stroke-width="1" stroke-dasharray="5 3"/>`);
+      continue;
+    }
     if (k === 'pendant') {
       // Подвес над полом — пунктирный круг с крестом, как точка света.
       const [cx, cy] = px([it.x, it.y]), r = (it.spec.w / 2) * S;
@@ -214,12 +220,13 @@ function drawItems(v) {
     const vertical = Math.abs(Math.sin((it.rot || 0) * Math.PI / 180)) > 0.7;
     const span = (vertical ? it.spec.d : it.spec.w) * S;
     if (k === 'chair') continue;
-    const size = span < 70 ? 9 : 10.5;
+    const size = span < 70 || k === 'kitchen' ? 9 : 10.5;
     const labY = k === 'rug' ? Math.min(...it.poly.map((p) => px(p)[1])) + 14 : cy;
     // Узкий предмет вдоль стены — подпись поворачиваем вдоль него.
     const turn = (vertical ? it.spec.d : it.spec.w) * S < 60 && (vertical ? it.spec.w : it.spec.d) * S >= 60 ? ` transform="rotate(-90 ${cx} ${labY})"` : '';
     out.push(`<g${turn}><text x="${cx}" y="${labY - 2}" font-size="${size}" font-weight="600" fill="${C.ink}" text-anchor="middle">${esc(it.spec.name)}</text>`);
-    out.push(`<text x="${cx}" y="${labY + 11}" font-size="${size - 1}" fill="${C.dim}" text-anchor="middle">${it.spec.w}×${it.spec.d}</text></g>`);
+    if (k !== 'kitchen' || it.spec.w >= 45) out.push(`<text x="${cx}" y="${labY + 11}" font-size="${size - 1}" fill="${C.dim}" text-anchor="middle">${it.spec.w}×${it.spec.d}</text>`);
+    out.push('</g>');
   }
   return out.join('\n');
 }
@@ -233,11 +240,19 @@ function analyze(v) {
   // Пересечения
   for (let i = 0; i < floor.length; i++) for (let j = i + 1; j < floor.length; j++) {
     const a = floor[i], b = floor[j];
-    const tucked = a.group === b.group && [a.spec.kind, b.spec.kind].sort().join('-') === 'chair-table';
+    // Стул задвинут под свой стол, модули гарнитура стоят вплотную — это не пересечения.
+    const tucked = a.group === b.group && ([a.spec.kind, b.spec.kind].sort().join('-') === 'chair-table' || a.spec.kind === 'kitchen' && b.spec.kind === 'kitchen');
     if (!tucked && G.polyDistance(a.poly, b.poly).d === 0) res.push(['bad', `Пересечение: ${a.spec.name} и ${b.spec.name.toLowerCase()}`]);
   }
+  const zRange = (o) => { const z0 = o.z ?? o.spec?.z ?? 0; return [z0, z0 + (o.h ?? o.spec?.h ?? 0)]; };
+  const zOverlap = (a, b) => { const [a0, a1] = zRange(a), [b0, b1] = zRange(b); return a0 < b1 && b0 < a1; };
+  // Вентканал не закрывать: шкаф до потолка перед решёткой — нужна решётка или вырез в шкафу.
+  for (const f of fx.filter((f) => f.type === 'vent')) {
+    const hit = v.items.find((it) => zOverlap({ ...it, spec: it.spec, z: it.z }, f) && G.polyDistance(it.poly, f.poly).d < 1);
+    if (hit) res.push(['warn', `${hit.spec.name} закрывает вентканал — в шкафу нужна решётка или вырез`]);
+  }
   for (const it of floor) {
-    for (const f of fx) if (G.polyDistance(it.poly, f.poly).d < (f.type === 'radiator' ? 10 : 0.1)) res.push(['bad', `${it.spec.name} вплотную к объекту «${f.name}»`]);
+    for (const f of fx) if (f.type !== 'vent' && zOverlap(it, f) && G.polyDistance(it.poly, f.poly).d < (f.type === 'radiator' ? 10 : 0.1)) res.push(['bad', `${it.spec.name} вплотную к объекту «${f.name}»`]);
     for (const [o, s] of swings) if (G.polyDistance(it.poly, s.poly).d === 0) res.push(['bad', `${it.spec.name} в зоне открывания двери «${o.name}»`]);
     for (const p of it.poly) if (!G.pointInPoly(p, room.outline) && G.pointPolyDistance(p, room.outline) > 0.5) { res.push(['bad', `${it.spec.name} выходит за стену`]); break; }
   }
@@ -252,9 +267,20 @@ function analyze(v) {
       res.push([r.d >= lo && r.d <= hi ? 'ok' : 'warn', `Диван ↔ журнальный стол: ${Math.round(r.d)} см (норма ${lo}–${hi})`]);
       continue;
     }
-    if (a.group && a.group === b.group) continue; // внутри одной группы (диван+кресло, стол+стулья) зазор задуман, это не проход
-    if (r.d >= 25 && r.d <= 130) ann.push(gapLine(r.p, r.q, r.d, r.d >= R.passMain ? C.ok : r.d >= R.passSecondary ? C.warn : C.bad));
   }
+  // Остальные зазоры: от каждого предмета — только до ближайшего предмета другой группы,
+  // иначе от стула тянутся линии к каждой тумбе гарнитура. Внутри группы зазор задуман.
+  const gaps = new Map();
+  for (const a of floor) {
+    let best = null;
+    for (const b of floor) {
+      if (b === a || (a.group && a.group === b.group)) continue;
+      const r = G.polyDistance(a.poly, b.poly);
+      if (!best || r.d < best.r.d) best = { b, r };
+    }
+    if (best) gaps.set([a.id, best.b.id].sort().join('|'), best.r);
+  }
+  for (const r of gaps.values()) if (r.d >= 25 && r.d <= 130) ann.push(gapLine(r.p, r.q, r.d, r.d >= R.passMain ? C.ok : r.d >= R.passSecondary ? C.warn : C.bad));
   // Зазоры до стен (только где реально ходят: 25–130 см)
   const chairGaps = [];
   for (const it of floor) for (const w of G.walls(room)) {
@@ -264,6 +290,8 @@ function analyze(v) {
     if (it.group === 'bed' && !isBed) continue; // тумбочки у кровати — не проход
     // Размер до стены не рисуем, если между предметом и стеной стоит другой предмет.
     const blocked = r.p && floor.some((o) => o !== it && G.pointInPoly(G.mul(G.add(r.p, r.q), 0.5), o.poly));
+    // Ближайшая точка — угол стены, а не перпендикуляр: это размер «наискосок», он только путает.
+    if (r.q && (G.len(G.sub(r.q, w.a)) < 0.5 || G.len(G.sub(r.q, w.b)) < 0.5)) continue;
     if (!blocked && r.d >= 25 && r.d <= 130) {
       const foot = isBed && G.dot(w.inward, G.facing(it.rot)) < -0.7;
       const [warn, ok] = isChair ? R.behindChair : foot ? R.bedFoot : isBed ? R.bedSide : [R.passSecondary, R.passMain];

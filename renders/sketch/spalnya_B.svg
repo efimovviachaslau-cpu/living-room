@@ -68,24 +68,29 @@
 <text x="345.5" y="620" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(360 345.5 620)">С4  ·  314</text></g>
 <polygon points="158.0,444.5 533.0,444.5 533.0,144.5 158.0,144.5" fill="#efe7f3" stroke="#a58fb5" stroke-width="1.1" stroke-dasharray="6 4"/>
 <g><text x="345.5" y="156.5" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Ковёр</text>
-<text x="345.5" y="169.5" font-size="9.5" fill="#6d6a65" text-anchor="middle">250×200</text></g>
+<text x="345.5" y="169.5" font-size="9.5" fill="#6d6a65" text-anchor="middle">250×200</text>
+</g>
 <polygon points="473.0,227.0 218.0,227.0 218.0,549.5 473.0,549.5" fill="#dde4ec" stroke="#2b2b2b" stroke-width="1.1"/>
 <polygon points="473.0,549.5 218.0,549.5 218.0,537.5 473.0,537.5" fill="#b9c3cf" stroke="#2b2b2b" stroke-width="0.6"/>
 <polygon points="354.5,531.5 447.5,531.5 447.5,474.5 354.5,474.5" fill="#ffffff" stroke="#2b2b2b" stroke-width="0.6"/>
 <polygon points="336.5,531.5 243.5,531.5 243.5,474.5 336.5,474.5" fill="#ffffff" stroke="#2b2b2b" stroke-width="0.6"/>
 <polyline points="473.0,456.5 218.0,456.5" fill="none" stroke="#2b2b2b" stroke-width="0.6" stroke-dasharray="4 3"/>
 <g><text x="345.5" y="386.25" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Кровать 160×200</text>
-<text x="345.5" y="399.25" font-size="9.5" fill="#6d6a65" text-anchor="middle">170×215</text></g>
+<text x="345.5" y="399.25" font-size="9.5" fill="#6d6a65" text-anchor="middle">170×215</text>
+</g>
 <polygon points="215.0,489.5 147.5,489.5 147.5,549.5 215.0,549.5" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
 <g><text x="181.25" y="517.5" font-size="9" font-weight="600" fill="#2b2b2b" text-anchor="middle">Тумбочка</text>
-<text x="181.25" y="530.5" font-size="8" fill="#6d6a65" text-anchor="middle">45×40</text></g>
+<text x="181.25" y="530.5" font-size="8" fill="#6d6a65" text-anchor="middle">45×40</text>
+</g>
 <polygon points="543.5,489.5 476.0,489.5 476.0,549.5 543.5,549.5" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
 <g><text x="509.75" y="517.5" font-size="9" font-weight="600" fill="#2b2b2b" text-anchor="middle">Тумбочка</text>
-<text x="509.75" y="530.5" font-size="8" fill="#6d6a65" text-anchor="middle">45×40</text></g>
+<text x="509.75" y="530.5" font-size="8" fill="#6d6a65" text-anchor="middle">45×40</text>
+</g>
 <polygon points="200.0,200.0 200.0,110.0 110.0,110.0 110.0,200.0" fill="#d8cfc2" stroke="#2b2b2b" stroke-width="1.1"/>
 <polyline points="200.0,200.0 110.0,110.0" fill="none" stroke="#2b2b2b" stroke-width="0.6"/>
 <g><text x="155" y="153" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Шкаф</text>
-<text x="155" y="166" font-size="9.5" fill="#6d6a65" text-anchor="middle">60×60</text></g>
+<text x="155" y="166" font-size="9.5" fill="#6d6a65" text-anchor="middle">60×60</text>
+</g>
 <polygon points="435.5,545.0 255.5,545.0 255.5,549.5 435.5,549.5" fill="#c08a5b" stroke="#2b2b2b" stroke-width="1.1"/>
 <text x="345.5" y="535.5" font-size="10" font-style="italic" fill="#6d6a65" text-anchor="middle">Картина 120×80</text>
 <polygon points="253.3,119.0 437.8,119.0 437.8,110.0 253.3,110.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="0"/>

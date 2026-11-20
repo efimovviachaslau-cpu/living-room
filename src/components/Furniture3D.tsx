@@ -213,6 +213,87 @@ function Wardrobe({ s }: { s: Spec & { sliding?: boolean } }) {
   );
 }
 
+// Кухонные модули. Нижние: цоколь 10, корпус, столешница 4 с выносом 2 см; фасады ~45 см.
+// Верхние с toCeiling тянутся до потолка: высота = потолок − низ шкафа.
+type KSpec = Spec & { part?: string; toCeiling?: boolean };
+
+function Fronts({ w, d, z, h, maxW = 50, handle = 'top' }: { w: number; d: number; z: number; h: number; maxW?: number; handle?: 'top' | 'bottom' | 'side' }) {
+  const n = Math.max(1, Math.round(w / maxW)), fw = w / n;
+  return (
+    <>
+      {Array.from({ length: n }, (_, k) => {
+        const cx = -w / 2 + fw * (k + 0.5);
+        const hz = handle === 'bottom' ? z + 3 : z + h - 6;
+        return (
+          <group key={k}>
+            <PBox x={cx} y={-d / 2 - 1} z={z + 0.3} w={fw - 0.6} d={2} h={h - 0.6} role="furniture" />
+            {handle === 'side'
+              ? <PBox x={cx + (k % 2 ? -1 : 1) * (fw / 2 - 4)} y={-d / 2 - 2.8} z={z + h / 2 - 12} w={1.5} d={1.5} h={24} role="metal" cast={false} />
+              : <PBox x={cx} y={-d / 2 - 2.8} z={hz} w={Math.min(30, fw * 0.5)} d={1.5} h={1.5} role="metal" cast={false} />}
+          </group>
+        );
+      })}
+    </>
+  );
+}
+
+function Kitchen({ s, z, ceiling }: { s: KSpec; z: number; ceiling: number }) {
+  const { w, d } = s;
+  if (s.part === 'upper') {
+    const h = s.toCeiling ? Math.max(10, ceiling - z) : s.h;
+    return (
+      <>
+        <PBox x={0} y={1} z={0} w={w} d={d - 2} h={h} role="furniture" />
+        <Fronts w={w} d={d - 2} z={0} h={h} maxW={45} handle="bottom" />
+      </>
+    );
+  }
+  if (s.part === 'hood') return <PBox x={0} y={0} z={0} w={w} d={d} h={s.h} role="metal" />;
+  if (s.part === 'fridge') {
+    const h = s.h, fz = 70; // морозилка снизу
+    return (
+      <>
+        <PBox x={0} y={1} z={0} w={w} d={d - 2} h={h} role="radiator" />
+        <PBox x={0} y={-d / 2 + 0.5} z={1} w={w - 1} d={1.5} h={fz - 1.5} role="radiator" />
+        <PBox x={0} y={-d / 2 + 0.5} z={fz} w={w - 1} d={1.5} h={h - fz - 1} role="radiator" />
+        <PBox x={w / 2 - 5} y={-d / 2 - 1.5} z={fz - 30} w={1.5} d={2} h={22} role="metal" cast={false} />
+        <PBox x={w / 2 - 5} y={-d / 2 - 1.5} z={fz + 8} w={1.5} d={2} h={35} role="metal" cast={false} />
+      </>
+    );
+  }
+  const plinth = 10, top = 4, body = s.h - plinth - top;
+  return (
+    <>
+      <PBox x={0} y={3} z={0} w={w} d={d - 6} h={plinth} role="dark" cast={false} />
+      <PBox x={0} y={1} z={plinth} w={w} d={d - 2} h={body} role="furniture" />
+      <PBox x={0} y={-1} z={s.h - top} w={w} d={d + 2} h={top} role="wood" />
+      {s.part === 'stove' ? (
+        <>
+          {/* панель управления, дверца духовки со стеклом, варочная поверхность и конфорки */}
+          <PBox x={0} y={-d / 2 - 1} z={s.h - top - 12} w={w - 1} d={2} h={11} role="dark" />
+          <PBox x={0} y={-d / 2 - 1} z={plinth + 1} w={w - 1} d={2} h={body - 14} role="dark" />
+          <PBox x={0} y={-d / 2 - 2.2} z={plinth + 12} w={w - 14} d={0.4} h={body - 34} role="screen" cast={false} />
+          <PBox x={0} y={0} z={s.h} w={w - 4} d={d - 12} h={0.6} role="screen" cast={false} />
+          {[[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([sx, sy], i) => (
+            <PCyl key={i} x={sx * (w / 4 - 1)} y={sy * (d / 4 - 3)} z={s.h + 0.6} r={i % 3 === 0 ? 9 : 7} h={0.4} role="dark" seg={24} />
+          ))}
+        </>
+      ) : s.part === 'dishwasher' ? (
+        <Fronts w={w} d={d - 2} z={plinth} h={body} maxW={60} />
+      ) : (
+        <Fronts w={w} d={d - 2} z={plinth} h={body} maxW={45} handle={s.part === 'sink' ? 'top' : 'top'} />
+      )}
+      {s.part === 'sink' && (
+        <>
+          <PBox x={0} y={-2} z={s.h} w={w - 16} d={d - 22} h={0.5} role="metal" cast={false} />
+          <PCyl x={0} y={d / 2 - 8} z={s.h} r={1.8} h={26} role="metal" seg={12} />
+          <PBox x={0} y={d / 2 - 15} z={s.h + 23} w={2.5} d={16} h={2.5} role="metal" cast={false} />
+        </>
+      )}
+    </>
+  );
+}
+
 function Lamp({ s }: { s: Spec }) {
   const r = s.w / 2;
   return (
@@ -245,6 +326,7 @@ export function Item({ it, spec, ceiling, wallId, registerWallItem }: {
     case 'art': body = <Art s={spec} />; break;
     case 'wardrobe': body = <Wardrobe s={spec} />; break;
     case 'mirror': body = <Mirror s={spec} />; break;
+    case 'kitchen': body = <Kitchen s={spec} z={z} ceiling={ceiling} />; break;
     case 'rug': body = <PBox x={0} y={0} z={0} w={spec.w} d={spec.d} h={1} role="rug" cast={false} />; break;
   }
   // Висящее на стене прячется вместе со стеной в режиме «кукольного дома».

@@ -95,20 +95,18 @@
 <text x="171.5" y="738" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(360 171.5 738)">С6  ·  82</text></g>
 <polygon points="380.0,281.0 380.0,401.0 455.0,401.0 455.0,281.0" fill="#efe7f3" stroke="#a58fb5" stroke-width="1.1" stroke-dasharray="6 4"/>
 <g><text x="417.5" y="293" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Коврик</text>
-<text x="417.5" y="306" font-size="9.5" fill="#6d6a65" text-anchor="middle">80×50</text></g>
+<text x="417.5" y="306" font-size="9.5" fill="#6d6a65" text-anchor="middle">80×50</text>
+</g>
 <polygon points="110.0,200.0 468.5,200.0 468.5,110.0 110.0,110.0" fill="#d8cfc2" stroke="#2b2b2b" stroke-width="1.1"/>
 <polyline points="110.0,200.0 468.5,110.0" fill="none" stroke="#2b2b2b" stroke-width="0.6"/>
 <g><text x="289.25" y="153" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Встроенный шкаф-купе</text>
-<text x="289.25" y="166" font-size="9.5" fill="#6d6a65" text-anchor="middle">239×60</text></g>
+<text x="289.25" y="166" font-size="9.5" fill="#6d6a65" text-anchor="middle">239×60</text>
+</g>
 <polygon points="162.5,308.0 162.5,203.0 110.0,203.0 110.0,308.0" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
 <g transform="rotate(-90 136.25 255.5)"><text x="136.25" y="253.5" font-size="9" font-weight="600" fill="#2b2b2b" text-anchor="middle">Обувница-скамья</text>
-<text x="136.25" y="266.5" font-size="8" fill="#6d6a65" text-anchor="middle">70×35</text></g>
-<g><line x1="162.5" y1="308" x2="233" y2="417.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
-<rect x="182.75" y="354.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
-<text x="197.75" y="366.75" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">87</text></g>
-<g><line x1="162.5" y1="308" x2="233" y2="417.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
-<rect x="182.75" y="354.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
-<text x="197.75" y="366.75" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">87</text></g>
+<text x="136.25" y="266.5" font-size="8" fill="#6d6a65" text-anchor="middle">70×35</text>
+</g>
+
 <text x="558.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Прихожая, вариант A —</text>
 <text x="558.5" y="124" font-size="20" font-weight="700" fill="#2b2b2b">Шкаф-купе в нише</text>
 <text x="558.5" y="148" font-size="12" fill="#6d6a65">Ниша справа от входа целиком под встроенный</text>
