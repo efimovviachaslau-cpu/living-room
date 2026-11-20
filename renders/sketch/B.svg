@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1079" height="1079" viewBox="0 0 1079 1079" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+<defs><marker id="a-2e8b57" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#2e8b57"/></marker><marker id="a-d48a00" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#d48a00"/></marker><marker id="a-d23c2a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" fill="#d23c2a"/></marker></defs>
+<rect width="1079" height="1079" fill="#ffffff"/>
+<polygon points="110.0,981.5 110.0,86.0 92.0,86.0 92.0,981.5" fill="#3d3a36"/>
+<polygon points="92.0,110.0 600.5,110.0 600.5,86.0 92.0,86.0" fill="#3d3a36"/>
+<polygon points="582.5,86.0 582.5,981.5 600.5,981.5 600.5,86.0" fill="#3d3a36"/>
+<polygon points="600.5,929.0 92.0,929.0 92.0,981.5 600.5,981.5" fill="#3d3a36"/>
+<polygon points="110.0,929.0 110.0,110.0 582.5,110.0 582.5,929.0" fill="#fbfaf7"/>
+<polygon points="492.5,929.0 222.5,929.0 222.5,981.5 492.5,981.5" fill="#fbfaf7"/>
+<line x1="492.5" y1="944.75" x2="222.5" y2="944.75" stroke="#6b8fb3" stroke-width="1"/>
+<line x1="492.5" y1="955.25" x2="222.5" y2="955.25" stroke="#6b8fb3" stroke-width="2"/>
+<line x1="492.5" y1="965.75" x2="222.5" y2="965.75" stroke="#6b8fb3" stroke-width="1"/>
+<polygon points="492.5,929.0 222.5,929.0 222.5,891.5 492.5,891.5" fill="none" stroke="#6b8fb3" stroke-width="0.8" stroke-dasharray="3 2"/>
+<polygon points="582.5,132.5 582.5,267.5 600.5,267.5 600.5,132.5" fill="#fbfaf7"/>
+<path d="M582.5,252.5 A120,120 0 0 1 462.5,132.5" fill="none" stroke="#9aa7b8" stroke-width="1" stroke-dasharray="4 3"/>
+<line x1="582.5" y1="132.5" x2="462.5" y2="132.5" stroke="#2b2b2b" stroke-width="2"/>
+<text x="573.5" y="204" font-size="10.5" font-style="italic" fill="#6d6a65" text-anchor="end">Вход из прихожей</text>
+<polygon points="110.0,462.5 110.0,335.0 92.0,335.0 92.0,462.5" fill="#fbfaf7"/>
+<line x1="92" y1="462.5" x2="32" y2="462.5" stroke="#8a857d" stroke-width="1.5" stroke-dasharray="3 2"/>
+<text x="119" y="402.75" font-size="10.5" font-style="italic" fill="#6d6a65" text-anchor="start">В спальню 7.5</text>
+<polygon points="110.0,665.0 110.0,537.5 92.0,537.5 92.0,665.0" fill="#fbfaf7"/>
+<line x1="92" y1="537.5" x2="32" y2="537.5" stroke="#8a857d" stroke-width="1.5" stroke-dasharray="3 2"/>
+<text x="119" y="605.25" font-size="10.5" font-style="italic" fill="#6d6a65" text-anchor="start">В спальню 9.2</text>
+<polygon points="387.5,929.0 282.5,929.0 282.5,914.0 387.5,914.0" fill="#e9b8a8" stroke="#2b2b2b" stroke-width="0.8"/>
+<text x="335" y="907.5" font-size="10" fill="#6d6a65" text-anchor="middle">батарея</text>
+<polygon points="137.0,929.0 131.0,929.0 131.0,923.0 137.0,923.0" fill="#999" stroke="#2b2b2b" stroke-width="0.8"/>
+<circle cx="345.5" cy="519.5" r="6" fill="none" stroke="#8a857d"/><line x1="339.5" y1="513.5" x2="351.5" y2="525.5" stroke="#8a857d"/><line x1="339.5" y1="525.5" x2="351.5" y2="513.5" stroke="#8a857d"/>
+<g><line x1="110" y1="929" x2="74" y2="929" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="665" x2="74" y2="665" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="74" y1="929" x2="74" y2="665" stroke="#6d6a65" stroke-width="0.8"/><line x1="70" y1="933" x2="78" y2="925" stroke="#6d6a65" stroke-width="1.2"/><line x1="70" y1="669" x2="78" y2="661" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="74" y="797" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 74 797)">176</text></g>
+<g><line x1="110" y1="665" x2="74" y2="665" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="537.5" x2="74" y2="537.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="74" y1="665" x2="74" y2="537.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="70" y1="669" x2="78" y2="661" stroke="#6d6a65" stroke-width="1.2"/><line x1="70" y1="541.5" x2="78" y2="533.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="74" y="601.25" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 74 601.25)">85</text></g>
+<g><line x1="110" y1="537.5" x2="74" y2="537.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="462.5" x2="74" y2="462.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="74" y1="537.5" x2="74" y2="462.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="70" y1="541.5" x2="78" y2="533.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="70" y1="466.5" x2="78" y2="458.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="74" y="500" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 74 500)">50</text></g>
+<g><line x1="110" y1="462.5" x2="74" y2="462.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="335" x2="74" y2="335" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="74" y1="462.5" x2="74" y2="335" stroke="#6d6a65" stroke-width="0.8"/><line x1="70" y1="466.5" x2="78" y2="458.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="70" y1="339" x2="78" y2="331" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="74" y="398.75" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 74 398.75)">85</text></g>
+<g><line x1="110" y1="335" x2="74" y2="335" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="110" x2="74" y2="110" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="74" y1="335" x2="74" y2="110" stroke="#6d6a65" stroke-width="0.8"/><line x1="70" y1="339" x2="78" y2="331" stroke="#6d6a65" stroke-width="1.2"/><line x1="70" y1="114" x2="78" y2="106" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="74" y="222.5" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(-90 74 222.5)">150</text></g>
+<g><line x1="110" y1="929" x2="52" y2="929" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="110" x2="52" y2="110" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="52" y1="929" x2="52" y2="110" stroke="#2b2b2b" stroke-width="0.8"/><line x1="48" y1="933" x2="56" y2="925" stroke="#2b2b2b" stroke-width="1.2"/><line x1="48" y1="114" x2="56" y2="106" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="52" y="519.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(-90 52 519.5)">С1  ·  546</text></g>
+<g><line x1="110" y1="110" x2="110" y2="68" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="110" x2="582.5" y2="68" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="68" x2="582.5" y2="68" stroke="#2b2b2b" stroke-width="0.8"/><line x1="106" y1="72" x2="114" y2="64" stroke="#2b2b2b" stroke-width="1.2"/><line x1="578.5" y1="72" x2="586.5" y2="64" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="346.25" y="68" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(0 346.25 68)">С2  ·  315</text></g>
+<g><line x1="582.5" y1="110" x2="618.5" y2="110" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="132.5" x2="618.5" y2="132.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="618.5" y1="110" x2="618.5" y2="132.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="614.5" y1="114" x2="622.5" y2="106" stroke="#6d6a65" stroke-width="1.2"/><line x1="614.5" y1="136.5" x2="622.5" y2="128.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="618.5" y="121.25" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(90 618.5 121.25)">15</text></g>
+<g><line x1="582.5" y1="132.5" x2="618.5" y2="132.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="267.5" x2="618.5" y2="267.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="618.5" y1="132.5" x2="618.5" y2="267.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="614.5" y1="136.5" x2="622.5" y2="128.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="614.5" y1="271.5" x2="622.5" y2="263.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="618.5" y="200" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(90 618.5 200)">90</text></g>
+<g><line x1="582.5" y1="267.5" x2="618.5" y2="267.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="929" x2="618.5" y2="929" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="618.5" y1="267.5" x2="618.5" y2="929" stroke="#6d6a65" stroke-width="0.8"/><line x1="614.5" y1="271.5" x2="622.5" y2="263.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="614.5" y1="933" x2="622.5" y2="925" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="618.5" y="598.25" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(90 618.5 598.25)">441</text></g>
+<g><line x1="582.5" y1="110" x2="640.5" y2="110" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="929" x2="640.5" y2="929" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="640.5" y1="110" x2="640.5" y2="929" stroke="#2b2b2b" stroke-width="0.8"/><line x1="636.5" y1="114" x2="644.5" y2="106" stroke="#2b2b2b" stroke-width="1.2"/><line x1="636.5" y1="933" x2="644.5" y2="925" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="640.5" y="519.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(90 640.5 519.5)">С3  ·  546</text></g>
+<g><line x1="582.5" y1="929" x2="582.5" y2="999.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="492.5" y1="929" x2="492.5" y2="999.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="999.5" x2="492.5" y2="999.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="578.5" y1="1003.5" x2="586.5" y2="995.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="488.5" y1="1003.5" x2="496.5" y2="995.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="537.5" y="999.5" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(360 537.5 999.5)">60</text></g>
+<g><line x1="492.5" y1="929" x2="492.5" y2="999.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="222.5" y1="929" x2="222.5" y2="999.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="492.5" y1="999.5" x2="222.5" y2="999.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="488.5" y1="1003.5" x2="496.5" y2="995.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="218.5" y1="1003.5" x2="226.5" y2="995.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="357.5" y="999.5" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(360 357.5 999.5)">180</text></g>
+<g><line x1="222.5" y1="929" x2="222.5" y2="999.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="929" x2="110" y2="999.5" stroke="#6d6a65" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="222.5" y1="999.5" x2="110" y2="999.5" stroke="#6d6a65" stroke-width="0.8"/><line x1="218.5" y1="1003.5" x2="226.5" y2="995.5" stroke="#6d6a65" stroke-width="1.2"/><line x1="106" y1="1003.5" x2="114" y2="995.5" stroke="#6d6a65" stroke-width="1.2"/>
+<text x="166.25" y="999.5" dy="-4" font-size="11" fill="#6d6a65" text-anchor="middle" transform="rotate(360 166.25 999.5)">75</text></g>
+<g><line x1="582.5" y1="929" x2="582.5" y2="1021.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="110" y1="929" x2="110" y2="1021.5" stroke="#2b2b2b" stroke-width="0.5" stroke-dasharray="2 2"/>
+<line x1="582.5" y1="1021.5" x2="110" y2="1021.5" stroke="#2b2b2b" stroke-width="0.8"/><line x1="578.5" y1="1025.5" x2="586.5" y2="1017.5" stroke="#2b2b2b" stroke-width="1.2"/><line x1="106" y1="1025.5" x2="114" y2="1017.5" stroke="#2b2b2b" stroke-width="1.2"/>
+<text x="346.25" y="1021.5" dy="-4" font-size="11" fill="#2b2b2b" text-anchor="middle" transform="rotate(360 346.25 1021.5)">С4  ·  315</text></g>
+<polygon points="245.0,434.0 545.0,434.0 545.0,224.0 245.0,224.0" fill="#efe7f3" stroke="#a58fb5" stroke-width="1.1" stroke-dasharray="6 4"/>
+<text x="395" y="236" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Ковёр</text>
+<text x="395" y="249" font-size="9.5" fill="#6d6a65" text-anchor="middle">200×140</text>
+<polygon points="560.0,426.5 230.0,426.5 230.0,569.0 560.0,569.0" fill="#cdd8cc" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="560.0,569.0 230.0,569.0 230.0,539.0 560.0,539.0" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="560.0,539.0 537.5,539.0 537.5,426.5 560.0,426.5" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<polygon points="230.0,539.0 252.5,539.0 252.5,426.5 230.0,426.5" fill="#b5c4b3" stroke="#2b2b2b" stroke-width="0.6"/>
+<text x="395" y="495.75" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Диван 3-местный</text>
+<text x="395" y="508.75" font-size="9.5" fill="#6d6a65" text-anchor="middle">220×95</text>
+<polygon points="327.5,366.5 462.5,366.5 462.5,299.0 327.5,299.0" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<text x="395" y="330.75" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Журнальный стол</text>
+<text x="395" y="343.75" font-size="9.5" fill="#6d6a65" text-anchor="middle">90×45</text>
+<polygon points="275.0,162.5 455.0,162.5 455.0,110.0 275.0,110.0" fill="#ddd6cb" stroke="#2b2b2b" stroke-width="1.1"/>
+<text x="365" y="134.25" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Консоль под ТВ</text>
+<text x="365" y="147.25" font-size="9.5" fill="#6d6a65" text-anchor="middle">120×35</text>
+<polygon points="289.3,674.0 289.3,854.0 401.8,854.0 401.8,674.0" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<text x="345.5" y="762" font-size="10.5" font-weight="600" fill="#2b2b2b" text-anchor="middle">Обеденный стол</text>
+<text x="345.5" y="775" font-size="9.5" fill="#6d6a65" text-anchor="middle">120×75</text>
+<polygon points="290.0,835.3 290.0,767.8 215.0,767.8 215.0,835.3" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="290.0,760.3 290.0,692.8 215.0,692.8 215.0,760.3" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="401.0,767.8 401.0,835.3 476.0,835.3 476.0,767.8" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="401.0,692.8 401.0,760.3 476.0,760.3 476.0,692.8" fill="#e8d9c2" stroke="#2b2b2b" stroke-width="1.1"/>
+<polygon points="256.3,119.0 473.8,119.0 473.8,110.0 256.3,110.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="0"/>
+<g><line x1="327.5" y1="426.5" x2="327.5" y2="366.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="312.5" y="388.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="327.5" y="400.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">40</text></g>
+<g><line x1="289.25" y1="569" x2="289.25" y2="674" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="274.25" y="613.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="289.25" y="625.5" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">70</text></g>
+<g><line x1="230" y1="569" x2="230" y2="692.75" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="215" y="622.875" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="230" y="634.875" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">83</text></g>
+<g><line x1="401" y1="569" x2="401" y2="692.75" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="386" y="622.875" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="401" y="634.875" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">83</text></g>
+<g><line x1="327.5" y1="299" x2="327.5" y2="162.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="312.5" y="222.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="327.5" y="234.75" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">91</text></g>
+<g><line x1="230" y1="426.5" x2="110" y2="426.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="155" y="418.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="170" y="430.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">80</text></g>
+<g><line x1="462.5" y1="299" x2="462.5" y2="110" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="447.5" y="196.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="462.5" y="208.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">126</text></g>
+<g><line x1="462.5" y1="366.5" x2="582.5" y2="366.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="507.5" y="358.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="522.5" y="370.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">80</text></g>
+<g><line x1="275" y1="162.5" x2="110" y2="162.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="177.5" y="154.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="192.5" y="166.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">110</text></g>
+<g><line x1="455" y1="162.5" x2="582.5" y2="162.5" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="503.75" y="154.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="518.75" y="166.5" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">85</text></g>
+<g><line x1="289.25" y1="674" x2="110" y2="674" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="184.625" y="666" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="199.625" y="678" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">120</text></g>
+<g><line x1="401.75" y1="854" x2="582.5" y2="854" stroke="#2e8b57" stroke-width="1.4" marker-start="url(#a-2e8b57)" marker-end="url(#a-2e8b57)"/>
+<rect x="477.125" y="846" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#2e8b57" stroke-width="0.8"/>
+<text x="492.125" y="858" font-size="10.5" font-weight="600" fill="#2e8b57" text-anchor="middle">121</text></g>
+<g><line x1="289.25" y1="854" x2="289.25" y2="929" stroke="#d23c2a" stroke-width="1.4" marker-start="url(#a-d23c2a)" marker-end="url(#a-d23c2a)"/>
+<rect x="274.25" y="883.5" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d23c2a" stroke-width="0.8"/>
+<text x="289.25" y="895.5" font-size="10.5" font-weight="600" fill="#d23c2a" text-anchor="middle">50</text></g>
+<g><line x1="215" y1="767.75" x2="110" y2="767.75" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="147.5" y="759.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="162.5" y="771.75" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">70</text></g>
+<g><line x1="215" y1="692.75" x2="110" y2="692.75" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="147.5" y="684.75" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="162.5" y="696.75" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">70</text></g>
+<g><line x1="476" y1="835.25" x2="582.5" y2="835.25" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="514.25" y="827.25" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="529.25" y="839.25" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">71</text></g>
+<g><line x1="476" y1="760.25" x2="582.5" y2="760.25" stroke="#d48a00" stroke-width="1.4" marker-start="url(#a-d48a00)" marker-end="url(#a-d48a00)"/>
+<rect x="514.25" y="752.25" width="30" height="15" rx="3" fill="#fbfaf7" stroke="#d48a00" stroke-width="0.8"/>
+<text x="529.25" y="764.25" font-size="10.5" font-weight="600" fill="#d48a00" text-anchor="middle">71</text></g>
+<line x1="395" y1="509" x2="365" y2="114.5" stroke="#7a6fb0" stroke-width="1" stroke-dasharray="1 4"/><circle cx="395" cy="509" r="3" fill="#7a6fb0"/>
+<text x="672.5" y="100" font-size="20" font-weight="700" fill="#2b2b2b">Вариант B — Обеденная зона у окна</text>
+<text x="672.5" y="124" font-size="12" fill="#6d6a65">Кухня 5.8 м² — стол на четверых переезжает к</text>
+<text x="672.5" y="140" font-size="12" fill="#6d6a65">окну. Диван спиной к столу делит комнату на</text>
+<text x="672.5" y="156" font-size="12" fill="#6d6a65">две зоны, ТВ на северной стене.</text>
+<text x="672.5" y="182" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="182" font-size="12" fill="#2b2b2b">Диван ↔ журнальный стол: 40 см (норма 35–50)</text>
+<text x="672.5" y="202" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="688.5" y="202" font-size="12" fill="#2b2b2b">За стульями до стены: 70–71 см (норма 75,</text>
+<text x="688.5" y="217" font-size="12" fill="#2b2b2b">минимум 60)</text>
+<text x="672.5" y="237" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="237" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 7.5»: 82 см</text>
+<text x="688.5" y="252" font-size="12" fill="#2b2b2b">(не уже двери)</text>
+<text x="672.5" y="272" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="688.5" y="272" font-size="12" fill="#2b2b2b">Проход от входа к двери «спальня 9.2»: 79 см</text>
+<text x="672.5" y="292" font-size="13" font-weight="700" fill="#d48a00">!</text>
+<text x="688.5" y="292" font-size="12" fill="#2b2b2b">Подход к окну (открыть створку): 59 см</text>
+<text x="688.5" y="307" font-size="12" fill="#2b2b2b">(норма ≥ 60)</text>
+<text x="672.5" y="327" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="327" font-size="12" fill="#2b2b2b">ТВ 65″: 264 см от глаз = 1.6 диагонали (4K:</text>
+<text x="688.5" y="342" font-size="12" fill="#2b2b2b">1–1.5, терпимо до 1.7)</text>
+<text x="672.5" y="362" font-size="13" font-weight="700" fill="#2e8b57">✓</text>
+<text x="688.5" y="362" font-size="12" fill="#2b2b2b">ТВ в стороне от оси дивана на 4° (≤ 30°)</text>
+<text x="50" y="1061" font-size="11" fill="#8a857d">Набросок по площади 17.2 м², плану БТИ и фото. Размеры ориентировочные до замеров. 2026-11-20</text>
+</svg>
